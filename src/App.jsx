@@ -1,4 +1,4 @@
-import TestAPP from "@/TEST/TestAPP"
+import TestAPP from "@/__TEST__/TestAPP"
 function App() {
   return (
     <>
