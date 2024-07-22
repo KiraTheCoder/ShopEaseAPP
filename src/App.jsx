@@ -3,21 +3,22 @@ import { getData } from "@/services/apiCall/index"
 import { useState,useEffect } from "react"
 
 
+
 function App() {
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
 
-  useEffect(() => {
-    getData('/sample')
-      .then((response) => setData(response))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
+  // useEffect(() => {
+  //   getData('/sample')
+  //     .then((response) => setData(response))
+  //     .catch((error) => console.error('Error fetching data:', error));
+  // }, []);
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <>
-    {/* <TestAPP/> */}
-    <h1>{data?.message}</h1>
+    <TestAPP/>
+    {/* <h1>{data?.message  && "hjh"}</h1> */}
     </>
   )
 }
