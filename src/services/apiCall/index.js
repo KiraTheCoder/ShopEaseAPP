@@ -9,7 +9,7 @@ async function handleResponse(response) {
   }
   return response.json();
 }
-2
+
 function getToken() {
   const state = useAuthStore.getState();
   return state.token || localStorage.getItem('token') || '';
