@@ -1,6 +1,6 @@
 import { ErrorMessage, Field } from "formik"
 
-export function TextInput({ label, name, type,labelColor }) {
+export function TextInput({ label, name, type, labelColor }) {
   return (
     <div className="w-[100%] m-auto rounded-sm my-3">
       <label

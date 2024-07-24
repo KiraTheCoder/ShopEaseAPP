@@ -19,6 +19,12 @@ const passwordValidate = Yup.string()
   .min(4, "atleast 4 character")
   .max(8, "atmost 8 character");
 
+const confirm_passwordValidation = Yup.string()
+  .required("required")
+  .oneOf([Yup.ref('password'), null], 'password must match')
+  .min(4, "atleast 4 character")
+  .max(8, "atmost 8 character");
+
 const nameValidate = Yup.string()
   .required("required")
   .min(3, "atleast 3 character")
@@ -41,12 +47,14 @@ const signUpForm = {
     name: "",
     phoneNumberOrEmail: "",
     password: "",
+    confirm_password:""
   },
 
   validationSchema: Yup.object({
     name: nameValidate,
     phoneNumberOrEmail: phoneNumberOrEmailValidate,
     password: passwordValidate,
+    confirm_password:confirm_passwordValidation
   }),
 };
 
