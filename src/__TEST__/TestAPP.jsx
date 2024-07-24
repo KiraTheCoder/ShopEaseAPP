@@ -1,9 +1,10 @@
 import Store from "./Store"
-
+import  Footer from '../layouts/Footer/index'
 const TestAPP = () => {
   return (
     <div>
-          <Store />
+          {/* <Store /> */}
+          <Footer/>
     </div>
   )
 }

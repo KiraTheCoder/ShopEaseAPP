@@ -1,12 +1,10 @@
-// import React from 'react'
 import Account from "./footersection/Account"
 import Downloadapp from "./footersection/DownloadApp"
 import Quicklink from "./footersection/QuickLink"
 import Subscribe from "./footersection/Subscribe"
 import Support from "./footersection/Support"
-function Footer() {
-  // const Text_color = "#fafafa"
 
+function Footer() {
   return (
     <div className='w-[100vw] h-auto py-[2rem] float-end bg-[#000000] m-auto flex items-center gap-4 flex-col'>
 

@@ -1,7 +1,6 @@
 import TestAPP from "@/__TEST__/TestAPP"
 import { getData } from "@/services/apiCall/index"
 import { useState,useEffect } from "react"
-import Footer from "./layouts/Footer/index"
 
 
 function App() {
@@ -17,9 +16,8 @@ function App() {
 
   return (
     <>
-    {/* <TestAPP/> */}
+    <TestAPP/>
 
-   <Footer/>
     {/* <h1>{data?.message  && "hjh"}</h1> */}
     </>
   )
