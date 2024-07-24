@@ -1,0 +1,53 @@
+import LoginImg from "@/assets/images/footerImages/loginImg.jpeg"
+import { Formik, Form } from 'formik'
+import { TextInput } from "@/components/form"
+import { LoginForm } from '@/services/lib/YupFormikValidator'
+import { postData } from "@/services/apiCall"
+export default function LogInPage() {
+    async function submitForm(values) {
+        console.log(values);
+        const val = values.phoneNumberOrEmail
+        const isPhoneNumber = /^\d{10}$/.test(val);
+        const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+
+
+        if (isPhoneNumber) {
+            values.phoneNumber = val
+        }
+        else if (isEmail) {
+            values.email = val
+        }
+
+        delete values.phoneNumberOrEmail
+        console.log(await postData("/login", values))
+
+    }
+    return (
+        <div className='w-[100vw] md:w-[100vw] md:justify-around lg:w-[90vw] my-[3rem] h-auto  flex flex-wrap items-center justify-center sm:justify-center lg:justify-between '>
+            <div className='w-[90vw] sm:w-[80vw] md:w-[45vw] lg:w-[50vw] xl:w-[55vw] h-auto  '>
+                <img src={LoginImg} alt="" />
+            </div>
+            <Formik
+                initialValues={LoginForm.initialVaues}
+                validationSchema={LoginForm.validationSchema}
+                onSubmit={submitForm}
+                className='w-[15rem] mt-6 md:mt-0 sm:w-[20rem] md:w-[17rem] lg:w-[17rem] xl:w-[20rem]  h-auto '>
+                {(Values) => (
+                    <Form action="">
+                        <h2 className='font-inter text-[1.2rem] text-center sm:text-start  sm:text-[1.4rem] font-Five my-1 tracking-wider'>Log in to Exclusive</h2>
+                        <p className='text-[13px] sm:text-[14px] text-center sm:text-start font-Poppins tracking-wider'>Enter your details below</p>
+                        <TextInput label={"Email or Phone Number"} name={"phoneNumberOrEmail"} type={"input"} />
+                        <TextInput label={"Password"} name={"password"} type={"input"} />
+                        <div className='flex justify-between items-center mt-[1.5rem]'>
+                            <button type="submit" className='h-[2rem] sm:h-[2.4rem] md:h-[2.5rem] bg-[#db4444] w-[5.5rem] text-[#fafafa] rounded-md'>Log In</button>
+                            <li className='list-none '><a className='no-underline hover:underline text-[#db4444] text-[13px]' href="#">Forget password ?</a></li>
+                        </div>
+                    </Form>
+                )}
+
+            </Formik>
+        </div>
+
+    )
+}
+
