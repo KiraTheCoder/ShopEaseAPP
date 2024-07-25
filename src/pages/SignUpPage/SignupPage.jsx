@@ -21,9 +21,10 @@ function SignupPage() {
         }
 
         delete values.phoneNumberOrEmail
-        // console.log("final value",values);
-        await postData("/signup", values)
-
+        console.log("final value",values);
+        // await postData("/signup", values)
+        console.log("hello datata", await postData("/signup", values));
+        
     }
 
 

@@ -19,7 +19,7 @@ export default function LogInPage() {
         }
 
         delete values.phoneNumberOrEmail
-        console.log(await postData("/login", values))
+        console.log("login datata=>> ",await postData("/login", values))
 
     }
     return (
