@@ -40,7 +40,6 @@ async function apiCall(endpoint, method = 'GET', data = null) {
     return await handleResponse(response);
   } catch (error) {
     console.error(`Error with ${method} request to ${endpoint}:`, error);
-    throw error;
   }
 }
 
