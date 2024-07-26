@@ -1,9 +1,10 @@
+import Header from "@/Header/Header"
 import Store from "./Store"
 
 const TestAPP = () => {
   return (
     <div>
-          <Store />
+          <Header/>
     </div>
   )
 }
