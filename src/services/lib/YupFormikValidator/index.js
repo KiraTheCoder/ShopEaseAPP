@@ -30,6 +30,12 @@ const nameValidate = Yup.string()
   .min(3, "atleast 3 character")
   .max(15, "atmost 15 character");
 
+const otpValidate = Yup.string()
+  .required("required")
+
+// const otpIDValidate = Yup.string()
+//   .required("required")
+
 const LoginForm = {
   initialVaues: {
     phoneNumberOrEmail: "",
@@ -47,15 +53,29 @@ const signUpForm = {
     name: "",
     phoneNumberOrEmail: "",
     password: "",
-    confirm_password:""
+    confirm_password:"",
+    otp:"",
+    // otpID:"",
   },
 
   validationSchema: Yup.object({
     name: nameValidate,
     phoneNumberOrEmail: phoneNumberOrEmailValidate,
     password: passwordValidate,
-    confirm_password:confirm_passwordValidation
+    confirm_password:confirm_passwordValidation,
+    otp:otpValidate,
+    // otpID:otpIDValidate
   }),
 };
 
-export {LoginForm,signUpForm}
+const otpForm = {
+  initialVaues: {
+    phoneNumberOrEmail: "",
+  },
+
+  validationSchema: Yup.object({
+    phoneNumberOrEmail: phoneNumberOrEmailValidate,
+  }),
+};
+
+export {LoginForm,signUpForm,otpForm}

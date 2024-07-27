@@ -1,7 +1,8 @@
 import TestAPP from "@/__TEST__/TestAPP"
 import { getData } from "@/services/apiCall/index"
 import { useState,useEffect } from "react"
-
+import Footer from "./layouts/Footer"
+import { Outlet } from "react-router-dom"
 
 function App() {
   // const [data, setData] = useState(null);
@@ -16,8 +17,10 @@ function App() {
 
   return (
     <>
+    {/* <Headers/> */}
     <TestAPP/>
-
+    <Outlet/>
+   <Footer/>
     {/* <h1>{data?.message  && "hjh"}</h1> */}
     </>
   )

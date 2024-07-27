@@ -11,19 +11,22 @@ export default function LogInPage() {
         const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
 
         if (isPhoneNumber) {
-            values.phoneNumber = val
+            values.phoneNumber = "91" + val
         }
         else if (isEmail) {
             values.email = val
         }
 
         delete values.phoneNumberOrEmail
-        console.log("login datata=>> ",)
+        // console.log("login datata=>> ",)
         try {
-            await postData("/login", values)
+           const data= await postData("/login", values)
+             alert(data.message)
+            // console.log("fetch" ,  await postData("/login", values));
             option.resetForm()
         } catch (error) {
-            console.log(error);
+            // console.log(error);
+            alert(error)
         }
     }
     return (
@@ -36,8 +39,6 @@ export default function LogInPage() {
                     initialValues={LoginForm.initialVaues}
                     validationSchema={LoginForm.validationSchema}
                     onSubmit={submitForm}
-
-                // className='w-[15rem] mt-6 md:mt-0 sm:w-[20rem] md:w-[17rem] lg:w-[17rem] xl:w-[20rem]  h-auto '
                 >
                     {(Values) => (
                         <Form action="">
@@ -46,9 +47,8 @@ export default function LogInPage() {
                             <TextInput label={"Email or Phone Number"} name={"phoneNumberOrEmail"} type={"input"} />
                             <TextInput label={"Password"} name={"password"} type={"password"} />
                             <div className='flex justify-between items-center mt-[1.5rem]'>
-                                <Button type={"submit"} name={"Log In"} height={"h-[2rem] sm:h-[2.4rem] md:h-[2.5rem]"} width={"w-[5.5rem]"} textColor={"text-[#fafafa]"} bgColor={"bg-[#db4444]"} />
-                                {/* <button type="submit" className='h-[2rem] sm:h-[2.4rem] md:h-[2.5rem] bg-[#db4444] w-[5.5rem] text-[#fafafa] rounded-md'>Log In</button> */}
-                                <li className='list-none '><a className='no-underline hover:underline text-[#db4444] text-[13px]' href="#">Forget password ?</a></li>
+                            <Button type="submit" name={"Log In"} style={"w-[5.5rem]"}/>
+                            <li className='list-none '><a className='no-underline hover:underline text-[#db4444] text-[13px]' href="#">Forget password ?</a></li>
                             </div>
                         </Form>
                     )}

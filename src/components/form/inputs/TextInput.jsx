@@ -1,6 +1,6 @@
 import { ErrorMessage, Field } from "formik"
 
-export function TextInput({ label, name, type, labelColor }) {
+export function TextInput({ label, name, type, labelColor, value }) {
   return (
     <div className="w-[100%] m-auto rounded-sm my-3">
       <label
@@ -14,6 +14,7 @@ export function TextInput({ label, name, type, labelColor }) {
         name={name}
         autoComplete="off"
         type={type}
+        value={value}
         placeholder={`Enter ${label}`}
       />
       <div className="text-red-500 h-3 text-xs">
