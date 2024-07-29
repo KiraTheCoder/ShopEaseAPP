@@ -2,7 +2,6 @@ import TestAPP from "@/__TEST__/TestAPP"
 import { getData } from "@/services/apiCall/index"
 // import Header from "./Header/Header"
 import { useState,useEffect } from "react"
-import Topheader from "./Topheader/Topheader"
 
 
 function App() {
@@ -18,9 +17,9 @@ function App() {
 
   return (
     <>
-    {/* <Header/> */}
     <TestAPP/>
-
+    {/* <Outlet/> */}
+   {/* <Footer/> */}
     {/* <h1>{data?.message  && "hjh"}</h1> */}
     </>
   )

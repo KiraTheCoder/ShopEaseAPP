@@ -21,7 +21,7 @@ function Footer() {
         <div className=' px-2 mt-8'>
           <Quicklink/>
         </div>
-        <div className='px-2 mt-8'>
+        <div className='px-2 mt-8 '>
           <Downloadapp/>
         </div>
       </div>

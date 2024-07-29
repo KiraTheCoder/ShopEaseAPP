@@ -1,5 +1,10 @@
 import { FaInstagram, FaLinkedinIn,FaFacebookF } from "react-icons/fa6";
 import { LuTwitter } from "react-icons/lu";
+import FooterQR from "@/assets/images/footerImages/footerQR.jpeg"
+// import googleImg from "@/assets/images/footerImages/googleImg.png"
+import googleIMG from "@/assets/images/footerImages/googleImg.png"
+
+
 
 function Downloadapp() {
     
@@ -9,11 +14,13 @@ function Downloadapp() {
             <h4 className={`text-[${Text_color}] text-[17px] sm:text-[19px] md:text-[20px] font-inter mb-3 font-semibold`}>Download App</h4>
             <p className="text-[13px] sm:text-[15px] md:text-[16px] my-2 text-[#fafafa]">Save $3 with App New User Only</p>
             
-            <div className="w-[100%] bg-slate-100 h-[5rem] flex justify-between">
-                <div className="w-[40%] "><img src="../../.././assets/images/footerQR.jpeg" alt="" /></div>
-                <div className="w-[50%] grid items-end bg-green-800">
-                    <img className="h-[2rem] w-[100%] " src="../assets/images/googlepay.png" alt="" />
-                    <img className="h-[2rem] w-[100%] " src="../assets/images/footer_appstoreImg.png" alt="" />
+            <div className="w-[100%] h-[5.5rem] flex justify-between">
+                <div className="w-[40%] my-auto "><img className="" src={FooterQR} alt="" /></div>
+                {/* <div className="w-[55%] grid items-end  "> */}
+                <div className=" w-[55%] flex items-end  ">
+                    <img className="border-2 w-[6rem] h-[100%] " src={googleIMG} alt="" />
+                    {/* <img className="w-[100%] border-2 " src="" alt="" /> */}
+                   {/* <div className="w-[100%]  bg-slate-100 "> <img className="bg-red-300" src={googleplay} alt="" /></div> */}
                 </div>
             </div>
             <div className="w-[100%] flex gap-4 my-4">
