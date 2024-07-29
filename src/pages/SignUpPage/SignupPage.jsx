@@ -47,32 +47,26 @@ function SignupPage() {
 
         delete values.phoneNumberOrEmail;
 
-        if (otpID) {
-            values.otpID = otpID;
-            try {
+        try {
+            if (otpID) {
+                values.otpID = otpID;
                 const response = await postData("/signup", values);
-                alert("signUp successfully 🥰")
-                // console.log("Signup response:", response);
-            } catch (error) {
-                alert("Ohhh!",error)
-                // console.error("Error during signup:", error);
-            }
-        }
-        else {
-            try {
+                alert("Sign up successful 🥰");
+                // Reset the form after successful signup
+                actions.resetForm();
+            } else {
                 const otpData = await postData("/send_signup_otp", values);
+                // console.log("ygfkuayfg",otpData.data.otpID);
                 setOtpID(otpData.data.otpID);
-                alert("OPT send successfully on your phoneNumber or Email..")
-                // console.log("OTP ID received:", otpData.data.otpID);
-            } catch (error) {
-                alert("Error sending OTP:" , error)
-                // console.error("Error sending OTP:", error);
+                alert("OTP sent successfully to your phone number or email.");
+                // console.log("rohit kumar otp id", otpID);
             }
+        } catch (error) {
+            alert("Error:", error);
         }
-
-        actions.resetForm();
+        console.log("otpid is print  rohit",otpID);
     }
-
+    
     return (
         <div className='w-[100vw] md:w-[100vw] md:justify-around lg:w-[90vw] my-[3rem] h-auto flex flex-wrap items-center justify-center sm:justify-center lg:justify-between'>
             <div className='w-[90vw] sm:w-[80vw] md:w-[45vw] lg:w-[50vw] xl:w-[55vw] h-auto'>
@@ -110,7 +104,6 @@ function SignupPage() {
                     <Formik
                         initialValues={otpForm.initialVaues}
                         validationSchema={otpForm.validationSchema}
-                        // onSubmit={otpsubForm}
                         onSubmit={submitForm}
                     >
                         {(Values) => (

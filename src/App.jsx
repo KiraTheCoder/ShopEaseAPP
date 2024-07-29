@@ -20,7 +20,7 @@ function App() {
     {/* <Headers/> */}
     <TestAPP/>
     <Outlet/>
-   <Footer/>
+   {/* <Footer/> */}
     {/* <h1>{data?.message  && "hjh"}</h1> */}
     </>
   )
