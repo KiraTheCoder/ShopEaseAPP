@@ -21,7 +21,7 @@ const passwordValidate = Yup.string()
 
 const confirm_passwordValidation = Yup.string()
   .required("required")
-  .oneOf([Yup.ref('password'), null], 'password must match')
+  .oneOf([Yup.ref("password"), null], "password must match")
   .min(4, "atleast 4 character")
   .max(8, "atmost 8 character");
 
@@ -30,8 +30,9 @@ const nameValidate = Yup.string()
   .min(3, "atleast 3 character")
   .max(15, "atmost 15 character");
 
-const otpValidate = Yup.string()
-  .required("required")
+const otpValidate = Yup.string().required("required");
+
+const textareaValidate = Yup.string().required("required");
 
 // const otpIDValidate = Yup.string()
 //   .required("required")
@@ -53,8 +54,8 @@ const signUpForm = {
     name: "",
     phoneNumberOrEmail: "",
     password: "",
-    confirm_password:"",
-    otp:"",
+    confirm_password: "",
+    otp: "",
     // otpID:"",
   },
 
@@ -62,8 +63,8 @@ const signUpForm = {
     name: nameValidate,
     phoneNumberOrEmail: phoneNumberOrEmailValidate,
     password: passwordValidate,
-    confirm_password:confirm_passwordValidation,
-    otp:otpValidate,
+    confirm_password: confirm_passwordValidation,
+    otp: otpValidate,
     // otpID:otpIDValidate
   }),
 };
@@ -78,4 +79,21 @@ const otpForm = {
   }),
 };
 
-export {LoginForm,signUpForm,otpForm}
+// send text message form start
+
+const sendMessageForm = {
+  initialVaues: {
+    name: "",
+    phone: "",
+    email: "",
+    textarea: "",
+  },
+  validationSchema: Yup.object({
+    name: nameValidate,
+    phone: phoneNumberOrEmailValidate,
+    email: phoneNumberOrEmailValidate,
+    textarea: textareaValidate,
+  }),
+};
+
+export { LoginForm, signUpForm, otpForm, sendMessageForm };

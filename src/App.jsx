@@ -18,7 +18,11 @@ function App() {
   return (
     <>
     <TestAPP/>
+<<<<<<< HEAD
     {/* <Outlet/> */}
+=======
+    <Outlet/>
+>>>>>>> 5a2e5a6ee4e9b06df51e88d8d86bf39b6db8769e
    {/* <Footer/> */}
     {/* <h1>{data?.message  && "hjh"}</h1> */}
     </>
