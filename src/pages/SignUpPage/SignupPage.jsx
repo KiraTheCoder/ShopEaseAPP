@@ -9,43 +9,20 @@ import { postData } from "@/services/apiCall";
 function SignupPage() {
     const [otpID, setOtpID] = useState(null);
 
-    //    async function otpsubForm(values, actions) {
-
-    //         const val = values.phoneNumberOrEmail;
-    //         const isPhoneNumber = /^\d{10}$/.test(val);
-    //         const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
-
-    //         if (isPhoneNumber) {
-    //             values.phoneNumber =  "91"+val;
-    //         } else if (isEmail) {
-    //             values.email = val;
-    //         }
-
-    //         delete values.phoneNumberOrEmail;
-
-    //         try {
-    //             const otpData = await postData("/send_signup_otp", values);
-    //             setOtpID(otpData.data.otpID);
-    //             console.log("OTP ID received:", otpData.data.otpID);
-    //         } catch (error) {
-    //             console.error("Error sending OTP:", error);
-    //         }
-
-    //         actions.resetForm();
-    //     }
-
     async function submitForm(values, actions) {
+        // console.log("rohit valueaaaa",values);
         const val = values.phoneNumberOrEmail;
         const isPhoneNumber = /^\d{10}$/.test(val);
         const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
 
         if (isPhoneNumber) {
-            values.phoneNumber = "91" + val;
+            values.phoneNumber = "+91" + val;
         } else if (isEmail) {
             values.email = val;
         }
 
         delete values.phoneNumberOrEmail;
+        // console.log("all value",values);
 
         try {
             if (otpID) {
@@ -62,9 +39,10 @@ function SignupPage() {
                 // console.log("rohit kumar otp id", otpID);
             }
         } catch (error) {
-            alert("Error:", error);
+            alert("Error message:", error);
         }
-        console.log("otpid is print  rohit",otpID);
+        actions.resetForm();
+        // console.log("otpid is print  rohit",otpID);
     }
     
     return (

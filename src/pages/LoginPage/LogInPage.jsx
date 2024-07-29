@@ -11,7 +11,7 @@ export default function LogInPage() {
         const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
 
         if (isPhoneNumber) {
-            values.phoneNumber = "91" + val
+            values.phoneNumber = "+91" + val
         }
         else if (isEmail) {
             values.email = val
@@ -26,7 +26,7 @@ export default function LogInPage() {
             option.resetForm()
         } catch (error) {
             // console.log(error);
-            alert(error)
+            alert("rohit ligin error",error)
         }
     }
     return (

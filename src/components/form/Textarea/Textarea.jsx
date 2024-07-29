@@ -1,26 +1,29 @@
-import React from 'react'
-import { ErrorMessage, Field } from "formik"
+import React from 'react';
+import { ErrorMessage, Field } from 'formik';
 
-export function Textarea({ label, name, type, labelColor, value }) {
+export function Textarea({ label, name, labelColor, style, cols, rows, ...props }) {
   return (
     <div className="w-[100%] m-auto rounded-sm my-3">
-      <label
-        className={`text-[0.8rem]  py-1 text-start ${labelColor?labelColor:"text-blue-800"}`}
-        htmlFor={label}
-      >
-        {label}
-      </label>
+      {label && (
+        <label
+          className={`text-[0.8rem] py-1 text-start ${labelColor || 'text-blue-800'}`}
+          htmlFor={name}
+        >
+          {label}
+        </label>
+      )}
       <Field
-        className="h-[2.5rem] text-[18px] border-b-[1px] border-blue-950 rounded-sm w-[100%] outline-none bg-transparent"
+        as="textarea"
+        className={`h-[10rem] text-[18px] rounded-sm w-[100%] outline-none ${style}`}
         name={name}
-        autoComplete="off"
-        type={type}
-        value={value}
-        placeholder={`Enter ${label}`}
+        cols={cols}
+        rows={rows}
+        placeholder={`Enter Message`}
+        {...props}
       />
       <div className="text-red-500 h-3 text-xs">
         <ErrorMessage name={name} />
       </div>
     </div>
-  )
+  );
 }

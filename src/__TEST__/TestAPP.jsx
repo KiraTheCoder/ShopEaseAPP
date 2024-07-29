@@ -11,17 +11,14 @@ import Contact from "@/pages/contactpage/Contact"
 const TestAPP = () => {
   return (
     <div>
-<<<<<<< HEAD
-          <Header/>
-=======
+          {/* <Header/> */}
           {/* <Store /> */}
-          {/* <LogInPage/> */}
-          {/* <SignupPage/> */}
-          <About/>
-         {/* <Contact/> */}
+          <LogInPage/>
+          <SignupPage/>
+          {/* <About/> */}
+         <Contact/>
          {/* <Contact/> */}
           <Footer/>
->>>>>>> e4849e09a9c10a96262fbf01aaf0effced3f84ad
     </div>
   )
 }
