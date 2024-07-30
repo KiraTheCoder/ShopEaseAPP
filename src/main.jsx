@@ -12,6 +12,7 @@ import Contact from './pages/contactpage/Contact.jsx';
 import SignupPage from './pages/SignUpPage/SignupPage.jsx';
 import { LoginForm } from './services/lib/YupFormikValidator/index.js';
 import LogInPage from './pages/LoginPage/LogInPage.jsx';
+import Home from './pages/HomePage/Home.jsx';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
     children:[
       {
         path:"/",
-        element:<Homepage/>
+        element:<Home/>
       },
       {
         path:"/about",

@@ -8,16 +8,11 @@ import Abouttrustcard from "@/components/cards/aboutcusTrustcards/Abouttrustcard
 import TeamSection from '../components/cards/aboutcusTrustcards/Ourteam'
 import About from "@/pages/Aboutpage/About"
 import Contact from "@/pages/contactpage/Contact"
+import Home from "@/pages/HomePage/Home"
+
 const TestAPP = () => {
   return (
     <div>
-          <Header/>
-          {/* <Store /> */}
-          <LogInPage/>
-          <SignupPage/>
-          <About/>
-         <Contact/>
-          <Footer/>
     </div>
   )
 }

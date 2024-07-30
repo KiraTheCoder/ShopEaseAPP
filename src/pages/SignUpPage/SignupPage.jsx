@@ -43,6 +43,7 @@ function SignupPage() {
             alert("Error message:", error.message);
         }
         actions.resetForm();
+        // console.log("otpid is print  rohit",otpID);
     }
     
     return (
