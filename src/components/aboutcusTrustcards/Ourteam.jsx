@@ -1,5 +1,7 @@
 import { FaInstagram, FaTwitter, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 import rohit from "@/assets/images/footerImages/rrrrrrr.jpg";
+
+import khushi from "@/assets/images/footerImages/kk.jpg";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -8,7 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 const teamMembers = [
     { name: "PAWAN SIR", role: "Founder & Chairman", imgSrc: "https://s3-alpha-sig.figma.com/img/0881/49fd/5afc043392ee3cbb529f429b3e2098d3?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=PTqcCKmb6S-VpW31BrzcwYZEtJMMXFPcgN2TzJvAuAvVC7MdRwylAwRUMoWuZqqjYMle-WXx~o9dTmQnNEf3YWf0FZSO3nMR9dXT4brAc3WaCD1A7s7bqPTC7QyEd3Iy1k2AojmeqvFapXIxmIzTgUOLUhWBky7tEfk~1XL8BRbHgJE3spxxBp6Cd~X2pIRa1sx0xNXXBFKxLGnMJ4oA8ZhhXe7UmMEwoazMbhM0idFPt~uOlJ6D5PJh0ogdWxXzSGL1ssEUcwfOMg3Amufmmuv-CWmpIiEnfcdFGhbNhqw9dFFLEDQroT80m41yeB3Tes7-IRRn~1bDSSfpraCKog__" },
     { name: "KIRAN BOHRA", role: "Managing Director ", imgSrc: "https://s3-alpha-sig.figma.com/img/ede4/8f2b/5df8103b281240ce5bafe5dd7d215ab8?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ocarnvqvi5WaQNohjrU10e18mAeTyDJ09Y3mXuVr3SVp4Ot2tyGo4BUb~Q4iY6LXnjbi~n4PHxlfra5L6GzpV6LSn2LejhmeQWcDz9BxV~XZFObWL8gnz0S8Ro9alFwBbQQboj5X-4F0eIXzAZTmYXrR5UrehvahY3l~IXyZ1BuIobxvcLkjCJsWhmklfqCAE3JOOa4L~MJ5J~PMbaO7r9d-sVKalALEw9-uURJMdnZlOCO73~Vl7wpxuKvBrEBzNyuJ5CyTgXynKWQKIeUsg124ejpCrzfX9ZE8dCOi5wXmoBStVf41q5Lu6JyxHSpZoMYEgwJrDfNU3hXxEsqntg__" },
-    { name: "KHUSHI TAMOR", role: "Product Designer", imgSrc: "https://s3-alpha-sig.figma.com/img/8438/eab9/a2fe88af0272adecd83422d0cb7e20d7?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=O7YwcI80oxaFYizYyDX6DoQu8jVQ7-rERzzE7Q8bXIgAViRz3PBdXy3FzEQygE~x6PtXvuINfD~OnIpZylJzkkIJXTnVUWq6jl7FMSJx4s4JTwP59xLUCCnYuDGkrRQuXlxt2X004-Cb3IKiYNgPnKleQLv3jz~d61WPke44Oa0mmEqBYRMlF-KvognfvTeen1R-S8Itn8gTeyZFrKzRHdR90X~INWeNDx3a7pAEQBo4OWXQaSdvw9b1jMTMgrhR~2T51wHI9HN6j0sfXZmwvJex8-vbQfkWknygFctwfxWTcNPZx6ZuarWLU8zQAcve7oAmDrKtmBBl~lI3OThwCQ__" },
+    { name: "KHUSHI TAMOR", role: "Product Designer", imgSrc: `${khushi}`},
     { name: "ROHIT KUMAR", role: "Product Designer", imgSrc: `${rohit}` },
     { name: "MANSHI", role: "Product Ideas", imgSrc: "https://s3-alpha-sig.figma.com/img/8438/eab9/a2fe88af0272adecd83422d0cb7e20d7?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=O7YwcI80oxaFYizYyDX6DoQu8jVQ7-rERzzE7Q8bXIgAViRz3PBdXy3FzEQygE~x6PtXvuINfD~OnIpZylJzkkIJXTnVUWq6jl7FMSJx4s4JTwP59xLUCCnYuDGkrRQuXlxt2X004-Cb3IKiYNgPnKleQLv3jz~d61WPke44Oa0mmEqBYRMlF-KvognfvTeen1R-S8Itn8gTeyZFrKzRHdR90X~INWeNDx3a7pAEQBo4OWXQaSdvw9b1jMTMgrhR~2T51wHI9HN6j0sfXZmwvJex8-vbQfkWknygFctwfxWTcNPZx6ZuarWLU8zQAcve7oAmDrKtmBBl~lI3OThwCQ__"},
 ];

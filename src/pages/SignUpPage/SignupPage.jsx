@@ -40,7 +40,7 @@ function SignupPage() {
         const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
 
         if (isPhoneNumber) {
-            values.phoneNumber = "91" + val;
+            values.phoneNumber = "+91" + val;
         } else if (isEmail) {
             values.email = val;
         }
@@ -64,7 +64,7 @@ function SignupPage() {
         } catch (error) {
             alert("Error:", error);
         }
-        console.log("otpid is print  rohit",otpID);
+        // console.log("otpid is print  rohit",otpID);
     }
     
     return (

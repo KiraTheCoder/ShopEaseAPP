@@ -1,8 +1,5 @@
 import TestAPP from "@/__TEST__/TestAPP"
 import { getData } from "@/services/apiCall/index"
-// import Header from "./Header/Header"
-import { useState,useEffect } from "react"
-
 
 function App() {
   // const [data, setData] = useState(null);
@@ -18,13 +15,6 @@ function App() {
   return (
     <>
     <TestAPP/>
-<<<<<<< HEAD
-    {/* <Outlet/> */}
-=======
-    <Outlet/>
->>>>>>> 5a2e5a6ee4e9b06df51e88d8d86bf39b6db8769e
-   {/* <Footer/> */}
-    {/* <h1>{data?.message  && "hjh"}</h1> */}
     </>
   )
 }
