@@ -1,10 +1,10 @@
-import TeamSection from '../../components/aboutcusTrustcards/Ourteam'
-import Abouttrustcard from '../../components/aboutcusTrustcards/Abouttrustcard'
-import Trustcard from '@/components/customerTrustcard/Trustcard'
+import TeamSection from '../../components/cards/aboutcusTrustcards/Ourteam'
+import Abouttrustcard from '../../components/cards/aboutcusTrustcards/Abouttrustcard'
+import Trustcard from '@/components/cards/customerTrustcard/Trustcard'
 function About() {
     const aboutmainImg = "https://s3-alpha-sig.figma.com/img/fcc8/9aaa/7b85f8c1dcce81e71e2eb178be13bd4d?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=BwHd84ktT1n-BhjX8HhzVtrvsH6RLRdS983M3Tz8eQDcvNZOXmZD6Sa0bce0TYwb5GM3AW0O2~US5TSCrk4a8CGjJ-KiYRhf2FWBgUe24gXwcKP47YflX6Bz8PkuaWVcx9praTqi0eNyh58eQ9LC4iof~BkwoOTqCSsOFTZbrfuqvcAhsEljcwJnSa7Mm5~ezNAMyJTz3qILzsGYaAIivQgdi0SXidNqFekMgW35SHocppaq2N9MC-OARmPB56oiiLLxcWRTLc7C~W1y1UHX3nSsEE5to~r2-BrD2TNw4I1VOc6moZDceyH2QPwQK3OFos407zHlseSMYICunmPMxg__"
     return (
-        <div>
+        <div className=''>
             <div className='w-[100vw] ml-auto md:w-[100vw] md:justify-around lg:w-[90vw] my-[3rem] h-auto flex flex-wrap-reverse items-center justify-center sm:justify-center lg:justify-between'>
                 <div className=' w-[90vw] mt-6 md:mt-0 sm:w-[90vw] md:w-[17rem] lg:w-[35vw] xl:w-[35vw] 2xl:w-[40vw] h-auto'>
                     <h2 className='font-inter text-[1.4rem] text-center sm:text-start sm:text-[1.7rem] md:text-[2rem] 2xl:text-[4rem] font-Five my-1 tracking-wider capitalize'>our Story</h2>

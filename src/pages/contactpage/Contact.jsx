@@ -13,9 +13,8 @@ function Contact() {
 
 
     return (
-        <div className=' md:w-[90vw] lg:w-[80vw] m-auto my-[4rem]  md:flex md:justify-between '>
-            <div className='w-[15rem] sm:w-[100%] md:w-[15rem] sm:text-center md:text-start font-Poppins'>
-            {/* <div className='w-[15rem] sm:w-[100%] md:w-[15rem] font-Poppins bg-teal-500'> */}
+        <div className=' md:w-[90vw] lg:w-[80vw] m-auto my-[3rem]  md:flex md:justify-between '>
+            <div className='w-[90vw] m-auto md:m-0 sm:w-[20rem] md:w-[15rem] sm:text-start md:text-start font-inter'>
                 <div className='py-4'>
                     <div className='flex items-center gap-4 my-2'><div className='w-7 h-7 bg-[#db4444] rounded-[50%] flex justify-center items-center' ><FaPhoneAlt className='text-sm text-white' /></div> <span className='text-sm font-four '>call to us</span></div>
                     <p className='text-[14px] leading-[1.7rem]'>we are available 24/7, 7 days a week.</p>
@@ -29,7 +28,7 @@ function Contact() {
                     <p className='text-[14px] leading-[1.7rem]'>Emails: support@exclusive.com</p>
                 </div>
             </div>
-            <div className='w-[50vw]  '>
+            <div className='w-[90vw] m-auto sm:m-auto md:m-0 sm:w-[20rem] md:w-[50vw]  '>
                 <Formik
                     initialValues={{ ...sendMessageForm.initialVaues }}
                     validationSchema={sendMessageForm.validationSchema}
@@ -43,7 +42,7 @@ function Contact() {
                                 <TextInput style=" sm-w[100%] border-none bg-gray-200 px-1" type="text"  name="phone" />
                             </div>
                             <Textarea type="textarea" rows="4" cols="50"  name="textarea" style="bg-gray-200 px-1 " />
-                            <div className='w-full flex justify-end items-center gap-8'> cancel <Button type="submit" name="Send message" style="w-[11.5rem] my-0 mb-2" /></div>
+                            <div className='w-full flex justify-end items-center gap-2 sm:gap-4 md:gap-8  text-[15px] md:text-[17px]'> cancel <Button type="submit" name="Send message" style="w-[7rem] text-[15px] md:text-[17px]  sm:w-[8rem] md:w-[11.5rem] my-0 mb-2" /></div>
                         </Form>
                     )}
                 </ Formik>
