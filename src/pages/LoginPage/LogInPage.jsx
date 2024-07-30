@@ -11,7 +11,7 @@ export default function LogInPage() {
         const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
 
         if (isPhoneNumber) {
-            values.phoneNumber = "91" + val
+            values.phoneNumber = "+91" + val
         }
         else if (isEmail) {
             values.email = val
@@ -26,11 +26,11 @@ export default function LogInPage() {
             option.resetForm()
         } catch (error) {
             // console.log(error);
-            alert(error)
+            alert("rohit ligin error",error)
         }
     }
     return (
-        <div className='w-[100vw] md:w-[100vw] md:justify-around lg:w-[90vw] my-[3rem] h-auto  flex flex-wrap items-center justify-center sm:justify-center lg:justify-between '>
+        <div className=' w-[100vw] md:w-[100vw] md:justify-around lg:w-[90vw] my-[3rem] h-auto  flex flex-wrap items-center justify-center sm:justify-center lg:justify-between '>
             <div className='w-[90vw] sm:w-[80vw] md:w-[45vw] lg:w-[50vw] xl:w-[55vw] h-auto  '>
                 <img className="rounded-[0.25rem]" src={LoginImg} alt="" />
             </div>

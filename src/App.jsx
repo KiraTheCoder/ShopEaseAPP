@@ -1,20 +1,16 @@
 import TestAPP from "@/__TEST__/TestAPP"
-import { getData } from "@/services/apiCall/index"
+import Header from "./Header/Header"
+import { Outlet } from "react-router-dom"
+import Footer from "./layouts/Footer"
 
 function App() {
-  // const [data, setData] = useState(null);
-
-  // useEffect(() => {
-  //   getData('/sample')
-  //     .then((response) => setData(response))
-  //     .catch((error) => console.error('Error fetching data:', error));
-  // }, []);
-
-  // console.log(data);
-
   return (
     <>
-    <TestAPP/>
+
+      <Header />
+      <Outlet />
+      <Footer />
+
     </>
   )
 }

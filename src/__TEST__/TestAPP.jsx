@@ -3,9 +3,9 @@ import Store from "./Store"
 import  Footer from '../layouts/Footer/index'
 import LogInPage from  '../pages/LoginPage/LogInPage'
 import SignupPage from "../pages/SignUpPage/SignupPage"
-import Trustcard from '../components/customerTrustcard/Trustcard'
-import Abouttrustcard from "@/components/aboutcusTrustcards/Abouttrustcard"
-import TeamSection from '../components/aboutcusTrustcards/Ourteam'
+import Trustcard from '../components/cards/customerTrustcard/Trustcard'
+import Abouttrustcard from "@/components/cards/aboutcusTrustcards/Abouttrustcard"
+import TeamSection from '../components/cards/aboutcusTrustcards/Ourteam'
 import About from "@/pages/Aboutpage/About"
 import Contact from "@/pages/contactpage/Contact"
 import Home from "@/pages/HomePage/Home"
@@ -13,12 +13,8 @@ import Home from "@/pages/HomePage/Home"
 const TestAPP = () => {
   return (
     <div>
-          {/* <Header/> */}
-          {/* <Home/> */}
-          <About/>
-          {/* <LogInPage/> */}
-          {/* <SignupPage/> */}
-          {/* <Footer/> */}
+      {/* <Home/> */}
+      {/* <Header/> */}
     </div>
   )
 }

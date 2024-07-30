@@ -6,11 +6,10 @@ import couple from "@/assets/images/footerImages/couple.png";
   
     return(
         <>
-        <div className="h-auto w-auto">
-        <div className="h-[80vh] w-[100vw]">
-            <div className="h-auto w-auto border pt-[5rem] px-[3rem] flex relative">
+        <div className="h-auto w-[90vw] m-auto">
+            <div className="h-auto  w-full mb-0 flex ">
 
-             <div className="h-auto w-[37rem] border ">
+             <div className=" pt-[3rem] flex-cols justify-center w-[48vw] ">
                 <h1 className="text-black text-7xl font-extrabold font-inter">
                     FIND CLOTHES THAT MATCHES YOUR STYLE
                 </h1>
@@ -22,36 +21,29 @@ import couple from "@/assets/images/footerImages/couple.png";
 
                  <div className="h-auto w-auto py-7 flex">
 
-                 <div className="h-[7rem] w-auto px-3.5 border">
+                 <div className="h-[7rem] w-auto px-3.5 ">
                     <h1 className="text-[40px] font-semibold">200+</h1>
                     <p className="text-gray-500">International Brands</p>
                  </div>
 
-                 <div className="h-[7rem] w-auto px-3.5 border">
+                 <div className="h-[7rem] w-auto px-3.5 ">
                     <h1 className="text-[40px] font-semibold">2,000+</h1>
                     <p className="text-gray-500">High-Quality Products</p>
                  </div>
 
-                 <div className="h-[7rem] w-auto px-3.5 border">
+                 <div className="h-[7rem] w-auto px-3.5">
                     <h1 className="text-[40px] font-semibold">30,000+</h1>
                     <p className="text-gray-500">Happy costomers</p>
                  </div>
                  </div>
-
-                 {/* <div>
-                 <img src={couple} alt="" />
-                 </div> */}
-
              </div>
 
-             <div className="h-auto w-[40rem] border">
-                <img className="ml-2" src={couple} alt="" />
-                <VscStarFull />
+             <div className=" w-[48vw] ">
+                <img className="" src={couple} alt="" />
+                {/* <VscStarFull /> */}
              </div>
 
             </div>
-           
-        </div>
         </div>   
         </>
     )

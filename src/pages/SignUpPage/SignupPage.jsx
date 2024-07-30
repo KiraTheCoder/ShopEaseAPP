@@ -5,34 +5,10 @@ import { TextInput, Button } from '@/components/form';
 import { signUpForm, otpForm } from "@/services/lib/YupFormikValidator";
 import { Formik, Form } from 'formik';
 import { postData } from "@/services/apiCall";
+import { Link } from 'react-router-dom';
 
 function SignupPage() {
     const [otpID, setOtpID] = useState(null);
-
-    //    async function otpsubForm(values, actions) {
-
-    //         const val = values.phoneNumberOrEmail;
-    //         const isPhoneNumber = /^\d{10}$/.test(val);
-    //         const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
-
-    //         if (isPhoneNumber) {
-    //             values.phoneNumber =  "91"+val;
-    //         } else if (isEmail) {
-    //             values.email = val;
-    //         }
-
-    //         delete values.phoneNumberOrEmail;
-
-    //         try {
-    //             const otpData = await postData("/send_signup_otp", values);
-    //             setOtpID(otpData.data.otpID);
-    //             console.log("OTP ID received:", otpData.data.otpID);
-    //         } catch (error) {
-    //             console.error("Error sending OTP:", error);
-    //         }
-
-    //         actions.resetForm();
-    //     }
 
     async function submitForm(values, actions) {
         const val = values.phoneNumberOrEmail;
@@ -46,12 +22,13 @@ function SignupPage() {
         }
 
         delete values.phoneNumberOrEmail;
-
+     
         try {
             if (otpID) {
                 values.otpID = otpID;
                 const response = await postData("/signup", values);
-                alert("Sign up successful 🥰");
+                 console.log("responce data", response);
+                alert("Sign up successful 🥰", response);
                 // Reset the form after successful signup
                 actions.resetForm();
             } else {
@@ -62,13 +39,15 @@ function SignupPage() {
                 // console.log("rohit kumar otp id", otpID);
             }
         } catch (error) {
-            alert("Error:", error);
+            console.log("my error", error);
+            alert("Error message:", error.message);
         }
-        // console.log("otpid is print  rohit",otpID);
+        actions.resetForm();
+        
     }
     
     return (
-        <div className='w-[100vw] md:w-[100vw] md:justify-around lg:w-[90vw] my-[3rem] h-auto flex flex-wrap items-center justify-center sm:justify-center lg:justify-between'>
+        <div className=' w-[100vw] md:w-[100vw] md:justify-around lg:w-[90vw] my-[3rem] h-auto flex flex-wrap items-center justify-center sm:justify-center lg:justify-between'>
             <div className='w-[90vw] sm:w-[80vw] md:w-[45vw] lg:w-[50vw] xl:w-[55vw] h-auto'>
                 <img className="rounded-[0.25rem]" src={LoginImg} alt="Login" />
             </div>
@@ -112,6 +91,10 @@ function SignupPage() {
                                 <p className='text-[13px] sm:text-[14px] text-center sm:text-start font-Poppins tracking-wider'>Enter your details below</p>
                                 <TextInput label="Email or Phone Number" name="phoneNumberOrEmail" type="input" />
                                 <Button type="submit" name="Send OTP" style="w-[5.5rem] my-0 mb-2" />
+                                <div className='list-none flex items-center gap-6'>
+                                    <span className='text-[16px]'>Already have an account:</span>
+                                    <a className='no-underline hover:underline text-[#db4444] text-[13px]' ><Link to={"/login"}>Login A/c</Link></a>
+                                </div>
                             </Form>
                         )}
                     </Formik>
