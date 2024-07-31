@@ -13,8 +13,7 @@ import Home from "@/pages/HomePage/Home"
 const TestAPP = () => {
   return (
     <div>
-      {/* <Home/> */}
-      {/* <Header/> */}
+      
     </div>
   )
 }
