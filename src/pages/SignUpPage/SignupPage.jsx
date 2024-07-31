@@ -8,13 +8,10 @@ import { postData } from "@/services/apiCall";
 import { Link } from 'react-router-dom';
 
 function SignupPage() {
-    const [otpID, setOtpID] = useState(null);
-    // const [otpID, setOtpID] = useState(false);
-
-
+    const [flag, setFlag] = useState(false);
+    const [otpID, setOtpID] = useState(false);
+  
     async function submitForm(values, actions) {
-        console.log("values rohit", values);
-
         const val = values.phoneNumberOrEmail;
         const isPhoneNumber = /^\d{10}$/.test(val);
         const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
@@ -27,29 +24,36 @@ function SignupPage() {
 
         delete values.phoneNumberOrEmail;
         delete values.confirm_password;
-     console.log("after validate", values);
-     console.log("otpId is ", otpID);
 
         try {
-            if (otpID) {
-                values.otpID = otpID;
-                const response = await postData("/user/signup", values);
-                 console.log("responce data", response);
-                alert("Sign up successful 🥰", response);
+            if (flag) {
+                if (values.phoneNumber) {
+                    values.otpID = otpID;
+                    console.log("if case inside flag condition");
+                    const response = await postData("/user/signup", values); 
+                }
+                else{
+                    console.log("else case inside flag condition");
+                    const response = await postData("/user/signup", values);
+                }
                 // Reset the form after successful signup
-                actions.resetForm();
+                 actions.resetForm();
+                 alert("Sign up successful 🥰");
             } else {
                 const otpData = await postData("/user/send_signup_otp", values);
-                console.log("ygfkuayfg",otpData.data.otpID);
-                setOtpID(otpData?.data?.otpID);
+                // console.log("ygfkuayfg",otpData.data.otpID);
+                setOtpID(otpData?.data?.otpID)
+                console.log("final otpID check", otpID);
+                console.log("ygfkuayfg",otpData.success);
+                setFlag(otpData?.success);
                 alert("OTP sent successfully to your phone number or email.");
             }
         } catch (error) {
-            // console.log("my error", error);
-            alert("Error message:", error);
+            // const Message=error?.response?.data?.message
+            actions.resetForm();
+            console.log("hello", error.message);
+                alert(error.message);
         }
-        // actions.resetForm();
-        // console.log("otpid is print  rohit",otpID);
     }
     
     return (
@@ -58,7 +62,7 @@ function SignupPage() {
                 <img className="rounded-[0.25rem]" src={LoginImg} alt="Login" />
             </div>
             <div className='w-[15rem] inl mt-6 md:mt-0 sm:w-[20rem] md:w-[17rem] lg:w-[17rem] xl:w-[20rem] h-auto'>
-                {otpID ? (
+                {flag ? (
                     <Formik
                         initialValues={{ ...signUpForm.initialVaues, otpID }}
                         validationSchema={signUpForm.validationSchema}
@@ -96,6 +100,7 @@ function SignupPage() {
                                 <h2 className='font-inter text-[1.2rem] text-center sm:text-start sm:text-[1.4rem] font-Five my-1 tracking-wider'>Sign Up to Exclusive</h2>
                                 <p className='text-[13px] sm:text-[14px] text-center sm:text-start font-Poppins tracking-wider'>Enter your details below</p>
                                 <TextInput label="Email or Phone Number" name="phoneNumberOrEmail" type="input" />
+                              
                                 <Button type="submit" name="Send OTP" style="w-[5.5rem] my-0 mb-2" />
                                 <div className='list-none flex items-center gap-6'>
                                     <span className='text-[16px]'>Already have an account:</span>
