@@ -17,36 +17,35 @@ function Header() {
             <div className="h-[5rem]  w-auto flex  items-center justify-around border bg-red-500">
                 <div className="h-[3rem] w-[35rem]  flex justify-between items-center">
                     {/* <div className=" text-[24px]  font-bold ">SHOP.CO</div> */}
-                    <h1 className=" px-2 text-1xl sm:2px font-bold  md:text-4xl md:font-extrabold md:font-bold ">SHOP.CO</h1>
-                    <div className="flex hidden sm:inline-flex md:visible md:items-center md:list-none md:gap-5 ">
+                    <h1 className=" px-2 text-1xl sm:2px font-bold  md:text-4xl  md:font-bold ">SHOP.CO</h1>
+                    <div className="flex  sm:inline-flex md:visible md:items-center md:list-none md:gap-5 ">
                         <li className=" ">
-                            <NavLink to={'/'} className={({ isActive }) => `text-[9px] sm:text-[12px] md:text-[14px] md:text-[16px] xl:text-[17px] capitalize relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[0.8px] sm:after:h-[1px] md:after:h-[1px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-1 ${isActive ? 'after:block' : 'after:hidden'}`}>
+                            <NavLink to={'/'} className={({ isActive }) => `text-[9px] sm:text-[12px] md:text-[16px] xl:text-[17px] capitalize relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[0.8px] sm:after:h-[1px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-1 ${isActive ? 'after:block' : 'after:hidden'}`}>
                                 Shop
-                                
                             </NavLink>
                         </li>
                         <li className=" ">
-                            <NavLink to={'/about'} className={({ isActive }) => `text-[9px] sm:text-[12px] md:text-[14px] md:text-[16px] xl:text-[17px] capitalize relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[0.8px] sm:after:h-[1px] md:after:h-[1px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-1 ${isActive ? 'after:block' : 'after:hidden'}`}>
+                            <NavLink to={'/about'} className={({ isActive }) => `text-[9px] sm:text-[12px] md:text-[16px] xl:text-[17px] capitalize relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[0.8px] sm:after:h-[1px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-1 ${isActive ? 'after:block' : 'after:hidden'}`}>
                                 On Sale
                             </NavLink>
                         </li>
                         <li className=" ">
-                            <NavLink to={'/contact'} className={({ isActive }) => `text-[9px] sm:text-[12px] md:text-[14px] md:text-[16px] xl:text-[17px] capitalize relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[0.8px] sm:after:h-[1px] md:after:h-[1px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-1 ${isActive ? 'after:block' : 'after:hidden'}`}>
+                            <NavLink to={'/contact'} className={({ isActive }) => `text-[9px] sm:text-[12px] md:text-[16px] xl:text-[17px] capitalize relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[0.8px] sm:after:h-[1px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-1 ${isActive ? 'after:block' : 'after:hidden'}`}>
                                 New Arrivales
                             </NavLink>
                         </li>
                         <li className=" ">
-                            <NavLink to={'/contact'} className={({ isActive }) => `text-[9px] sm:text-[12px] md:text-[14px] md:text-[16px] xl:text-[17px] capitalize relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[0.8px] sm:after:h-[1px] md:after:h-[1px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-1 ${isActive ? 'after:block' : 'after:hidden'}`}>
+                            <NavLink to={'/contact'} className={({ isActive }) => `text-[9px] sm:text-[12px] md:text-[16px] xl:text-[17px] capitalize relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[0.8px] sm:after:h-[1px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-1 ${isActive ? 'after:block' : 'after:hidden'}`}>
                                 Brands
                             </NavLink>
                         </li>
                         <li className="">
-                            <NavLink to={`/${activeLink}`} className={({ isActive }) => `text-[9px] sm:text-[12px] md:text-[14px] md:text-[16px] xl:text-[17px] capitalize relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[0.8px] sm:after:h-[1px] md:after:h-[1px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-1 ${isActive ? 'after:block' : 'after:hidden'}`}  onClick={() => {activeLink==="signup"? handleToggle('login'):handleToggle("signup") }}>
+                            <NavLink to={`/${activeLink}`} className={({ isActive }) => `text-[9px] sm:text-[12px]  md:text-[16px] xl:text-[17px] capitalize relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[0.8px] sm:after:h-[1px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-1 ${isActive ? 'after:block' : 'after:hidden'}`}  onClick={() => {activeLink==="signup"? handleToggle('login'):handleToggle("signup") }}>
                                 {activeLink}
                             </NavLink>
                         </li>
                         {/* <li>
-                            <NavLink to={'/login'} className={({ isActive }) => `text-[9px] sm:text-[12px] md:text-[14px] md:text-[16px] xl:text-[17px] capitalize relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[0.8px] sm:after:h-[1px] md:after:h-[1px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-1 ${isActive ? 'after:block' : 'after:hidden'}`}  onClick={() => handleToggle('/login')}>
+                            <NavLink to={'/login'} className={({ isActive }) => `text-[9px] sm:text-[12px] md:text-[16px] xl:text-[17px] capitalize relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[0.8px] sm:after:h-[1px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-1 ${isActive ? 'after:block' : 'after:hidden'}`}  onClick={() => handleToggle('/login')}>
                                 Login
                             </NavLink>
                         </li> */}
@@ -56,10 +55,10 @@ function Header() {
 
                     </div>
                 </div>
-                <div className=" h-[25px] w-[30rem] bg-green-500 md:h-[3rem] md:w-[29rem]  flex md:justify-between items-center ">
+                <div className=" h-[25px] w-[30rem]  md:h-[3rem] md:w-[29rem]  flex md:justify-between items-center ">
                     <div className="flex h-[20px] w-[22px] gap-2 px-3 md:h-[3rem] md:w-[25rem] items-center rounded-3xl  bg-gray-100">
                     <CiSearch className="text-[10px] text-gray-500 md:text-2xl md:text-gray-500"/>
-                        <input type="text" placeholder="Search for Product..." className="h-[19px] w-[25px] md:h-[2rem] md:w-[20rem] bg-gray-100 h-7  outline-none" />
+                        <input type="text" placeholder="Search for Product..." className=" w-[25px] md:h-[2rem] md:w-[20rem] bg-gray-100 h-7  outline-none" />
                     </div>
                     <FaRegCircleUser className="text-[20px] "/>
                     <FaCartPlus className="text-[20px]"/>
