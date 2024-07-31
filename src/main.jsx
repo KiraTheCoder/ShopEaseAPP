@@ -6,7 +6,6 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Homepage from './pages/HomePage/index.jsx';
 import About from './pages/Aboutpage/About.jsx';
 import Contact from './pages/contactpage/Contact.jsx';
 import SignupPage from './pages/SignUpPage/SignupPage.jsx';

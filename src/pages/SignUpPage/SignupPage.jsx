@@ -9,8 +9,12 @@ import { Link } from 'react-router-dom';
 
 function SignupPage() {
     const [otpID, setOtpID] = useState(null);
+    // const [otpID, setOtpID] = useState(false);
+
 
     async function submitForm(values, actions) {
+        console.log("values rohit", values);
+
         const val = values.phoneNumberOrEmail;
         const isPhoneNumber = /^\d{10}$/.test(val);
         const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
@@ -22,27 +26,29 @@ function SignupPage() {
         }
 
         delete values.phoneNumberOrEmail;
-     
+        delete values.confirm_password;
+     console.log("after validate", values);
+     console.log("otpId is ", otpID);
+
         try {
             if (otpID) {
                 values.otpID = otpID;
-                const response = await postData("/signup", values);
+                const response = await postData("/user/signup", values);
                  console.log("responce data", response);
                 alert("Sign up successful 🥰", response);
                 // Reset the form after successful signup
                 actions.resetForm();
             } else {
-                const otpData = await postData("/send_signup_otp", values);
-                // console.log("ygfkuayfg",otpData.data.otpID);
-                setOtpID(otpData.data.otpID);
+                const otpData = await postData("/user/send_signup_otp", values);
+                console.log("ygfkuayfg",otpData.data.otpID);
+                setOtpID(otpData?.data?.otpID);
                 alert("OTP sent successfully to your phone number or email.");
-                // console.log("rohit kumar otp id", otpID);
             }
         } catch (error) {
-            console.log("my error", error);
-            alert("Error message:", error.message);
+            // console.log("my error", error);
+            alert("Error message:", error);
         }
-        actions.resetForm();
+        // actions.resetForm();
         // console.log("otpid is print  rohit",otpID);
     }
     
@@ -51,7 +57,7 @@ function SignupPage() {
             <div className='w-[90vw] sm:w-[80vw] md:w-[45vw] lg:w-[50vw] xl:w-[55vw] h-auto'>
                 <img className="rounded-[0.25rem]" src={LoginImg} alt="Login" />
             </div>
-            <div className='w-[15rem] mt-6 md:mt-0 sm:w-[20rem] md:w-[17rem] lg:w-[17rem] xl:w-[20rem] h-auto'>
+            <div className='w-[15rem] inl mt-6 md:mt-0 sm:w-[20rem] md:w-[17rem] lg:w-[17rem] xl:w-[20rem] h-auto'>
                 {otpID ? (
                     <Formik
                         initialValues={{ ...signUpForm.initialVaues, otpID }}

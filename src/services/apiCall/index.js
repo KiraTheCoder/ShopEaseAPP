@@ -1,56 +1,57 @@
-import { useAuthStore } from '@/services/zustandStore';
+import axios from 'axios';
+import { useAuthStore } from "@/services/zustandStore";
+
 const apiUrl = import.meta.env.VITE_API_URL;
-
-
-async function handleResponse(response) {
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || 'Something went wrong');
-  }
-  return response.json();
-}
 
 function getToken() {
   const state = useAuthStore.getState();
-  return state.token || localStorage.getItem('token') || '';
+  return state.token || localStorage.getItem("token") || "";
 }
 
-async function apiCall(endpoint, method = 'GET', data = null) {
+async function handleResponse(response) {
+  if (response.status >= 200 && response.status < 300) {
+    return response.data;
+  } else {
+    const error = new Error(response.data || "Something went wrong");
+    error.response = response;
+    throw error;
+  }
+}
+
+async function apiCall(endpoint, method = "GET", data = null) {
   const url = `${apiUrl}${endpoint}`;
   const token = getToken();
 
   const options = {
     method,
+    url,
     headers: {
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
+    data,
   };
 
-  if (data) {
-    if (data instanceof FormData) {
-      options.body = data;
-    } else {
-      options.headers['Content-Type'] = 'application/json';
-      options.body = JSON.stringify(data);
-    }
+  if (data && !(data instanceof FormData)) {
+    options.headers["Content-Type"] = "application/json";
   }
 
   try {
-    const response = await fetch(url, options);
+    const response = await axios(options);
     return await handleResponse(response);
   } catch (error) {
     console.error(`Error with ${method} request to ${endpoint}:`, error);
+    throw error; // rethrowing to allow further handling if needed
   }
 }
 
 export function getData(endpoint) {
-  return apiCall(endpoint, 'GET');
+  return apiCall(endpoint, "GET");
 }
 
 export function postData(endpoint, data) {
-  return apiCall(endpoint, 'POST', data);
+  return apiCall(endpoint, "POST", data);
 }
 
 export function putData(endpoint, data) {
-  return apiCall(endpoint, 'PUT', data);
+  return apiCall(endpoint, "PUT", data);
 }

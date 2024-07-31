@@ -9,10 +9,12 @@ import TeamSection from '../components/cards/aboutcusTrustcards/Ourteam'
 import About from "@/pages/Aboutpage/About"
 import Contact from "@/pages/contactpage/Contact"
 import Home from "@/pages/HomePage/Home"
+import Itemcard from "@/components/cards/itemcard/Itemcard"
 
 const TestAPP = () => {
   return (
     <div>
+      <Itemcard/>
     </div>
   )
 }
