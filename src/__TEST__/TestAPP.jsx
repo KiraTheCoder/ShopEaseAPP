@@ -13,13 +13,8 @@ import Itemcard from "@/components/cards/itemcard/Itemcard"
 
 const TestAPP = () => {
   return (
-    <div>
-<<<<<<< HEAD
-      
-=======
-      <Itemcard/>
->>>>>>> 47869cbba06c73ef48c2cd0d0c4a2433a623d6a7
-    </div>
+    <div>      <Itemcard/>
+ </div>
   )
 }
 

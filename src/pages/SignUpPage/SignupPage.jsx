@@ -54,11 +54,8 @@ function SignupPage() {
             console.log("hello", error.message);
                 alert(error.message);
         }
-<<<<<<< HEAD
-        actions.resetForm();
-        
-=======
->>>>>>> 47869cbba06c73ef48c2cd0d0c4a2433a623d6a7
+    actions.resetForm();
+    
     }
     
     return (
