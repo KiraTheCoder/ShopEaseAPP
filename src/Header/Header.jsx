@@ -45,6 +45,7 @@
 //                                 {activeLink}
 //                             </NavLink>
 //                         </li>
+
 //                         {/* <li>
 //                             <NavLink to={'/login'} className={({ isActive }) => `text-[9px] sm:text-[12px] md:text-[14px] md:text-[16px] xl:text-[17px] capitalize relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[0.8px] sm:after:h-[1px] md:after:h-[1px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-1 ${isActive ? 'after:block' : 'after:hidden'}`}  onClick={() => handleToggle('/login')}>
 //                                 Login
