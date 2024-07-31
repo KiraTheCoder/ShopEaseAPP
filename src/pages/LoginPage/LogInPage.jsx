@@ -20,13 +20,13 @@ export default function LogInPage() {
         delete values.phoneNumberOrEmail
         // console.log("login datata=>> ",)
         try {
-           const data= await postData("/login", values)
+           const data = await postData("/user/login", values)
              alert(data.message)
             // console.log("fetch" ,  await postData("/login", values));
             option.resetForm()
         } catch (error) {
             // console.log(error);
-            alert("rohit ligin error",error)
+            alert("rohit login error",error)
         }
     }
     return (
