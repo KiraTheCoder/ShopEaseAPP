@@ -52,12 +52,9 @@ export function postData(endpoint, data) {
   return apiCall(endpoint, "POST", data);
 }
 
-// // // SELF DEFINE METHOD +++++++++
 export function patchData(endpoint, data) {
   return apiCall(endpoint, "PATCH", data);
 }
-// // // +++++++++++
-
 
 export function putData(endpoint, data) {
   return apiCall(endpoint, "PUT", data);
