@@ -1,6 +1,7 @@
-import Header from "@/Header/Header"
+// import Header from "@/Header/Header"
 import Store from "./Store"
 import Footer from '../layouts/Footer/index'
+import Header from '../layouts/Header/Header'
 import LogInPage from  '../pages/LoginPage/LogInPage'
 import SignupPage from "../pages/SignUpPage/SignupPage"
 import Trustcard from '../components/cards/customerTrustcard/Trustcard'
@@ -16,7 +17,8 @@ const TestAPP = () => {
   return (
     <div>
       {/* <Itemcard/> */}
-      <ForgetAndChangePassword/>
+      {/* <ForgetAndChangePassword/> */}
+      <Header/>
       </div>
   )
 }
