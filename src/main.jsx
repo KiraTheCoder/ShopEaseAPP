@@ -9,9 +9,9 @@ import {
 import About from './pages/Aboutpage/About.jsx';
 import Contact from './pages/contactpage/Contact.jsx';
 import SignupPage from './pages/SignUpPage/SignupPage.jsx';
-import { LoginForm } from './services/lib/YupFormikValidator/index.js';
 import LogInPage from './pages/LoginPage/LogInPage.jsx';
 import Home from './pages/HomePage/Home.jsx';
+import Forget_and_change_password from './pages/Forget_password/ForgetAndChangePassword.jsx';
 
 const router = createBrowserRouter([
   {
@@ -36,7 +36,11 @@ const router = createBrowserRouter([
       },
       {
         path:"/login",
-        element:<LogInPage/>
+        element:<LogInPage/>,
+      },
+      {
+        path:"/forgetpassword",
+        element:<Forget_and_change_password/>
       }
     ],
     errorElement:<Error/>

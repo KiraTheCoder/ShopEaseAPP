@@ -34,8 +34,6 @@ const otpValidate = Yup.string().required("required");
 
 const textareaValidate = Yup.string().required("required");
 
-// const otpIDValidate = Yup.string()
-//   .required("required")
 
 const LoginForm = {
   initialVaues: {
@@ -69,6 +67,7 @@ const signUpForm = {
   }),
 };
 
+//  send otp form +++++++++++++++++
 const otpForm = {
   initialVaues: {
     phoneNumberOrEmail: "",
@@ -80,7 +79,6 @@ const otpForm = {
 };
 
 // send text message form start
-
 const sendMessageForm = {
   initialVaues: {
     name: "",
@@ -96,4 +94,37 @@ const sendMessageForm = {
   }),
 };
 
-export { LoginForm, signUpForm, otpForm, sendMessageForm };
+// change password form +++++++++++++++++
+const changePassword={
+  initialVaues:{
+    phoneNumberOrEmail:"",
+    password:"",
+    confirm_password: "",   
+    otp:""
+  },
+
+  validationSchema: Yup.object({
+    phoneNumberOrEmail: phoneNumberOrEmailValidate,
+    password: passwordValidate,
+    confirm_password: confirm_passwordValidation,
+    otp: otpValidate,
+  }),
+}
+
+
+//  Update /Add Email or PhoneNumber
+const updateAddemailPhoneNumber={
+  initialVaues:{
+    phoneNumberOrEmail:"",
+    password:"",
+    otp:""
+  },
+
+  validationSchema: Yup.object({
+    phoneNumberOrEmail: phoneNumberOrEmailValidate,
+    otp: otpValidate,
+  }),
+}
+
+
+export { LoginForm, signUpForm, otpForm, sendMessageForm,changePassword,updateAddemailPhoneNumber };
