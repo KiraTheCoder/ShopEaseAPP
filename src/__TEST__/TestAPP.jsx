@@ -13,7 +13,8 @@ import Itemcard from "@/components/cards/itemcard/Itemcard"
 
 const TestAPP = () => {
   return (
-    <div>      <Itemcard/>
+    <div>     
+       <Itemcard/>
  </div>
   )
 }
