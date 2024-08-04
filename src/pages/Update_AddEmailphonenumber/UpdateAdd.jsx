@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import LoginImg from "@/assets/images/footerImages/loginImg.jpeg";
-import { changePassword, otpForm } from "@/services/lib/YupFormikValidator";
+import { updateAddemailPhoneNumber, otpForm } from "@/services/lib/YupFormikValidator";
 import { TextInput, Button } from '@/components/form';
 import { Formik, Form } from 'formik';
-import { postData } from "@/services/apiCall";
-import { patchData } from '@/services/apiCall';
+import { postData, patchData } from "@/services/apiCall";
 import { Link } from 'react-router-dom';
-function ForgetAndChangePassword() {
+
+function UpdateAdd() {
     const [flag1, setFlag1] = useState(false);
     const [otpID, setOtpID] = useState('');
 
@@ -26,7 +26,7 @@ function ForgetAndChangePassword() {
 
         delete values.phoneNumberOrEmail;
         delete values.confirm_password;
-        console.log("after delete form data",values);
+        console.log("after delete form data", values);
 
         try {
             if (flag1) {
@@ -35,12 +35,12 @@ function ForgetAndChangePassword() {
                 }
                 console.log(flag1);
                 console.log("before hit change url", values);
-                const response = await patchData("/user/change_password", values);
-                console.log("this is response message",response);
+                const response = await patchData("/user/phone_or_email_update", values);
+                console.log("this is response message", response);
                 actions.resetForm();
-                alert("Change password successful 🥰");
+                alert("Update/ Add PhoneNumber or Email successful 🥰");
             } else {
-                const otpData = await postData("/user/send_forgot_password_otp", values);
+                const otpData = await postData("/user/send_phone_or_email_otp", values);
                 setOtpID(otpData?.data?.otpID);
                 setFlag1(otpData?.success);
                 alert("OTP sent successfully to your phone number or email.");
@@ -52,36 +52,34 @@ function ForgetAndChangePassword() {
     }
 
     return (
-        <div className='w-[100vw] md:w-[100vw] md:justify-around lg:w-[90vw] my-[3rem] h-auto flex flex-wrap items-center justify-center sm:justify-center lg:justify-between'>
+        <div className='w-full md:justify-around lg:w-[90vw] my-12 h-auto flex flex-wrap items-center justify-center lg:justify-between'>
             <div className='w-[90vw] sm:w-[80vw] md:w-[45vw] lg:w-[50vw] xl:w-[55vw] h-auto'>
-                <img className="rounded-[0.25rem]" src={LoginImg} alt="Login" />
+                <img className="rounded-md" src={LoginImg} alt="Update" />
             </div>
             <div className='w-[15rem] mt-6 md:mt-0 sm:w-[20rem] md:w-[17rem] lg:w-[17rem] xl:w-[20rem] h-auto'>
                 <Formik
-                    initialValues={flag1 ? { ...changePassword.initialVaues, otpID } : otpForm.initialVaues}
-                    validationSchema={flag1 ? changePassword.validationSchema : otpForm.validationSchema}
+                    initialValues={flag1 ? { ...updateAddemailPhoneNumber.initialValues, otpID } : otpForm.initialVaues}
+                    validationSchema={flag1 ? updateAddemailPhoneNumber.validationSchema : otpForm.validationSchema}
                     onSubmit={submitForm}
                 >
                     {({ values }) => (
                         <Form>
-                            <h2 className='font-inter text-[1.2rem] text-center sm:text-start sm:text-[1.4rem] font-Five my-1 tracking-wider'>
-                                {flag1 ? "Change Password to Exclusive" : "Forget password to Exclusive"}
+                            <h2 className='font-inter text-lg text-center sm:text-start sm:text-xl font-Five my-1 tracking-wider'>
+                                {flag1 ? "Update/Add Email/PhoneNumber " : "Generate OTP for Update/Add Email/PhoneNumber"}
                             </h2>
-                            <p className='text-[13px] sm:text-[14px] text-center sm:text-start font-Poppins tracking-wider'>
+                            <p className='text-sm sm:text-base text-center sm:text-start font-Poppins tracking-wider'>
                                 Enter your details below
                             </p>
                             <TextInput label="Email or Phone Number *" name="phoneNumberOrEmail" type="input" />
                             {flag1 && (
                                 <>
-                                    <TextInput label="Password *" name="password" type="password" />
-                                    <TextInput label="Confirm Password *" name="confirm_password" type="password" />
                                     <TextInput label="OTP *" name="otp" type="text" />
                                 </>
                             )}
-                            <Button type="submit" name={flag1 ? "Submit" : "Send OTP"} style="w-[100%] my-0 mb-2" />
+                            <Button type="submit" name={flag1 ? "Submit" : "Send OTP"} style="w-full my-0 mb-2" />
                             <div className='flex items-center gap-6'>
-                                <span className='text-[16px]'>Go to Login page</span>
-                                <a className='no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/login"}> Login A/c</Link></a>
+                                <span className='text-base'>Go to Sign Up</span>
+                                <Link className='no-underline hover:underline text-red-600 text-sm' to={"/signup"}> Sign up</Link>
                             </div>
                         </Form>
                     )}
@@ -91,4 +89,4 @@ function ForgetAndChangePassword() {
     );
 }
 
-export default ForgetAndChangePassword;
+export default UpdateAdd;

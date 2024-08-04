@@ -20,7 +20,7 @@ const TeamCard = ({ name, role, imgSrc, icon }) => {
     return (
         <div className="flex justify-center items-center pt-6 pb-8 " >
 
-            <div className="w-[16.2rem] h-88  shadow-md rounded-lg cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-105 group hover:bg-[#db4444] hover:shadow-lg flex flex-col items-center text-center group">
+            <div className="w-[16.2rem] h-88 bg-lime-600  rounded-lg cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-105 hover:bg-[#db4444] flex flex-col items-center text-center group  hover:shadow-custom outline-none">
                 <div className="w-full h-[16rem] outline-none flex justify-center items-start rounded-t-lg overflow-hidden  ">
                     <img src={imgSrc} alt={name} className="w-[100%] h-auto bg-slate-100 object-cover" />
                 </div>
@@ -52,7 +52,18 @@ const TeamSection = () => {
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 5,
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true,
+                    centerMode: true,
+                    centerPadding: "0",
+                }
+            },
+            {
+                breakpoint: 900,
+                settings: {
+                    slidesToShow: 2,
                     slidesToScroll: 1,
                     infinite: true,
                     dots: true,
@@ -73,7 +84,7 @@ const TeamSection = () => {
     };
 
     return (
-        <div className="w-[90vw]  sm:w-[90vw] md:w-[82vw] m-auto gap-6 h-auto  my-8">
+        <div className="w-[90vw]  sm:w-[90vw] md:w-[95vw]  xl:w-[82vw] m-auto gap-6 h-auto  my-8">
             {/* <div className="w-[90vw] sm:w-[90vw] md:w-[80vw] m-auto gap-6 h-auto flex flex-wrap justify-around items-center my-8"> */}
             <Slider {...settings} >
                 {teamMembers.map((member, index) => (

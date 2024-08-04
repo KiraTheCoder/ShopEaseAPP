@@ -73,11 +73,11 @@ function SignupPage() {
                             <Form>
                                 <h2 className='font-inter text-[1.2rem] text-center sm:text-start sm:text-[1.4rem] font-Five my-1 tracking-wider'>Sign Up to Exclusive</h2>
                                 <p className='text-[13px] sm:text-[14px] text-center sm:text-start font-Poppins tracking-wider'>Enter your details below</p>
-                                <TextInput label="Email or Phone Number" name="phoneNumberOrEmail" type="input" />
-                                <TextInput label="Username" name="name" type="input" />
-                                <TextInput label="Password" name="password" type="password" />
-                                <TextInput label="Confirm Password" name="confirm_password" type="password" />
-                                <TextInput label="OTP" name="otp" type="text" />
+                                <TextInput label="Email or Phone Number *" name="phoneNumberOrEmail" type="input" />
+                                <TextInput label="Username *" name="name" type="input" />
+                                <TextInput label="Password *" name="password" type="password" />
+                                <TextInput label="Confirm Password *" name="confirm_password" type="password" />
+                                <TextInput label="OTP *" name="otp" type="text" />
                                 <Button type="submit" name="Create Account" style="w-[100%] my-0 mb-2" />
                                 <button className='h-[2rem] sm:h-[2.4rem] md:h-[2.5rem] border-2 w-[100%] rounded-md my-2 flex justify-center gap-4 items-center'>
                                     <FcGoogle className='text-[30px]' />
@@ -100,7 +100,7 @@ function SignupPage() {
                             <Form>
                                 <h2 className='font-inter text-[1.2rem] text-center sm:text-start sm:text-[1.4rem] font-Five my-1 tracking-wider'>Sign Up to Exclusive</h2>
                                 <p className='text-[13px] sm:text-[14px] text-center sm:text-start font-Poppins tracking-wider'>Enter your details below</p>
-                                <TextInput label="Email or Phone Number" name="phoneNumberOrEmail" type="input" />
+                                <TextInput label="Email or Phone Number *" name="phoneNumberOrEmail" type="input" />
                               
                                 <Button type="submit" name="Send OTP" style="w-[5.5rem] my-0 mb-2" />
                                 <div className='list-none flex items-center gap-6'>

@@ -1,4 +1,5 @@
 
+import UpdateAdd from '@/pages/Update_AddEmailphonenumber/UpdateAdd'
 import Header from '../layouts/Header/Header'
 import ForgetAndChangePassword from "@/pages/Forget_password/ForgetAndChangePassword"
 
@@ -7,6 +8,7 @@ const TestAPP = () => {
     <div>
       {/* <Itemcard/> */}
       {/* <ForgetAndChangePassword/> */}
+      {/* <UpdateAdd/> */}
       {/* <Header/> */}
       </div>
   )
