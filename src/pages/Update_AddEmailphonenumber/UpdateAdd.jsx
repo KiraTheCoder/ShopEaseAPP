@@ -52,7 +52,7 @@ function UpdateAdd() {
     }
 
     return (
-        <div className='w-full md:justify-around lg:w-[90vw] my-12 h-auto flex flex-wrap items-center justify-center lg:justify-between'>
+        <div className='w-full md:justify-around lg:w-[90vw] my-4 sm:my-6 md:my-[3rem] h-auto flex flex-wrap items-center justify-center lg:justify-between'>
             <div className='w-[90vw] sm:w-[80vw] md:w-[45vw] lg:w-[50vw] xl:w-[55vw] h-auto'>
                 <img className="rounded-md" src={LoginImg} alt="Update" />
             </div>

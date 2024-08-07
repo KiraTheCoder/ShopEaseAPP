@@ -8,7 +8,7 @@ import { postData } from "@/services/apiCall";
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '@/services/zustandStore';
 function SignupPage() {
-    const  setToken = useAuthStore((state) => state.setToken)
+    const setToken = useAuthStore((state) => state.setToken)
     const [flag, setFlag] = useState(false);
     const [otpID, setOtpID] = useState(false);
 
@@ -29,24 +29,22 @@ function SignupPage() {
         try {
             if (flag) {
                 if (values.phoneNumber) {
-                    values.otpID = otpID;  
+                    values.otpID = otpID;
                 }
-                 const response = await postData("/user/signup", values);
-                 console.log(response.data.token);
-                 
-                //  setToken(response.data.token)
+                const response = await postData("/user/signup", values);
+                setToken(response.data.token)
                 // Reset the form after successful signup
                 actions.resetForm();
                 alert("Sign up successful 🥰");
             } else {
                 const otpData = await postData("/user/send_signup_otp", values);
-                console.log("otpdtata",otpData);
-                
+                console.log("otpdtata", otpData);
+
                 if (isPhoneNumber) {
                     setOtpID(otpData?.data?.otpID);
                 }
                 setFlag(otpData?.success);
-                
+
 
                 alert("OTP sent successfully to your phone number or email.");
             }
@@ -59,14 +57,14 @@ function SignupPage() {
     }
 
     return (
-        <div className=' w-[100vw] md:w-[100vw] md:justify-around lg:w-[90vw] my-[3rem] h-auto flex flex-wrap items-center justify-center sm:justify-center lg:justify-between'>
+        <div className=' w-[100vw] md:w-[100vw] md:justify-around lg:w-[90vw] my-4 sm:my-6 md:my-[3rem] h-auto flex flex-wrap items-center justify-center sm:justify-center lg:justify-between'>
             <div className='w-[90vw] sm:w-[80vw] md:w-[45vw] lg:w-[50vw] xl:w-[55vw] h-auto'>
                 <img className="rounded-[0.25rem]" src={LoginImg} alt="Login" />
             </div>
             <div className='w-[15rem] inl mt-6 md:mt-0 sm:w-[20rem] md:w-[17rem] lg:w-[17rem] xl:w-[20rem] h-auto'>
 
                 <Formik
-                    initialValues={ flag ? { ...signUpForm.initialVaues, otpID } : otpForm.initialVaues}
+                    initialValues={flag ? { ...signUpForm.initialVaues, otpID } : otpForm.initialVaues}
                     validationSchema={flag ? signUpForm.validationSchema : otpForm.validationSchema}
                     onSubmit={submitForm}
                 >
@@ -77,7 +75,7 @@ function SignupPage() {
                             <TextInput label="Email or Phone Number *" name="phoneNumberOrEmail" type="input" />
                             {flag && (
                                 <>
-                                    <TextInput label="Username *" name="name" type="input" />
+                                    <TextInput label="Name *" name="name" type="input" />
                                     <TextInput label="Password *" name="password" type="password" />
                                     <TextInput label="Confirm Password *" name="confirm_password" type="password" />
                                     <TextInput label="OTP *" name="otp" type="text" />
@@ -90,7 +88,7 @@ function SignupPage() {
                             <div className='list-none flex items-center gap-6'>
                                 <span className='text-[16px]'>Already have an account:</span>
                                 <a className='no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/login"}>Login</Link></a>
-                           </div>
+                            </div>
                         </Form>
                     )}
                 </Formik>

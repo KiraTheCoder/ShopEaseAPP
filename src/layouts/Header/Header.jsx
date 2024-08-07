@@ -27,7 +27,7 @@ function Header() {
     const handleToggle = () => setActiveLink(prevLink => (prevLink === 'signup' ? 'login' : 'signup'));
 
     return (
-        <div className="w-[100vw] py-1 md:py-0 bg-cyan-950">
+        <div className=" py-1 md:py-0 bg-cyan-950">
             <div className="flex h-[4rem] md:h-[5rem] lg:h-[6rem] justify-between sm:justify-around items-center">
                 <div className='w-[35%] sm:w-[17%] flex justify-center'>
                     <h1 className="text-lg sm:text-2xl md:text-[1.5rem] lg:text-4xl font-bold text-white">SHOP.CO</h1>
