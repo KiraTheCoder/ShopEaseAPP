@@ -4,8 +4,10 @@ import { Button, TextInput } from "@/components/form"
 import { LoginForm } from '@/services/lib/YupFormikValidator'
 import { postData } from "@/services/apiCall"
 import { Link } from "react-router-dom"
+import { useAuthStore } from "@/services/zustandStore"
 
 export default function LogInPage() {
+    const  setToken = useAuthStore((state) => state.setToken)
     async function submitForm(values, option) {
         const val = values.phoneNumberOrEmail
         const isPhoneNumber = /^\d{10}$/.test(val);
@@ -23,9 +25,11 @@ export default function LogInPage() {
         try {
             const data = await postData("/user/login", values)
             alert(data.message)
+            console.log(data.data.token);
+            setToken(data?.data?.token)
             option.resetForm()
         } catch (error) {
-            alert("An error occurred:" + error)
+            alert("An error occurred:" + error?.response?.data?.message)
         }
     }
     return (

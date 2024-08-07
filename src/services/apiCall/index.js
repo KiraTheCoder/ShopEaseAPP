@@ -13,7 +13,7 @@ async function handleResponse(response) {
     return response.data;
   } else {
     const error = new Error(response.data || "Something went wrong");
-    error.response = response;
+    error.data = response.data;
     throw error;
   }
 }

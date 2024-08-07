@@ -47,7 +47,7 @@ function UpdateAdd() {
             }
         } catch (error) {
             actions.resetForm();
-            alert("An error occurred: " + error.message);
+            alert("An error occurred: " + error?.response?.data?.message);
         }
     }
 

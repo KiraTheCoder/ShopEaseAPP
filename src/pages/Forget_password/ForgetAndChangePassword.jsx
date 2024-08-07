@@ -47,7 +47,7 @@ function ForgetAndChangePassword() {
             }
         } catch (error) {
             actions.resetForm();
-            alert("An error occurred: " + error.message);
+            alert("An error occurred: " + error?.response?.data?.message);
         }
     }
 
@@ -65,7 +65,7 @@ function ForgetAndChangePassword() {
                     {({ values }) => (
                         <Form>
                             <h2 className='font-inter text-[1.2rem] text-center sm:text-start sm:text-[1.4rem] font-Five my-1 tracking-wider'>
-                                {flag1 ? "Change Password to Exclusive" : "Forget password to Exclusive"}
+                                {flag1 ? "Change Password to ShopEase" : "Forget password to ShopEase"}
                             </h2>
                             <p className='text-[13px] sm:text-[14px] text-center sm:text-start font-Poppins tracking-wider'>
                                 Enter your details below
@@ -81,7 +81,7 @@ function ForgetAndChangePassword() {
                             <Button type="submit" name={flag1 ? "Submit" : "Send OTP"} style="w-[100%] my-0 mb-2" />
                             <div className='flex items-center gap-6'>
                                 <span className='text-[16px]'>Go to Login page</span>
-                                <a className='no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/login"}> Login A/c</Link></a>
+                                <a className='no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/login"}>Login</Link></a>
                             </div>
                         </Form>
                     )}
