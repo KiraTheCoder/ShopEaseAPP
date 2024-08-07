@@ -2,6 +2,7 @@ import React from "react";
 import { VscStarFull } from "react-icons/vsc";
 import couple from "@/assets/images/footerImages/couple.png";
 import couple2 from "@/assets/images/footerImages/couple2.png"
+import ItemsCollection from "../ItemsCollection/ItemsCollection";
 
 export default function Home() {
 
@@ -52,6 +53,9 @@ export default function Home() {
             <h1 className="text-[16px] sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl text-white font-normal">GUCCI</h1>
             <h1 className="text-[16px] sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl text-white font-normal italic">PRADA</h1>
             <h1 className="text-[16px] sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl text-white font-extralight">Calvin Klein</h1>
+         </div>
+         <div>
+            <ItemsCollection/>
          </div>
       </>
    )
