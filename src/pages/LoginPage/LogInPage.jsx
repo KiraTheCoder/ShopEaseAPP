@@ -3,9 +3,10 @@ import { Formik, Form } from 'formik'
 import { Button, TextInput } from "@/components/form"
 import { LoginForm } from '@/services/lib/YupFormikValidator'
 import { postData } from "@/services/apiCall"
+import { Link } from "react-router-dom"
+
 export default function LogInPage() {
     async function submitForm(values, option) {
-        // console.log(values);
         const val = values.phoneNumberOrEmail
         const isPhoneNumber = /^\d{10}$/.test(val);
         const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
@@ -18,15 +19,13 @@ export default function LogInPage() {
         }
 
         delete values.phoneNumberOrEmail
-        // console.log("login datata=>> ",)
+
         try {
            const data = await postData("/user/login", values)
              alert(data.message)
-            // console.log("fetch" ,  await postData("/login", values));
             option.resetForm()
         } catch (error) {
-            // console.log(error);
-            alert("rohit login error",error)
+            alert("An error occurred:" + error)
         }
     }
     return (
@@ -48,11 +47,10 @@ export default function LogInPage() {
                             <TextInput label={"Password"} name={"password"} type={"password"} />
                             <div className='flex justify-between items-center mt-[1.5rem]'>
                             <Button type="submit" name={"Log In"} style={"w-[5.5rem]"}/>
-                            <li className='list-none '><a className='no-underline hover:underline text-[#db4444] text-[13px]' href="#">Forget password ?</a></li>
+                            <li className='list-none '><a className='no-underline hover:underline text-[#db4444] text-[13px]' ><Link to={"/forgetpassword"}>Forget password ?</Link></a></li>
                             </div>
                         </Form>
                     )}
-
                 </Formik>
             </div>
         </div>

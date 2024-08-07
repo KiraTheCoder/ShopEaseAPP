@@ -54,8 +54,7 @@ function SignupPage() {
             console.log("hello", error.message);
                 alert(error.message);
         }
-    actions.resetForm();
-    
+
     }
     
     return (

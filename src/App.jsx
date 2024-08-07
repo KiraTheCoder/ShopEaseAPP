@@ -7,12 +7,12 @@ import CartButton from "./add-cart/AddCart"
 function App() {
   return (
     <>
-    {/* <Itemcord/> */}
+
     <Header/>
     <Outlet/>
     {/* <TestAPP/> */}
     <Footer/>
-    </>
+</>
   )
 }
 

@@ -1,6 +1,5 @@
 import { FaInstagram, FaTwitter, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 import rohit from "@/assets/images/footerImages/rohit1.jpg";
-
 import manshi from "@/assets/images/footerImages/manshi.jpg"
 import khushi from "@/assets/images/footerImages/kk.jpg";
 import kiran from "@/assets/images/footerImages/kiran.jpg";
