@@ -115,7 +115,7 @@ const changePassword={
 
 //  Update /Add Email or PhoneNumber
 const updateAddemailPhoneNumber={
-  initialVaues:{
+  initialValues:{
     phoneNumberOrEmail:"",
     password:"",
     otp:""

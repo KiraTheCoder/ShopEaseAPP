@@ -13,7 +13,7 @@ async function handleResponse(response) {
     return response.data;
   } else {
     const error = new Error(response.data || "Something went wrong");
-    error.response = response;
+    error.data = response.data;
     throw error;
   }
 }
@@ -40,7 +40,7 @@ async function apiCall(endpoint, method = "GET", data = null) {
     return await handleResponse(response);
   } catch (error) {
     console.error(`Error with ${method} request to ${endpoint}:`, error);
-    throw error; // rethrowing to allow further handling if needed
+    throw error; 
   }
 }
 
