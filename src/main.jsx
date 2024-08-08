@@ -4,6 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import {createBrowserRouter, RouterProvider,} from "react-router-dom";
 import About from './pages/Aboutpage/About.jsx';
+import Onsale from './pages/Onsale/Onsale.jsx';
 import Contact from './pages/contactpage/Contact.jsx';
 import Brands from './pages/brandpage/Brands.jsx';
 import SignupPage from './pages/SignUpPage/SignupPage.jsx';
@@ -11,6 +12,7 @@ import LogInPage from './pages/LoginPage/LogInPage.jsx';
 import Home from './pages/HomePage/Home.jsx';
 import Forget_and_change_password from './pages/Forget_password/ForgetAndChangePassword.jsx';
 import UpdateAdd from './pages/Update_AddEmailphonenumber/UpdateAdd.jsx';
+import Uploaded from './components/test.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,8 +21,15 @@ const router = createBrowserRouter([
       {
         path:"/",
         element:<Home/>,
-      },  
-      
+      },       
+      {
+        path:"/uploaded",
+        element:<Uploaded/>
+      },
+      // {
+      //   path:"/onsale",
+      //   element:<Onsale/>
+      // },
       {
         path:"/about",
         element:<About/>

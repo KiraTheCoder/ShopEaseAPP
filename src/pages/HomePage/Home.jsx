@@ -54,7 +54,7 @@ export default function Home() {
             <h1 className="text-[16px] sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl text-white font-normal italic">PRADA</h1>
             <h1 className="text-[16px] sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl text-white font-extralight">Calvin Klein</h1>
          </div>
-         <div>
+         <div className="m-auto bg-lime-500">
             <ItemsCollection/>
          </div>
       </>

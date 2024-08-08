@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function Uploaded() {
-  const [name, setName] = useState('');
+  const [productName, setProductName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [stock, setStock] = useState('');
@@ -16,20 +16,22 @@ function Uploaded() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('name', name);
+    formData.append('productName', productName);
     formData.append('description', description);
     formData.append('category', category);
     formData.append('stock', stock);
     formData.append('price', price);
     formData.append('image', image);
 
+//  console.log("formdata", formData);
+ 
     try {
       const response = await axios.post('http://localhost:8080/product/create-products', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log('Product created:', response.data);
+      // console.log('Product created:', response.data);
     } catch (error) {
       console.error('Error creating product:', error);
     }
@@ -43,9 +45,9 @@ function Uploaded() {
           <input
             type="text"
             placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full p-2 border rounded-lg"
+            value={productName}
+            onChange={(e) => setProductName(e.target.value)}
+            className="w-full p-2 border rounded-lg bg-fuchsia-200"
             required
           />
         </div>
@@ -54,17 +56,17 @@ function Uploaded() {
             placeholder="Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full p-2 border rounded-lg"
+            className="w-full p-2 border rounded-lg bg-fuchsia-200"
             required
           />
         </div>
         <div>
           <input
-            type="number"
+            type="text"
             placeholder="Price"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            className="w-full p-2 border rounded-lg"
+            className="w-full p-2 border rounded-lg bg-fuchsia-200"
             required
           />
         </div>
@@ -74,7 +76,7 @@ function Uploaded() {
             placeholder="Stock"
             value={stock}
             onChange={(e) => setStock(e.target.value)}
-            className="w-full p-2 border rounded-lg"
+            className="w-full p-2 border rounded-lg bg-fuchsia-200"
             required
           />
         </div>
@@ -84,12 +86,12 @@ function Uploaded() {
             placeholder="Category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full p-2 border rounded-lg"
+            className="w-full p-2 border rounded-lg bg-fuchsia-200"
             required
           />
         </div>
         <div>
-          <input type="file" onChange={handleFileChange} className="w-full p-2 border rounded-lg" required />
+          <input type="file" onChange={handleFileChange} className="w-full p-2 border rounded-lg bg-fuchsia-200" required />
         </div>
         <div>
           <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-700">

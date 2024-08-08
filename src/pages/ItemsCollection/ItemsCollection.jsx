@@ -11,14 +11,13 @@ function ItemsCollection() {
   const fetchData = async () => {
     const result = await fetch("http://localhost:8080/product/get-products")
     const data = await result.json();
-    // console.log("my data", data);
     setProducts(data?.data)
 }
 
 console.log("rohitngigns",products);
 
   return (
-    <div className="w-[90vw] flex justify-between items-center ">
+    <div className="w-[95vw] m-auto flex bg-black gap-3 items-center flex-wrap ">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

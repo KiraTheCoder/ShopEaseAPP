@@ -18,7 +18,7 @@ export function Textarea({ label, name, labelColor, style, cols, rows, ...props 
         name={name}
         cols={cols}
         rows={rows}
-        placeholder={`Enter Message`}
+        placeholder={name=="Description" ? `${name}`:"Enter Message"}
         {...props}
       />
       <div className="text-red-500 h-3 text-xs">
