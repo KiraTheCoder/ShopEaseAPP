@@ -18,7 +18,7 @@ function ItemsCollection() {
   return (
     <div className="w-[95vw] m-auto flex bg-black gap-3 items-center flex-wrap ">
       {products.map((product,index) => (
-        <ProductCard key={index} products={products} />
+        <ProductCard key={index} product={product} />
       ))}
     </div>
   )

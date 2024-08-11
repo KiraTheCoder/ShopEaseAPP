@@ -5,7 +5,6 @@ import couple2 from "@/assets/images/footerImages/couple2.png"
 import ItemsCollection from "../ItemsCollection/ItemsCollection";
 
 export default function Home() {
-   // const [state,setState] = useState(false)
 
    return (
       <>
@@ -56,9 +55,6 @@ export default function Home() {
             <h1 className="text-[16px] sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl text-white font-extralight">Calvin Klein</h1>
          </div>
          <div className="m-auto bg-lime-500">
-    {/* <button onClick={()=>setState(true)}>call</button>
-            {state &&
-             } */}
              <ItemsCollection />
          </div>
       </>
