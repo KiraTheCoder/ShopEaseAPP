@@ -1,18 +1,19 @@
-export const ProductCard = ({ product }) => {
-  // console.log(product.image[0]);
+export const ProductCard = ({ products }) => {
+  // console.log(products.image[0]);
+  console.log(products);
   return (
     <div className="w-[15rem] bg-slate-300 rounded overflow-hidden shadow-lg p-4 m-4">
-      {product?.images?.map((image, index) => (
-        <img key={index} className="w-full h-[8rem]" src={`data:${image.contentType};base64,${image.data};`} alt={product?.productName} />
+      {products?.images?.map((image, index) => (
+        <img key={index} className="w-full h-[8rem]" src={`data:${image.contentType};base64,${image.data};`} alt={products?.productName} />
       ))}
       {/* <div className="px-6 py-4">
-        <h2 className="text-xl font-bold">{product.productName}</h2>
-        <p>{product.description}</p>
-        <p>Stock: {product.stock}</p>
-        <p>Category: {product.category}</p>
+        <h2 className="text-xl font-bold">{products.productName}</h2>
+        <p>{products.description}</p>
+        <p>Stock: {products.stock}</p>
+        <p>Category: {products.category}</p>
       </div>
       <div className="px-6 py-4">
-        <span className="text-gray-900 font-bold">{product.price}</span>
+        <span className="text-gray-900 font-bold">{products.price}</span>
       </div> */}
     </div>
   );

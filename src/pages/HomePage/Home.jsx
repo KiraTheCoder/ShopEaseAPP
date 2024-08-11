@@ -56,14 +56,10 @@ export default function Home() {
             <h1 className="text-[16px] sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl text-white font-extralight">Calvin Klein</h1>
          </div>
          <div className="m-auto bg-lime-500">
-<<<<<<< HEAD
-            <ItemsCollection />
-=======
     {/* <button onClick={()=>setState(true)}>call</button>
             {state &&
              } */}
              <ItemsCollection />
->>>>>>> 230d89d9c45d4dd51bfb1b36b7f0fe3b2f955084
          </div>
       </>
    )

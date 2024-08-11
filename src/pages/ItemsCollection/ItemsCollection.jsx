@@ -10,15 +10,15 @@ function ItemsCollection() {
   },[])
   
   const fetchData = async () => {
-    const result = await getData("products");  
-    console.log(result?.data);
+    const result = await getData("/products");  
+    // console.log(result?.data);
     setProducts(result?.data)
 }
 
   return (
     <div className="w-[95vw] m-auto flex bg-black gap-3 items-center flex-wrap ">
-      {products.map((product) => (
-        <ProductCard key={product?._id} product={product} />
+      {products.map((product,index) => (
+        <ProductCard key={index} products={products} />
       ))}
     </div>
   )
