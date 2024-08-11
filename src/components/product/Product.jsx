@@ -1,10 +1,12 @@
 export const ProductCard = ({ product }) => {
-  // console.log(product.image[0]);
+  
   return (
     <div className="w-[15rem] bg-slate-300 rounded overflow-hidden shadow-lg p-4 m-4">
       {product?.images?.map((image, index) => (
         <img key={index} className="w-full h-[8rem]" src={`data:${image.contentType};base64,${image.data};`} alt={product?.productName} />
       ))}
+
+      {/* <h2 className="text-xl font-bold">{product?.productName}</h2> */}
       {/* <div className="px-6 py-4">
         <h2 className="text-xl font-bold">{product.productName}</h2>
         <p>{product.description}</p>

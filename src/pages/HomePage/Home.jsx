@@ -3,11 +3,19 @@ import { VscStarFull } from "react-icons/vsc";
 import couple from "@/assets/images/footerImages/couple.png";
 import couple2 from "@/assets/images/footerImages/couple2.png"
 import ItemsCollection from "../ItemsCollection/ItemsCollection";
+// import useOnlineStatus from "@/services/hooks/customhooks/useOnlineStatus";
 
 export default function Home() {
-   // const [state,setState] = useState(false)
 
-   return (
+   //  const onlineStatus= useOnlineStatus()
+   //  console.log("status", onlineStatus);
+    
+   // if (onlineStatus===false) 
+   //    return (
+   //       <h1 className="bg-pink-700 my-16">you are offline please cheeck your internet connection ...!</h1>
+   //    )
+
+  return (
       <>
 
          <div className="w-[90vw] mt-10 mb-0 m-auto ">
@@ -55,15 +63,12 @@ export default function Home() {
             <h1 className="text-[16px] sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl text-white font-normal italic">PRADA</h1>
             <h1 className="text-[16px] sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl text-white font-extralight">Calvin Klein</h1>
          </div>
-         <div className="m-auto bg-lime-500">
-<<<<<<< HEAD
-            <ItemsCollection />
-=======
+         <div className="m-auto my-4">
     {/* <button onClick={()=>setState(true)}>call</button>
             {state &&
              } */}
              <ItemsCollection />
->>>>>>> 230d89d9c45d4dd51bfb1b36b7f0fe3b2f955084
+
          </div>
       </>
    )
