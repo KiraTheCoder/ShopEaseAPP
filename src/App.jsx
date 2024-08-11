@@ -1,24 +1,17 @@
 import TestAPP from "@/__TEST__/TestAPP"
-import { getData } from "@/services/apiCall/index"
-import { useState,useEffect } from "react"
-
-
+import Header from "./layouts/Header/Header"
+import { Outlet } from "react-router-dom"
+import Footer from "./layouts/Footer"
+import Itemcord from "./components/cards/itemcard/Itemcard"
+import CartButton from "./add-cart/AddCart"
 function App() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    getData('/sample')
-      .then((response) => setData(response))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
-
-  console.log(data);
-
   return (
     <>
+    <Header/>
+    <Outlet />
     {/* <TestAPP/> */}
-    <h1>{data?.message}</h1>
-    </>
+    <Footer/>
+</>
   )
 }
 
