@@ -19,33 +19,8 @@ function Onsale() {
             formData.append('image', values.image);
         }
 
-        // formData.productName=values.productName
-        // formData.description=values.description
-        // formData.price=values.price
-        // formData.stock=values.stock
-        // formData.category=values.category
-        //    if (values.image) {
-        //     formData.image= values.image
-        // }
-
-        // console.log("form dataaaaaaaaa", formData);
-
-        // try {
-        //     const response = await axios.post('http://localhost:8080/product/create-products', formData, {
-        //         headers: {
-        //             'Content-Type': 'multipart/form-data',
-        //         },
-        //     });
-        //     console.log('Product created:', response.data);
-        // } catch (error) {
-        //     console.error('Error creating product:', error);
-        // }
-        // actions.resetForm();
-
-
-
         try {
-            const response = await axios.post('http://localhost:8080/product/create-products', formData, {
+            const response = await axios.post('http://localhost:8080/product/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

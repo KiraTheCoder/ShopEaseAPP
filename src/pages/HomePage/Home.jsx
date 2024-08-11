@@ -19,24 +19,24 @@ export default function Home() {
                      Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style.
                   </p>
 
-                  <button className="h-[3rem] w-[12rem] bg-black rounded-3xl text-white">Shop Now</button>
+                  <button className="h-[2rem] sm:h-[3rem] w-[12rem] bg-black rounded-3xl text-white">Shop Now</button>
 
-                  <div className="flex md:bg-white lg:bg-transparent flex-row my-6 space-y-4 sm:space-y-0 sm:space-x-4">
-                      <div className="flex-1 text-center sm:text-left px-2 sm:px-3.5 border-b sm:border-b-0 sm:border-r sm:border-gray-300">
-                         <h1 className="text-lg sm:text-3xl md:text-4xl font-semibold">200+</h1>
-                         <p className="text-gray-600 text-[14px] sm:text-sm">International Brands</p>
-                      </div>
+                  <div className="flex my-4  w-[90vw] sm:w-auto ">
+                     <div className=" flex-1 text-center sm:text-left px-2 sm:px-3.5 border-r border-gray-300">
+                        <h1 className="text-[1rem] sm:text-3xl md:text-4xl font-semibold">200+</h1>
+                        <p className="text-gray-600 text-[12px] sm:text-sm">International Brands</p>
+                     </div>
 
-                      <div className="flex-1 text-center sm:text-left px-2 sm:px-3.5 border-b sm:border-b-0 sm:border-r sm:border-gray-300">
-                         <h1 className="text-lg sm:text-3xl md:text-4xl font-semibold">2,000+</h1>
-                         <p className="text-gray-600 text-[14px] sm:text-sm">High-Quality Products</p>
-                      </div>
+                     <div className=" flex-1 text-center sm:text-left px-2 sm:px-3.5 border-r border-gray-300">
+                        <h1 className="text-[1rem] sm:text-3xl md:text-4xl font-semibold">2,000+</h1>
+                        <p className="text-gray-600 text-[12px] sm:text-sm">High-Quality Products</p>
+                     </div>
 
-                      <div className="flex-1 text-center sm:text-left px-2 sm:px-3.5">
-                         <h1 className="text-lg sm:text-3xl md:text-4xl font-semibold">30,000+</h1>
-                         <p className="text-gray-600 text-[14px] sm:text-sm">Happy Customers</p>
-                      </div>
-                   </div>
+                     <div className=" flex-1 text-center sm:text-left px-2 sm:px-3.5">
+                        <h1 className="text-[1rem] sm:text-3xl md:text-4xl font-semibold">30,000+</h1>
+                        <p className="text-gray-600 text-[12px] sm:text-sm">Happy Customers</p>
+                     </div>
+                  </div>
 
                </div>
 
@@ -55,7 +55,7 @@ export default function Home() {
             <h1 className="text-[16px] sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl text-white font-extralight">Calvin Klein</h1>
          </div>
          <div className="m-auto bg-lime-500">
-            <ItemsCollection/>
+            <ItemsCollection />
          </div>
       </>
    )

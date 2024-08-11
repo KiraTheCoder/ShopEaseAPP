@@ -13,6 +13,7 @@ import Home from './pages/HomePage/Home.jsx';
 import Forget_and_change_password from './pages/Forget_password/ForgetAndChangePassword.jsx';
 import UpdateAdd from './pages/Update_AddEmailphonenumber/UpdateAdd.jsx';
 import Uploaded from './components/test.jsx';
+import ProductCart from '@/pages/productcartpage/Productcart'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path:"/updateAdd",
         element:<UpdateAdd/>
+      },
+      {
+        path:"/productcart",
+        element:<ProductCart/>
       }
     ],
     errorElement:<Error/>
