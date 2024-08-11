@@ -63,17 +63,13 @@ export default function Home() {
             <h1 className="text-[16px] sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl text-white font-normal italic">PRADA</h1>
             <h1 className="text-[16px] sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl text-white font-extralight">Calvin Klein</h1>
          </div>
-<<<<<<< HEAD
+
          <div className="m-auto my-4">
     {/* <button onClick={()=>setState(true)}>call</button>
             {state &&
              } */}
              <ItemsCollection />
 
-=======
-         <div className="m-auto bg-lime-500">
-             <ItemsCollection />
->>>>>>> e30d6d9327ed5d0e57b75c2c2598e86c7235f2d9
          </div>
       </>
    )
