@@ -33,7 +33,6 @@ function SignupPage() {
                 }
                 const response = await postData("/user/signup", values);
                 setToken(response.data.token)
-                // Reset the form after successful signup
                 actions.resetForm();
                 alert("Sign up successful 🥰");
             } else {

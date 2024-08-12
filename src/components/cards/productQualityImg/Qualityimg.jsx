@@ -13,7 +13,7 @@ const washable ='https://m.media-amazon.com/images/S/aplus-media-library-service
     <>
       <div className="flex justify-around w-[24rem] ">
         {productDesImg.map((img, index) => (
-          <div className="h-[5rem] w-[5rem] rounded-lg">
+          <div key={index} className="h-[5rem] w-[5rem] rounded-lg">
             <img
               src={img}
               className="w-[100%] h-[100%] cursor-pointer "

@@ -14,24 +14,6 @@ function ProductCart() {
         "https://sashamilano.com/wp-content/uploads/2023/12/navy6-980x1470.webp",
         "https://sashamilano.com/wp-content/uploads/2023/12/black3-980x1470.webp",
     ]
-// const [productId, setProductId]=useState("66b8758340cc73cf2cbdba82")
-
-//     useEffect(()=>{
-//         fetchData()
-    
-//       },[])
-      
-//       const fetchData = async () => {
-//         console.log("fechind dsingle product is start");
-        
-//         const result = await getData(`http://localhost:8080/products/:66b8758340cc73cf2cbdba82`)
-//         // const result = await getData(`http://localhost:8080/products/${productId}`)
-//         // setProducts(result?.data) 
-//         console.log("fechng result=>",result);
-//         console.log(result?.data);
-        
-//     }
-    
 
     const [product, setProduct] = useState(null);
 
@@ -42,16 +24,14 @@ function ProductCart() {
     const fetchData = async () => {
   
       try {
-        const productId = "66b8758340cc73cf2cbdba82"; // Replace with your actual product ID
+        const productId = "66b8758340cc73cf2cbdba82"; 
         const result = await getData(`/products/${productId}`);
-        setProduct(result?.data); // Assuming the result contains the product data directly
-        // console.log("Fetching result =>", result);
+        setProduct(result?.data); 
       } catch (error) {
         console.error("Error fetching the product:", error);
       }
     };
 
- console.log(product);
  
     return (
         <>

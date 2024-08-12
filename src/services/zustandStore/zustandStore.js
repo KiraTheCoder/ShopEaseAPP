@@ -10,13 +10,11 @@ const counter = (set,get)=>({
     reset: () => set({ count: 0, extraCount: 0 }),
 })
 
-
 const useCounter = create(devtools(persist(counter,{
     name: "counter-storage", 
     getStorage: () => localStorage, 
     // getStorage: () => sessionStorage, //  for session storage
 })))
-
 
 const authStore = (set)=>({
     token:"",
@@ -27,7 +25,6 @@ const useAuthStore =create(devtools(persist(authStore,{
     name:"token",
     getStorage: () => localStorage
 })))
-
 
 export { useCounter,useAuthStore }
 
