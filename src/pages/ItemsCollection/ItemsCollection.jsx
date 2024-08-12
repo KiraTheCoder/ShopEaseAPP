@@ -1,26 +1,37 @@
 import ProductCard from "@/components/product/Product"
 import { useEffect, useState } from "react"
-
+import {getData} from "@/services/apiCall"
+import Shimmer from "@/components/shimmer/Shimmer"
+ 
 function ItemsCollection() {
   const [products, setProducts]= useState([])
+
   useEffect(()=>{
     fetchData()
-
   },[])
   
   const fetchData = async () => {
-    const result = await fetch("http://localhost:8080/product/get-products")
-    const data = await result.json();
-    // console.log("my data", data);
-    setProducts(data?.data)
+    const result = await getData("/products");  
+    // console.log(result?.data);
+    setProducts(result?.data)
 }
 
-console.log("rohitngigns",products);
 
+<<<<<<< HEAD
   return (
     <div className="w-[90vw] m-auto flex gap-3  flex-wrap items-center ">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
+=======
+return products.length== 0 ? (
+  <Shimmer/>
+  )
+  :
+(
+    <div className="w-[95vw] m-auto flex  gap-3 items-center flex-wrap ">
+      {products.map((product,index) => (
+        <ProductCard key={index} product={product} />
+>>>>>>> dc67a03388692a902a04ab29258e795d05c5bf8f
       ))}
     </div>
   )

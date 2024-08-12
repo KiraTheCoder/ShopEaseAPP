@@ -35,6 +35,12 @@ const otpValidate = Yup.string().required("required");
 
 const textareaValidate = Yup.string().required("required");
 
+// upload product image
+const productNameValidation= Yup.string().required("product name is required")
+const priceValidation=Yup.string().required("product price is required")
+const stockvalidation=Yup.string().required("required")
+const categoryValidation= Yup.string().required("required")
+const imageValidation= Yup.string().required("product image is required")
 
 const LoginForm = {
   initialVaues: {
@@ -127,5 +133,25 @@ const updateAddemailPhoneNumber={
   }),
 }
 
+//  product uploaded 
+const productUpload={
+  initialValues:{
+    productName:"",
+    description:"",
+    price: "",
+    stock:"",
+    category:"",
+    image:"",
+  },
 
-export { LoginForm, signUpForm, otpForm, sendMessageForm,changePassword,updateAddemailPhoneNumber };
+  validationSchema: Yup.object({
+    productName:productNameValidation,
+    description:textareaValidate,
+    price:priceValidation,
+    stock:stockvalidation,
+    category:categoryValidation,
+    image:imageValidation,
+  }),
+}
+
+export { LoginForm, signUpForm, otpForm, sendMessageForm,changePassword,updateAddemailPhoneNumber, productUpload };

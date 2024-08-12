@@ -1,17 +1,16 @@
 
-import UpdateAdd from '@/pages/Update_AddEmailphonenumber/UpdateAdd'
-import Header from '../layouts/Header/Header'
-import ForgetAndChangePassword from "@/pages/Forget_password/ForgetAndChangePassword"
-import Uploaded from '@/components/test'
 
 const TestAPP = () => {
   return (
     <div>
+<<<<<<< HEAD
       {/* <Itemcard/> */}
       {/* <ForgetAndChangePassword/> */}
       {/* <Uploaded/> */}
       {/* <UpdateAdd/> */}
       {/* <Header/> */}
+=======
+>>>>>>> dc67a03388692a902a04ab29258e795d05c5bf8f
       </div>
   )
 }

@@ -34,7 +34,8 @@ function Header() {
                 </div>
                 <nav className="hidden md:block md:flex justify-around w-[35%]">
                     <CustomNavLink to="/">Shop</CustomNavLink>
-                    <CustomNavLink to="/about">On Sale</CustomNavLink>
+                    <CustomNavLink to="/uploaded">On Sale</CustomNavLink>
+                    {/* <CustomNavLink to="/onsale">On Sale</CustomNavLink> */}
                     <CustomNavLink to="/contact">New Arrivals</CustomNavLink>
                     <CustomNavLink to="/brands">Brands</CustomNavLink>
                     {/* <CustomNavLink to={`/${activeLink}`} onClick={handleToggle} isActiveLink={true}>{activeLink}</CustomNavLink> */}
@@ -50,7 +51,9 @@ function Header() {
                         />
                     </div>
                     <div className="w-[22%] sm:w-[15%] md:w-[20%] lg:w-[15%] flex justify-around sm:justify-between md:justify-between lg:justify-start lg:gap-3 items-center">
+                    <NavLink to="/productcart">
                         <FaCartPlus className="text-sm sm:text-xl text-white" />
+                    </NavLink>
                         <FaRegCircleUser className="text-sm sm:text-xl text-white" />
                     </div>
                 </div>
@@ -61,7 +64,7 @@ function Header() {
                 </button>
                 <div className={`w-[87%] sm:w-[80%] flex justify-around sm:justify-start sm:gap-7 ${isMenuOpen ? 'block' : 'hidden'}`}>
                     <CustomNavLink to="/">Shop </CustomNavLink>
-                    <CustomNavLink to="/about">On Sale</CustomNavLink>
+                    <CustomNavLink to="/onsale">On Sale</CustomNavLink>
                     <CustomNavLink to="/contact">New Arrivals</CustomNavLink>
                     <CustomNavLink to="/brands">Brands</CustomNavLink>
                     <CustomNavLink to={`/${activeLink}`} onClick={handleToggle} >{activeLink}</CustomNavLink>
