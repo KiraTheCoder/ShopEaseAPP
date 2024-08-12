@@ -17,13 +17,13 @@ function ItemsCollection() {
 }
 
 
-return products.length== 0 ? (
+return products?.length== 0 ? (
   <Shimmer/>
   )
   :
 (
     <div className="w-[95vw] m-auto flex  gap-3 items-center flex-wrap ">
-      {products.map((product,index) => (
+      {products?.map((product,index) => (
         <ProductCard key={index} product={product} />
       ))}
     </div>
