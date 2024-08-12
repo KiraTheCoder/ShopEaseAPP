@@ -251,7 +251,8 @@ function Header() {
                     </CustomNavLink>
                     <CustomNavLink to="/about">On Sale</CustomNavLink>
                     <CustomNavLink to="/contact">New Arrivals</CustomNavLink>
-                    <CustomNavLink to="/">Brands</CustomNavLink>
+                    <CustomNavLink to="/uploaded">Brands</CustomNavLink>
+                    {/* <CustomNavLink to="/">Brands</CustomNavLink> */}
                     {/* <CustomNavLink to={/${activeLink}} onClick={handleToggle} isActiveLink={true}>{activeLink}</CustomNavLink> */}
                     <CustomNavLink to={`/${activeLink}`} onClick={handleToggle} >{activeLink}</CustomNavLink>
                 </nav>
@@ -280,7 +281,8 @@ function Header() {
                     </CustomNavLink>
                     <CustomNavLink to="/about">On Sale</CustomNavLink>
                     <CustomNavLink to="/contact">New Arrivals</CustomNavLink>
-                    <CustomNavLink to="/">Brands</CustomNavLink>
+                    <CustomNavLink to="/uploaded">Brands</CustomNavLink>
+                    {/* <CustomNavLink to="/">Brands</CustomNavLink> */}
                     <CustomNavLink to={`/${activeLink}`} onClick={handleToggle} >{activeLink}</CustomNavLink>
                 </div>
             </div>

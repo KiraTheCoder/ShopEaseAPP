@@ -11,6 +11,7 @@ import LogInPage from './pages/LoginPage/LogInPage.jsx';
 import Home from './pages/HomePage/Home.jsx';
 import Forget_and_change_password from './pages/Forget_password/ForgetAndChangePassword.jsx';
 import UpdateAdd from './pages/Update_AddEmailphonenumber/UpdateAdd.jsx';
+import Uploaded from './components/test.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,8 +32,12 @@ const router = createBrowserRouter([
       },
       {
         path:"/brands",
-        element:<Brands/>,        
+        element:<Uploaded/>,        
       },
+      // {
+      //   path:"/brands",
+      //   element:<Brands/>,        
+      // },
       {
         path:"/signup",
         element:<SignupPage/>

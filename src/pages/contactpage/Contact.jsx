@@ -13,7 +13,7 @@ function Contact() {
 
 
     return (
-        <div className=' md:w-[90vw] lg:w-[80vw] m-auto my-[3rem]  md:flex md:justify-between '>
+        <div className=' md:w-[90vw] lg:w-[80vw] m-auto my-2 sm:my-6 md:my-[3rem]  md:flex md:justify-between '>
             <div className='w-[90vw] m-auto md:m-0 sm:w-[20rem] md:w-[15rem] sm:text-start md:text-start font-inter'>
                 <div className='py-4'>
                     <div className='flex items-center gap-4 my-2'><div className='w-7 h-7 bg-[#db4444] rounded-[50%] flex justify-center items-center' ><FaPhoneAlt className='text-sm text-white' /></div> <span className='text-sm font-four '>call to us</span></div>

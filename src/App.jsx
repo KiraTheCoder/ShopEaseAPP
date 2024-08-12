@@ -10,7 +10,7 @@ function App() {
     <>
     <Header/>
     <Outlet />
-    {/* <TestAPP/> */}
+    <TestAPP/>
     <Footer/>
 </>
   )
