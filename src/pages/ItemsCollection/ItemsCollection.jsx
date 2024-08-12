@@ -22,7 +22,7 @@ return products.length== 0 ? (
   )
   :
 (
-    <div className="w-[95vw] m-auto flex bg-black gap-3 items-center flex-wrap ">
+    <div className="w-[95vw] m-auto flex  gap-3 items-center flex-wrap ">
       {products.map((product,index) => (
         <ProductCard key={index} product={product} />
       ))}

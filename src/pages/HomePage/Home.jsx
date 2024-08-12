@@ -64,7 +64,8 @@ export default function Home() {
                   </div>
 
                   <div className="h-auto w-[40rem]">
-                     <img className="ml-2" src={images[currentImageIndex]} alt="Fashion" />
+                     {/* <img className="ml-2" src={images[currentImageIndex]} alt="Fashion" /> */}
+                     <img  className="ml-2" src={couple} alt="" />
                   </div>
 
                </div>
