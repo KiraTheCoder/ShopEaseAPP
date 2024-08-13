@@ -31,7 +31,7 @@ function Counter() {
       </button>
     </div>
       <button className="flex justify-center items-center py-0 px-6 ml-3.5 text-red-600 bg-gray-200 hover:bg-slate-300" onClick={() => dispatch({ type: "reset" })}>
-        Clear
+        Delete
       </button>
     
     </>

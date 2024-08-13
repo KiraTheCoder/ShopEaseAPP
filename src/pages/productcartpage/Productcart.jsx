@@ -4,93 +4,79 @@ import { Button } from "@/components/form";
 import Counter from "@/components/productDetails/counter/Counter";
 import ProductInfo from "@/components/productDetails/prductinfo/ProductInfo";
 import Productcolor from "@/components/productDetails/productcolor/Productcolor";
-import { useEffect , useState} from "react";
-import { getData } from "@/services/apiCall"
+import { postData } from "@/services/apiCall";
 import { useGetProduct } from "@/services/zustandStore";
+import { useState } from "react";
 
 function ProductCart() {
+    // const [token, setToken]=useState()
 
-    const  Product = useGetProduct((state=>state.product))
+    const Product = useGetProduct((state => state.product))
+    // console.log("hello", Product);
+    const { images, age, manufacturer, category, material, soft, discount, price, productName, description, color } = Product
+    const MRP = price / (1 - discount / 100);
 
-    console.log("hello",Product);
-    
-    const imgs = [
-        "https://sashamilano.com/wp-content/uploads/2023/12/black1-980x1470.webp",
-        "https://sashamilano.com/wp-content/uploads/2023/12/black4-980x1470.webp",
-        "https://sashamilano.com/wp-content/uploads/2023/12/navy6-980x1470.webp",
-        "https://sashamilano.com/wp-content/uploads/2023/12/black3-980x1470.webp",
-    ]
 
-    const [product, setProduct] = useState(null);
+    // add to cart ++++++
+    const AddCart =  () => {
+        // const result = await postData("/products");  
+        // setToken(result?.data)
+        alert("cart url called")
+    }
 
-    useEffect(() => {
-      fetchData();
-    }, []);
-  
-    const fetchData = async () => {
-  
-      try {
-        const productId = "66b8758340cc73cf2cbdba82"; 
-        const result = await getData(`/products/${productId}`);
-        setProduct(result?.data); 
-      } catch (error) {
-        console.error("Error fetching the product:", error);
-      }
-    };
-
- 
     return (
         <>
-            <section className="">
-                <h1 className="text-center font-sans font-semibold text-2xl text-fuchsia-600 mb-[3rem]">
-                    PRODUCT CART
-                </h1>
+            <section className="  my-4 sm:my-12">
+               
                 <div className="w-[90vw] m-auto flex justify-around flex-wrap  ">
                     <div className="w-[24rem] h-auto py-[1.5rem]   flex flex-col items-center  ">
-                        <div className="w-[24rem] h-[30rem]  flex flex-col items-center justify-center shadow-lg shadow-gray-500  rounded-tl-[10%] rounded-br-[10%]">
-                            <img src="https://sashamilano.com/wp-content/uploads/2023/12/black1-980x1470.webp" className="w-[18rem] h-[28rem]  " alt="img" />
+                        <div className="w-[24rem] h-[30rem]  flex flex-col items-center justify-center shadow-[0_0_10px_2px_rgba(0,0,0,0.2)]  rounded-tl-[10%] rounded-br-[10%]">
+                            <img src={`data:${images[0]?.contentType};base64,${images[0]?.data}`} alt={productName} />
                         </div>
                         <div className="flex justify-around w-[23rem] mt-[2rem] ">
-                            {imgs.map((img, index) => (
-                                <div key={index} className="h-[5rem] w-[4rem] border-[1px] border-gray-600 rounded-lg">
+                            {images?.map((img, index) => (
+                                <div key={index} className="h-[5.2rem] w-[5rem] border-[1px] border-gray-600 rounded-lg">
                                     <img
-                                        src={img}
+                                        src={`data:${img?.contentType};base64,${img?.data}`} alt={productName}
                                         className="w-[100%] h-[100%] rounded-lg cursor-pointer "
-                                        alt="img"
                                     />
                                 </div>
                             ))}
                         </div>
-                        <div className="flex justify-around mt-8 w-full">
+                        <div className="flex justify-around mt-8 w-full" >
                             <Button name={"BUY NOW"} type={"submit"} style={"py-2 px-10 text-white font-bold text-sm rounded-3xl bg-green-800 hover:bg-green-600 hover:text-black"} />
-                            <Button name={"ADD TO CART"} type={""} style={"py-2 px-10 text-white font-bold text-sm rounded-3xl  bg-orange-600 hover:bg-orange-400 hover:text-black"} />
+                            <Button    name={"ADD TO CART"} type={"submit"}  style={"py-2 px-10 text-white font-bold text-sm rounded-3xl  bg-orange-600 hover:bg-orange-400 hover:text-black"} />
                         </div>
                     </div>
                     <div className="w-[30rem] h-auto ">
-                        <h4 className="font-bold text-xl uppercase py-2">
-                            MEERA FAB Women's Cotton Printed White Anarkali
-                        </h4>
+                        <h4 className="font-bold text-xl uppercase py-2">{productName}</h4>
                         <div className="">
                             <p className="text-[13px] font-bold text-gray-500 flex">
                                 <h5 className="font-bold text-green-600 text-xl mr-8">
-                                    ₹ 2999 /- <span className="text-[14px]  ">Only</span>{" "}
+                                    ₹ {price} /- <span className="text-[14px]  ">Only</span>{" "}
                                 </h5>
                                 M.R.P :
                                 <span className="italic text-[14px] line-through text-red-400">
-                                    ₹ 5999 /-
+                                    ₹ {MRP} /-
                                 </span>
                             </p>
                         </div>
-                        <p className=" text-gray-400 leading-5 text-sm">
-                            Discover the allure of the Lemonade Shirt Dress, a wide-fit wonder
-                            with overlapping panels, dynamic box pleats, and a playful wide
-                            cuff ring adorned with a self-fabric ribbon. Expertly crafted, it
-                            promises a stylish and customizable silhouette that effortlessly
-                            blends comfort and contemporary charm.
-                        </p>
+                        <p className=" text-gray-400 leading-5 text-sm">{description}</p>
                         <h3 className="font-bold my-2">Colors</h3>
                         {/* product color collection */}
-                        <Productcolor />
+                        {/* <Productcolor /> */}
+
+                        <div className="flex max-w-[50%] h-[6.5rem] gap-2 bg-slate-50 shadow-[0_0_10px_2px_rgba(0,0,0,0.2)] overflow-x-auto ">
+                            <div className="w-auto flex-shrink-0 flex flex-col justify-center items-center">
+                                <img
+                                    src={`data:${images[0]?.contentType};base64,${images[0]?.data}`}
+                                    alt={productName}
+                                    className="cursor-pointer w-[95%] h-[80%]"
+                                />
+                                <p className="text-pink-500 text-[12px]">{color}</p>
+                            </div>
+                        </div>
+
                         <div className="flex justify-between  mt-6">
                             <div className=" w-[10rem]">
                                 <h3 className="font-bold  ">Quantity</h3>
@@ -108,7 +94,7 @@ function ProductCart() {
                 </div>
             </section>
             <section>
-                <ProductInfo />
+                <ProductInfo details={Product} />
             </section>
             <section className="w-full my-8">
                 <h2 className="font-bold text-xl text-center italic">
