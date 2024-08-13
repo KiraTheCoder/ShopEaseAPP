@@ -6,8 +6,14 @@ import ProductInfo from "@/components/productDetails/prductinfo/ProductInfo";
 import Productcolor from "@/components/productDetails/productcolor/Productcolor";
 import { useEffect , useState} from "react";
 import { getData } from "@/services/apiCall"
+import { useGetProduct } from "@/services/zustandStore";
 
 function ProductCart() {
+
+    const  Product = useGetProduct((state=>state.product))
+
+    console.log("hello",Product);
+    
     const imgs = [
         "https://sashamilano.com/wp-content/uploads/2023/12/black1-980x1470.webp",
         "https://sashamilano.com/wp-content/uploads/2023/12/black4-980x1470.webp",

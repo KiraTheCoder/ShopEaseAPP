@@ -16,6 +16,7 @@ const useCounter = create(devtools(persist(counter,{
     // getStorage: () => sessionStorage, //  for session storage
 })))
 
+
 const authStore = (set)=>({
     token:"",
     setToken: (newToken) => set({ token: newToken })
@@ -26,9 +27,26 @@ const useAuthStore =create(devtools(persist(authStore,{
     getStorage: () => localStorage
 })))
 
-export { useCounter,useAuthStore }
+
+// khushi
+
+
+const getProduct = (set)=>({
+    product:"",
+    setProduct: (product) => set({ product })
+})
+
+const useGetProduct =create(devtools(getProduct,{
+    name:"product",
+    getStorage: () => localStorage
+}))
+
+
+export { useCounter,useAuthStore, useGetProduct }
 
 /* 
 get().state --> useful when work conditional state
 
 */
+
+

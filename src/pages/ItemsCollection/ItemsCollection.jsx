@@ -16,13 +16,6 @@ function ItemsCollection() {
     setProducts(result?.data)
 }
 
-
-<<<<<<< HEAD
-  return (
-    <div className="w-[90vw] m-auto flex gap-3  flex-wrap items-center ">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-=======
 return products.length== 0 ? (
   <Shimmer/>
   )
@@ -31,7 +24,6 @@ return products.length== 0 ? (
     <div className="w-[95vw] m-auto flex  gap-3 items-center flex-wrap ">
       {products.map((product,index) => (
         <ProductCard key={index} product={product} />
->>>>>>> dc67a03388692a902a04ab29258e795d05c5bf8f
       ))}
     </div>
   )

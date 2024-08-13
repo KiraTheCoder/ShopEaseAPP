@@ -12,11 +12,7 @@ import LogInPage from './pages/LoginPage/LogInPage.jsx';
 import Home from './pages/HomePage/Home.jsx';
 import Forget_and_change_password from './pages/Forget_password/ForgetAndChangePassword.jsx';
 import UpdateAdd from './pages/Update_AddEmailphonenumber/UpdateAdd.jsx';
-import Uploaded from './components/test.jsx';
-<<<<<<< HEAD
-=======
 import ProductCart from '@/pages/productcartpage/Productcart'
->>>>>>> dc67a03388692a902a04ab29258e795d05c5bf8f
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,14 +23,6 @@ const router = createBrowserRouter([
         element:<Home/>,
       },       
       {
-        path:"/uploaded",
-        element:<Uploaded/>
-      },
-      // {
-      //   path:"/onsale",
-      //   element:<Onsale/>
-      // },
-      {
         path:"/about",
         element:<About/>
       },
@@ -42,14 +30,6 @@ const router = createBrowserRouter([
         path:"/contact",
         element:<Contact/>
       },
-      {
-        path:"/brands",
-        element:<Uploaded/>,        
-      },
-      // {
-      //   path:"/brands",
-      //   element:<Brands/>,        
-      // },
       {
         path:"/signup",
         element:<SignupPage/>
