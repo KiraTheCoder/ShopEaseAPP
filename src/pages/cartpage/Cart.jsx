@@ -1,29 +1,67 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { MdOutlineLocalOffer, MdDeleteForever } from "react-icons/md";
 import { FaArrowRight } from "react-icons/fa6";
 import { FaCartArrowDown } from "react-icons/fa";
 import Counter from '@/components/productDetails/counter/Counter';
+import { getData, postData } from '@/services/apiCall';
+
 function Cart() {
+    const [cartData, setCartData] = useState([])
+
+    useEffect(() => {
+        getCartData()
+    }, [])
+
+    const getCartData = async () => {
+        try {
+            const result = await getData("/products/cart_products");
+            // console.log("fetched Cartdata successful", result?.data?.products);
+            setCartData(result?.data?.products || []);
+        } catch (error) {
+            console.error("Failed to add to cart", error);
+        }
+    };
+
+    const deleteProduct = async ( Id ) => {
+        try {
+            const result = await postData("/products/add_to_cart", { productId:Id });
+            console.log("Delete product from Cart successful", result);
+          
+            if (result?.success) {
+                getCartData()
+            }
+        } catch (error) {
+            console.error("Failed to Delete product from cart", error);
+        }
+    };
+ 
+ 
     return (
         <div className='w-[90vw] sm:w-[80vw] lg:w-[85vw] xl:w-[80vw] m-auto my-4 sm:my-12'>
             <h2 className='uppercase font-inter font-bold text-xl sm:text-3xl flex items-center gap-4 my-3'>Your cart <FaCartArrowDown className='text-[#db4444]' /></h2>
             <div className='w-full flex justify-center lg:justify-between flex-wrap '>
-                <div className='border-2 rounded-lg w-[35rem] lg:w-[60%] xl:w-[55%]'>
-                    <div className='m-2 flex justify-between border-b-2'>
-                        <div className=' flex gap-2'>
-                            <div className='bg-gray-900 h-[5rem] w-[5rem] rounded-lg'><img src="" alt="" className='h-full w-full rounded-lg' /></div>
-                            <div>
-                                <h5 className='text-[15px] font-DM font-semibold'>Gradient Graphic T-shirt</h5>
-                                <p className='text-[14px]'>Size: <span className='text-gray-500'>Large</span></p>
-                                <p className='text-[14px]'>Color: <span className='text-gray-500'>White</span></p>
-                                <p className='font-Five text-sm'>$145</p>
+                <div className='border-2 rounded-lg w-[35rem] h-auto lg:w-[60%] xl:w-[55%]'>
+                    {cartData? cartData?.map((product, index) => (
+                        <div key={index} className='m-2 flex justify-between border-b-2'>
+                            <div className=' flex gap-2'>
+                                <img
+                                    src={`data:${product?.images[0]?.contentType};base64,${product?.images[0]?.data}`}
+                                    alt={product?.productName}
+                                    className='bg-gray-900 h-[5rem] w-[5rem] rounded-lg'
+                                />
+                                <div>
+                                    <h5 className='text-[15px] font-DM font-semibold'>{product?.productName}</h5>
+                                    <p className='text-[14px]'>Size: <span className='text-gray-500'>{product?.size}</span></p>
+                                    <p className='text-[14px]'>Color: <span className='text-gray-500'>{product?.color}</span></p>
+                                    <p className='font-Five text-sm'>${product?.price}</p>
+                                </div>
+                            </div>
+                            <div className=' flex flex-col items-end justify-between'>
+                                <div><MdDeleteForever className='text-[#db4444] text-xl'  onClick={() => deleteProduct(product._id)}/></div>
+                                <div><Counter /></div>
                             </div>
                         </div>
-                        <div className=' flex flex-col items-end justify-between'>
-                            <div><MdDeleteForever className='text-[#db4444] text-xl' /></div>
-                            <div ><Counter /></div>
-                        </div>
-                    </div>
+                    )):null}
                 </div>
                 <div className='border-2 mt-6 lg:mt-0 rounded-lg p-2 h-auto lg:h-[19rem] xl:h-[21rem] w-[23rem] lg:w-[17rem] xl:w-[23rem]'>
                     <h4 className='font-bold '>Order Summary</h4>
