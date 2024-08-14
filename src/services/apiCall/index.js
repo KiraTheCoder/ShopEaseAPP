@@ -59,6 +59,7 @@ export function patchData(endpoint, data) {
 export function putData(endpoint, data) {
   return apiCall(endpoint, "PUT", data);
 }
+
 export function deleteData(endpoint, data) {
   return apiCall(endpoint, "DELETE", data);
 }
