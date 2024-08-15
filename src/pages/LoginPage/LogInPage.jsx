@@ -5,9 +5,13 @@ import { LoginForm } from '@/services/lib/YupFormikValidator'
 import { postData } from "@/services/apiCall"
 import { Link } from "react-router-dom"
 import { useAuthStore } from "@/services/zustandStore"
+import { useNavigate } from "react-router-dom"
+import { toast } from 'react-toastify';
 
 export default function LogInPage() {
-    const  setToken = useAuthStore((state) => state.setToken)
+    const setToken = useAuthStore((state) => state.setToken)
+    const navigate = useNavigate()
+
     async function submitForm(values, option) {
         const val = values.phoneNumberOrEmail
         const isPhoneNumber = /^\d{10}$/.test(val);
@@ -23,13 +27,28 @@ export default function LogInPage() {
         delete values.phoneNumberOrEmail
 
         try {
-            const data = await postData("/user/login", values)
-            alert(data.message)
-            console.log(data.data.token);
-            setToken(data?.data?.token)
+            const myPromise = postData("/user/login", values)
+            toast.promise(
+                myPromise,
+                {
+                    pending: 'logging...',
+                    success: 'logged in 👌',
+                    error: 'something went wrong.. 🤯',
+                }
+            );
+
+            const data = await myPromise;
+
+            if (data.success) {
+                // console.log(data);
+                // alert(data.message)
+                // console.log(data.data.token);
+                setToken(data?.data?.token)
+                navigate("/")
+            }
             option.resetForm()
         } catch (error) {
-            alert("An error occurred:" + error?.response?.data?.message)
+            toast.warn("An error occurred:" + error?.response?.data?.message)
         }
     }
     return (
@@ -43,7 +62,7 @@ export default function LogInPage() {
                     validationSchema={LoginForm.validationSchema}
                     onSubmit={submitForm}
                 >
-                    {(Values) => (
+                    {() => (
                         <Form action="">
                             <h2 className='font-inter text-[1.2rem] text-center sm:text-start  sm:text-[1.4rem] font-Five my-1 tracking-wider'>Log in to Exclusive</h2>
                             <p className='text-[13px] sm:text-[14px] text-center sm:text-start font-Poppins tracking-wider'>Enter your details below</p>

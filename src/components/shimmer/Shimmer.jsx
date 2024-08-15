@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Shimmer = () => {
   const shimmerItem = (
     <div className="w-[300px] h-[400px] bg-gray-100 m-2 rounded animate-pulse">
