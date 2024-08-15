@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { FaCartPlus } from "react-icons/fa";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { HiMenu, HiX } from "react-icons/hi";
+import { getData } from "@/services/apiCall";
 
 const CustomNavLink = ({ to, children, onClick, isActiveLink }) => (
-    <NavLink 
-        to={to} 
-        onClick={onClick} 
-        className={({ isActive }) => 
+    <NavLink
+        to={to}
+        onClick={onClick}
+        className={({ isActive }) =>
             `text-[12px] sm:text-[0.5rem] md:text-[0.6rem] lg:text-[0.8rem] xl:text-[1rem] font-medium text-white relative after:content-[''] 
             after:absolute after:left-0 after:bottom-0 after:h-[1.3px] sm:after:h-[1.5px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-[0.18rem] 
             ${isActive || isActiveLink ? 'after:block' : 'after:hidden'}`
@@ -20,6 +21,20 @@ const CustomNavLink = ({ to, children, onClick, isActiveLink }) => (
 );
 
 function Header() {
+    useEffect(() => {
+        getCartData()
+    },[])
+    const [count, setCount] = useState('')
+    const getCartData = async () => {
+        try {
+            const result = await getData("/products/cart_products_count");
+            console.log("fetched Cartdata count successful", result?.data?.productCartsCount);
+            setCount(result?.data?.productCartsCount)
+        } catch (error) {
+            console.error("Failed to fetch cartdata count", error);
+        }
+    };
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeLink, setActiveLink] = useState('signup');
 
@@ -44,16 +59,19 @@ function Header() {
                 <div className="w-[60%] sm:w-[65%] md:w-[40%] flex justify-between items-center">
                     <div className="flex justify-evenly items-center bg-slate-200 h-6 sm:h-8 md:h-7 lg:h-9 w-[75%] sm:w-[70%] md:w-[70%] lg:w-[80%] rounded-full">
                         <CiSearch className="text-md sm:text-[1.5rem] text-gray-500" />
-                        <input 
-                            type="text" 
-                            placeholder="Search for Product..." 
-                            className="h-[100%] w-[90%] px-1 rounded-full bg-transparent text-[13px] sm:text-[14px] md:text-[14px] lg:text-sm outline-none" 
+                        <input
+                            type="text"
+                            placeholder="Search for Product..."
+                            className="h-[100%] w-[90%] px-1 rounded-full bg-transparent text-[13px] sm:text-[14px] md:text-[14px] lg:text-sm outline-none"
                         />
                     </div>
                     <div className="w-[22%] sm:w-[15%] md:w-[20%] lg:w-[15%] flex justify-around sm:justify-between md:justify-between lg:justify-start lg:gap-3 items-center">
-                    <NavLink to="/cart">
-                        <FaCartPlus className="text-sm sm:text-xl text-white" />
-                    </NavLink>
+                        <div>
+                            <p className="text-orange-500 ml-2 absolute top-6 text-[14px]">{count}</p>
+                            <NavLink to="/cart">
+                                <FaCartPlus className="text-sm sm:text-xl text-white" />
+                            </NavLink>
+                        </div>
                         <FaRegCircleUser className="text-sm sm:text-xl text-white" />
                     </div>
                 </div>
@@ -176,12 +194,12 @@ export default Header;
 
 //     return (
 //         <div className="relative" onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown}>
-//             <NavLink 
-//                 to={to} 
-//                 onClick={onClick} 
-//                 className={({ isActive }) => 
-//                     `text-[12px] sm:text-[0.5rem] md:text-[0.6rem] lg:text-[0.8rem] xl:text-[1rem] font-medium text-white relative after:content-[''] 
-//                     after:absolute after:left-0 after:bottom-0 after:h-[1.3px] sm:after:h-[1.5px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-[0.18rem] 
+//             <NavLink
+//                 to={to}
+//                 onClick={onClick}
+//                 className={({ isActive }) =>
+//                     `text-[12px] sm:text-[0.5rem] md:text-[0.6rem] lg:text-[0.8rem] xl:text-[1rem] font-medium text-white relative after:content-['']
+//                     after:absolute after:left-0 after:bottom-0 after:h-[1.3px] sm:after:h-[1.5px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-[0.18rem]
 //                     ${isActive || isActiveLink ? 'after:block' : 'after:hidden'}`
 //                 }
 //             >
@@ -221,10 +239,10 @@ export default Header;
 //                 <div className="w-[60%] sm:w-[65%] md:w-[40%] flex justify-between items-center">
 //                     <div className="flex justify-evenly items-center bg-slate-200 h-6 sm:h-8 md:h-7 lg:h-9 w-[75%] sm:w-[70%] md:w-[70%] lg:w-[80%] rounded-full">
 //                         <CiSearch className="text-md sm:text-[1.5rem] text-gray-500" />
-//                         <input 
-//                             type="text" 
-//                             placeholder="Search for Product..." 
-//                             className="h-full w-[90%] px-1 rounded-full bg-transparent text-[13px] sm:text-[14px] md:text-[14px] lg:text-sm outline-none" 
+//                         <input
+//                             type="text"
+//                             placeholder="Search for Product..."
+//                             className="h-full w-[90%] px-1 rounded-full bg-transparent text-[13px] sm:text-[14px] md:text-[14px] lg:text-sm outline-none"
 //                         />
 //                     </div>
 //                     <div className="w-[22%] sm:w-[15%] md:w-[20%] lg:w-[15%] flex justify-around sm:justify-between md:justify-between lg:justify-start lg:gap-3 items-center">

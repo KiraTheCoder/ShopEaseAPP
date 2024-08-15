@@ -6,27 +6,29 @@ import Counter from "@/components/productDetails/counter/Counter";
 import ProductInfo from "@/components/productDetails/prductinfo/ProductInfo";
 import { postData } from "@/services/apiCall";
 import { useGetProduct, useCartStore } from "@/services/zustandStore";
+import Quantity from "@/components/productDetails/counter/Quantity";
 
 function ProductCart() {
     const Product = useGetProduct((state) => state.product);
     const { images, discount, price, productName, description, color, _id } = Product;
     const MRP = Math.ceil(price / (1 - discount / 100));
-
     const [mainImg, setMainImg] = useState(images[0]);
 
-    // Add to cart function
-    const AddCart = async (Id) => {
+      // Add to cart function
+      const AddCart = async (Id) => {
         try {
             const result = await postData("/products/add_to_cart", { productId: Id });
-            console.log("Add to Cart successful", result);
+            // console.log("Add to Cart successful", result);
         } catch (error) {
             console.error("Failed to add to cart", error);
+            if (error.response) {
+                console.error("Server responded with:", error.response.status, error.response.data);
+            } else {
+                console.error("No response received or other error:", error.message);
+            }
         }
     };
-
-
-
-
+    
     return (
         <>
             <section className="my-4 sm:my-12">
@@ -83,12 +85,13 @@ function ProductCart() {
                                 />
                             </div>
                         </div>
-                        <div className="flex justify-between mt-6">
+                        {/* <div className="flex justify-between mt-6">
                             <div className="w-[10rem]">
                                 <h3 className="font-bold">Quantity</h3>
                                 <Counter />
                             </div>
-                        </div>
+                        </div> */}
+                        <Quantity/>
                         <Offercard />
                     </div>
                 </div>
