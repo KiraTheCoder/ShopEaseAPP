@@ -64,17 +64,20 @@ export default function LogInPage() {
                 >
                     {() => (
                         <Form action="">
-                            <h2 className='font-inter text-[1.2rem] text-center sm:text-start  sm:text-[1.4rem] font-Five my-1 tracking-wider'>Log in to Exclusive</h2>
+                            <h2 className='font-inter text-[1.2rem] text-center sm:text-start  sm:text-[1.4rem] font-Five my-1 tracking-wider'>Log in to ShopEase</h2>
                             <p className='text-[13px] sm:text-[14px] text-center sm:text-start font-Poppins tracking-wider'>Enter your details below</p>
                             <TextInput label={"Email or Phone Number *"} name={"phoneNumberOrEmail"} type={"input"} />
                             <TextInput label={"Password *"} name={"password"} type={"password"} />
-                            <div className='flex justify-between items-center mt-[1.5rem]'>
+                            <div className='flex justify-between items-center my-[1.2rem]'>
                                 <Button type="submit" name={"Log In"} style={"w-[5.5rem]"} />
-                                <div className=" leading-6">
+                                <div className="">
                                     <li className='list-none no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/forgetpassword"}>Forget password ?</Link></li>
-                                    <li className='list-none no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/updateAdd"}>Update/Add email or phonrNumber ?</Link></li>
                                 </div>
                             </div>
+                                <div className=" flex text-sm  justify-between px-2">
+                                    Create Account:👉 
+                                    <li className='list-none no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/signup"}>Click here </Link></li>
+                                </div>
                         </Form>
                     )}
                 </Formik>

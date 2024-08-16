@@ -52,9 +52,9 @@ function Header() {
                     <CustomNavLink to="/contact">New Arrivals</CustomNavLink>
                     <CustomNavLink to="/brands">Brands</CustomNavLink>
                     {isLoggedIn ?
-                        <CustomNavLink to="/" onClick={() => {
+                        <NavLink to="/" onClick={() => {
                             removeToken()                            
-                        }}>logout</CustomNavLink>
+                        }} className={ " text-white"}>logout</NavLink>
                         :
                         <CustomNavLink to={`/login`} >login</CustomNavLink>
                     }
@@ -70,7 +70,7 @@ function Header() {
                     </div>
                     <div className="w-[22%] sm:w-[15%] md:w-[20%] lg:w-[15%] flex justify-around sm:justify-between md:justify-between lg:justify-start lg:gap-3 items-center">
                         <div>
-                            <p className="text-orange-500 ml-2 absolute top-6 text-[14px]">{count}</p>
+                            <p className="text-white bg-orange-500 rounded-full h-3 w-3 flex justify-center items-center ml-2 absolute top-[1.7rem] text-[12px]">{count}</p>
                             <NavLink to="/cart">
                                 <FaCartPlus className="text-sm sm:text-xl text-white" />
                             </NavLink>

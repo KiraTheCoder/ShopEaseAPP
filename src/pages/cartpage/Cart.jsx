@@ -15,7 +15,7 @@ function Cart() {
     const getCartData = async () => {
         try {
             const result = await getData("/products/cart_products");
-            // console.log("fetched Cartdata successful", result?.data?.products);
+            console.log("fetched Cartdata successful", result?.data?.products);
             setCartData(result?.data?.products || []);
         } catch (error) {
             console.error("Failed to fetch cart data", error);
@@ -25,7 +25,7 @@ function Cart() {
     const deleteProduct = async (Id) => {
         try {
             const result = await deleteData("/products/delete_from_cart", { productId: Id });
-            // console.log("Delete product from Cart successful", result);
+            console.log("Delete product from Cart successful", result);
             if (result?.success) {
                 getCartData();  
             }
@@ -37,7 +37,7 @@ function Cart() {
     const minusProduct = async (Id) => {
         try {
             const result = await patchData("/products/minus_from_cart", { productId: Id });
-            // console.log("Minus product from Cart successful", result);
+            console.log("Minus product from Cart successful", result);
             if (result?.success) {
                 getCartData();  
             }
@@ -81,7 +81,7 @@ function Cart() {
             <div className='w-full flex justify-center lg:justify-between flex-wrap '>
                 <div className='border-2 rounded-lg w-[35rem] h-auto lg:w-[60%] xl:w-[55%]'>
                     {cartData.length > 0 ? cartData.map((product, index) => (
-                        <div key={index}  className='m-2 flex justify-between border-b-2'>
+                        <div key={index}  className=' flex justify-between border-b-2 p-2'>
                             <div className='flex gap-2'>
                                 <img
                                     src={`data:${product?.images[0]?.contentType};base64,${product?.images[0]?.data}`}
