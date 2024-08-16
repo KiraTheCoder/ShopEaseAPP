@@ -7,10 +7,15 @@ import { Formik, Form } from 'formik';
 import { postData } from "@/services/apiCall";
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '@/services/zustandStore';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 function SignupPage() {
     const setToken = useAuthStore((state) => state.setToken)
     const [flag, setFlag] = useState(false);
-    const [otpID, setOtpID] = useState(false);
+    const [otpID, setOtpID] = useState("");
+
+    const navigate = useNavigate()
 
     async function submitForm(values, actions) {
         const val = values.phoneNumberOrEmail;
@@ -31,26 +36,44 @@ function SignupPage() {
                 if (values.phoneNumber) {
                     values.otpID = otpID;
                 }
-                const response = await postData("/user/signup", values);
+                const userCreate = postData("/user/signup", values);
+                toast.promise(
+                    userCreate, {
+                    pending: "user creating..",
+                    success: "user created successfully..",
+                    reject: "user can't be created.."
+                });
+
+                const response = await userCreate;
                 setToken(response.data.token)
+                navigate("/")
                 actions.resetForm();
-                alert("Sign up successful 🥰");
+                toast("Sign up successful ✌");
             } else {
-                const otpData = await postData("/user/send_signup_otp", values);
-                console.log("otpdtata", otpData);
+                const sendOTP = postData("/user/send_signup_otp", values);
+                // console.log("otpdtata", otpData);
+
+                toast.promise(
+                    sendOTP, {
+                    pending: "OTP sending..",
+                    success: "OTP sent successfully..",
+                    reject: "OTP can't be sent.."
+                }
+                )
+                const otpData = await sendOTP;
 
                 if (isPhoneNumber) {
                     setOtpID(otpData?.data?.otpID);
                 }
-                setFlag(otpData?.success);
-
-
-                alert("OTP sent successfully to your phone number or email.");
+                if (otpData?.success) {
+                    setFlag(true);
+                    signUpForm.initialVaues.phoneNumberOrEmail = val
+                }
             }
 
         } catch (error) {
-            actions.resetForm();
-            alert(error?.response?.data?.message);
+            // actions.resetForm();
+            toast(error?.response?.data?.message);
         }
 
     }
@@ -64,14 +87,15 @@ function SignupPage() {
 
                 <Formik
                     initialValues={flag ? { ...signUpForm.initialVaues, otpID } : otpForm.initialVaues}
+                    enableReinitialize
                     validationSchema={flag ? signUpForm.validationSchema : otpForm.validationSchema}
                     onSubmit={submitForm}
                 >
-                    {({ Values }) => (
+                    {() => (
                         <Form>
                             <h2 className='font-inter text-[1.2rem] text-center sm:text-start sm:text-[1.4rem] font-Five my-1 tracking-wider'>Sign Up to ShopEase</h2>
                             <p className='text-[13px] sm:text-[14px] text-center sm:text-start font-Poppins tracking-wider'>Enter your details below</p>
-                            <TextInput label="Email or Phone Number *" name="phoneNumberOrEmail" type="input" />
+                            <TextInput label="Email or Phone Number *" name="phoneNumberOrEmail" type="input" attribute={{ disabled: flag }} />
                             {flag && (
                                 <>
                                     <TextInput label="Name *" name="name" type="input" />

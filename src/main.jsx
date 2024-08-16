@@ -2,7 +2,8 @@ import React from 'react';
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import {createBrowserRouter, RouterProvider,} from "react-router-dom";
+
+import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import About from './pages/Aboutpage/About.jsx';
 import Onsale from './pages/Onsale/Onsale.jsx';
 import Contact from './pages/contactpage/Contact.jsx';
@@ -13,50 +14,60 @@ import Home from './pages/HomePage/Home.jsx';
 import Forget_and_change_password from './pages/Forget_password/ForgetAndChangePassword.jsx';
 import UpdateAdd from './pages/Update_AddEmailphonenumber/UpdateAdd.jsx';
 import ProductCart from '@/pages/productcartpage/Productcart'
-import Cart from './pages/cartpage/Cart.jsx';
+import Cart from '@/pages/cartpage/Cart.jsx';
+import SomethingWentWrong from "@/components/error/SomethingWentWrong.jsx"
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element:<App/>,
-    children:[
+    element: <App />,
+    children: [
       {
-        path:"/",
-        element:<Home/>,
-      },       
-      {
-        path:"/about",
-        element:<About/>
+        path: "/",
+        element: <Home />,
       },
       {
-        path:"/contact",
-        element:<Contact/>
+        path: "/uploaded",
+        element: <Uploaded />
+      },
+      // {
+      //   path:"/onsale",
+      //   element:<Onsale/>
+      // },
+      {
+        path: "/about",
+        element: <About />
+      },
+      {
+        path: "/contact",
+        element: <Contact />
       },
       {
         path:"/signup",
         element:<SignupPage/>
       },
       {
-        path:"/login",
-        element:<LogInPage/>,
+        path: "/login",
+        element: <LogInPage />,
       },
       {
-        path:"/forgetpassword",
-        element:<Forget_and_change_password/>
+        path: "/forgetpassword",
+        element: <Forget_and_change_password />
       },
       {
-        path:"/updateAdd",
-        element:<UpdateAdd/>
+        path: "/updateAdd",
+        element: <UpdateAdd />
       },
       {
-        path:"/productcart",
-        element:<ProductCart/>
+        path: "/productcart",
+        element: <ProductCart />
       },
       {
-        path:"/cart",
-        element:<Cart/>
+        path: "/cart",
+        element: <Cart />
       }
     ],
-    errorElement:<Error/>
+    errorElement: <SomethingWentWrong />
   }
 ]);
 

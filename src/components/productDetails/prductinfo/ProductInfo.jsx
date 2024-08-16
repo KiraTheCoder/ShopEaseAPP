@@ -2,7 +2,7 @@ import Qualityimg from '@/components/cards/productQualityImg/Qualityimg';
 import React from 'react'
 
 function ProductInfo({ details }) {
-    console.log("product details==>", details);
+    // console.log("product details==>", details);
 
     const { age,manufacturer ,category, material, soft,discount } = details
 
