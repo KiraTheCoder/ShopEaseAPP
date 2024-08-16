@@ -68,12 +68,14 @@ export default function LogInPage() {
                             <p className='text-[13px] sm:text-[14px] text-center sm:text-start font-Poppins tracking-wider'>Enter your details below</p>
                             <TextInput label={"Email or Phone Number *"} name={"phoneNumberOrEmail"} type={"input"} />
                             <TextInput label={"Password *"} name={"password"} type={"password"} />
-                            <div className='flex justify-between items-center mt-[1.5rem]'>
+                            <div className='flex justify-between items-center my-[1.2rem]'>
                                 <Button type="submit" name={"Log In"} style={"w-[5.5rem]"} />
-                                <div className=" leading-6">
+                                <div className="">
                                     <li className='list-none no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/forgetpassword"}>Forget password ?</Link></li>
-                                    <li className='list-none no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/updateAdd"}>Update/Add email or phonrNumber ?</Link></li>
-                                </div>
+                                </div> 
+                            </div>
+                            <div className="flex justify-between text-sm"> craete Acount 
+                                    <li className='list-none no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/signup"}>click here</Link></li>
                             </div>
                         </Form>
                     )}
