@@ -1,11 +1,10 @@
-import React from 'react';
 import { createRoot } from 'react-dom/client'
+import {StrictMode} from "react"
 import App from './App.jsx'
 import './index.css'
 
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import About from './pages/Aboutpage/About.jsx';
-import Onsale from './pages/Onsale/Onsale.jsx';
 import Contact from './pages/contactpage/Contact.jsx';
 import Brands from './pages/brandpage/Brands.jsx';
 import SignupPage from './pages/SignUpPage/SignupPage.jsx';
@@ -31,10 +30,6 @@ const router = createBrowserRouter([
         path: "/uploaded",
         element: <Uploaded />
       },
-      // {
-      //   path:"/onsale",
-      //   element:<Onsale/>
-      // },
       {
         path: "/about",
         element: <About />
@@ -72,12 +67,12 @@ const router = createBrowserRouter([
         element: <Cart />
       }
     ],
-    errorElement: <SomethingWentWrong />
+    // errorElement: <SomethingWentWrong />
   }
 ]);
 
 createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  <StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>,
+  </StrictMode>,
 )

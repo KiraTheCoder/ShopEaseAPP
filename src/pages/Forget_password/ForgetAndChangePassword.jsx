@@ -6,9 +6,17 @@ import { Formik, Form } from 'formik';
 import { postData } from "@/services/apiCall";
 import { patchData } from '@/services/apiCall';
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "@/services/zustandStore/zustandStore"
+
 function ForgetAndChangePassword() {
     const [flag1, setFlag1] = useState(false);
     const [otpID, setOtpID] = useState('');
+    const isLoggedin = useAuthStore(s => s.token)
+    const navigate = useNavigate()
+    if (!isLoggedin) {
+        navigate("/login")
+    }
 
     async function submitForm(values, actions) {
         const val = values.phoneNumberOrEmail;
@@ -26,7 +34,7 @@ function ForgetAndChangePassword() {
 
         delete values.phoneNumberOrEmail;
         delete values.confirm_password;
-        console.log("after delete form data",values);
+        console.log("after delete form data", values);
 
         try {
             if (flag1) {
@@ -36,7 +44,7 @@ function ForgetAndChangePassword() {
                 console.log(flag1);
                 console.log("before hit change url", values);
                 const response = await patchData("/user/change_password", values);
-                console.log("this is response message",response);
+                console.log("this is response message", response);
                 actions.resetForm();
                 alert("Change password successful 🥰");
             } else {
