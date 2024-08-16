@@ -51,7 +51,7 @@ function Header() {
                         />
                     </div>
                     <div className="w-[22%] sm:w-[15%] md:w-[20%] lg:w-[15%] flex justify-around sm:justify-between md:justify-between lg:justify-start lg:gap-3 items-center">
-                    <NavLink to="/productcart">
+                    <NavLink to="/cart">
                         <FaCartPlus className="text-sm sm:text-xl text-white" />
                     </NavLink>
                         <FaRegCircleUser className="text-sm sm:text-xl text-white" />
