@@ -2,11 +2,12 @@ import { useState } from "react";
 import DeliveryInfo from "@/components/cards/deliveryInfo/DeliveryInfo";
 import Offercard from "@/components/cards/offercard/Offercard";
 import { Button } from "@/components/form";
-import Counter from "@/components/productDetails/counter/Counter";
 import ProductInfo from "@/components/productDetails/prductinfo/ProductInfo";
 import { postData } from "@/services/apiCall";
 import { useGetProduct, useCartStore } from "@/services/zustandStore";
-import Quantity from "@/components/productDetails/counter/Quantity";
+import { MdDeleteForever } from "react-icons/md";
+import { FaPlus, FaMinus } from "react-icons/fa6";
+import { toast } from 'react-toastify';
 
 function ProductCart() {
     const Product = useGetProduct((state) => state.product);
@@ -14,28 +15,51 @@ function ProductCart() {
     const MRP = Math.ceil(price / (1 - discount / 100));
     const [mainImg, setMainImg] = useState(images[0]);
 
-      // Add to cart function
-      const AddCart = async (Id) => {
+    const [quantity, setQuantity] = useState(1)
+    // Add to cart function
+    const AddCart = async (Id, quantity) => {
         try {
-            const result = await postData("/products/add_to_cart", { productId: Id });
-            // console.log("Add to Cart successful", result);
+            const result = await postData("/products/add_to_cart", { productId: Id, productQuantity:quantity });
+            console.log("Add to Cart successful", result);
+            toast.promise(
+                result,
+                {
+                    // pending: 'Product addddd...',
+                    success: 'Product Add Successfully 👌',
+                    error: 'something went wrong.. 🤯',
+                }
+            );
+
+
         } catch (error) {
-            console.error("Failed to add to cart", error);
-            if (error.response) {
-                console.error("Server responded with:", error.response.status, error.response.data);
-            } else {
-                console.error("No response received or other error:", error.message);
-            }
+            // toast.warn("Failed to add to cart", error)
+            // if (error.response) {
+                // toast.warn("Server responded with:", error.response.data.message)
+            //     // console.error("Server responded with:", error.response.status, error.response.data);
+            // } else {
+            //     // console.error("No response received or other error:", error.message);
+                toast.warn("No response received or other error:", error.message)
+               
+            // }
         }
     };
-    
+    const handleIncrement = () => {
+        setQuantity( quantity + 1);
+    };
+
+    const handleDecrement = () => {
+        if (quantity>1) {
+            setQuantity( quantity - 1);
+        }
+    };
+
     return (
         <>
             <section className="my-4 sm:my-12">
                 <div className="w-[90vw] m-auto flex justify-around flex-wrap">
                     <div className="w-[24rem] h-auto py-[1.5rem] flex flex-col items-center">
                         <div className="w-[24rem] h-[30rem] flex flex-col items-center justify-center shadow-[0_0_10px_2px_rgba(0,0,0,0.2)]">
-                            <img src={`data:${mainImg?.contentType};base64,${mainImg?.data}`} alt={productName} className="h-full w-auto"/>
+                            <img src={`data:${mainImg?.contentType};base64,${mainImg?.data}`} alt={productName} className="h-full w-auto" />
                         </div>
                         <div className="flex justify-around w-[23rem] mt-[2rem]">
                             {images?.map((img, index) => (
@@ -59,7 +83,7 @@ function ProductCart() {
                                 name={"ADD TO CART"}
                                 type={"button"}
                                 style={"py-2 px-10 text-white font-bold text-sm rounded-3xl bg-orange-600 hover:bg-orange-400 hover:text-black"}
-                                onClick={() => AddCart(_id)}
+                                onClick={() => AddCart(_id, quantity)}
                             />
                         </div>
                     </div>
@@ -85,13 +109,24 @@ function ProductCart() {
                                 />
                             </div>
                         </div>
-                        {/* <div className="flex justify-between mt-6">
-                            <div className="w-[10rem]">
-                                <h3 className="font-bold">Quantity</h3>
-                                <Counter />
+                        <div className="text-lg font-Five mt-6">Quantity</div>
+                        <div className='w-20 h-6 rounded-xl flex justify-between bg-gray-400 my-2'>
+                            <button
+                                className='w-6 rounded-l-xl text-sm flex justify-center items-center'
+                                onClick={() => handleDecrement()}
+                            >
+                                {quantity > 1 ? <FaMinus /> : <MdDeleteForever className='text-[#db4444]' />}
+                            </button>
+                            <div className='w-8 bg-gray-200 text-center text-[16px] flex items-center justify-center'>
+                                {quantity}
                             </div>
-                        </div> */}
-                        <Quantity/>
+                            <button
+                                className='w-6 rounded-r-xl text-sm flex justify-center items-center'
+                                onClick={() => handleIncrement()}
+                            >
+                                <FaPlus />
+                            </button>
+                        </div>
                         <Offercard />
                     </div>
                 </div>

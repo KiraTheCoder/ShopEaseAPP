@@ -16,7 +16,6 @@ function ItemsCollection() {
     setProducts(result?.data)
 }
 
-
 return products?.length== 0 ? (
   <Shimmer/>
   )
