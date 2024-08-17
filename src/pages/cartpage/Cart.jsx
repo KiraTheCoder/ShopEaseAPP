@@ -34,7 +34,7 @@ function Cart() {
 
     const getCartData = async () => {
         try {
-            const result = await getData("/products/cart_products");
+            const result = await getData("/user/products/cart_products");
             console.log("Fetched cart data successfully", result?.data?.products);
             setCartData(result?.data?.products || []);
             // setQuantity(result?.data?.products?.productCount)
@@ -46,7 +46,7 @@ function Cart() {
 
     const deleteProduct = async (Id) => {
         try {
-            const result = await deleteData("/products/delete_from_cart", { productId: Id });
+            const result = await deleteData("user/products/delete_from_cart", { productId: Id });
             console.log("Deleted product from cart successfully", result);
             if (result?.success) {
                 getCartData();
@@ -58,7 +58,7 @@ function Cart() {
 
     const minusProduct = async (Id) => {
         try {
-            const result = await patchData("/products/minus_from_cart", { productId: Id });
+            const result = await patchData("/user/products/minus_from_cart", { productId: Id });
             console.log("Decreased product quantity in cart successfully", result);
             if (result?.success) {
                 getCartData();
@@ -70,7 +70,7 @@ function Cart() {
 
     const AddCart = async (Id, quantity) => {
         try {
-            const addCart = postData("/products/add_to_cart", { productId: Id, productQuantity: quantity });
+            const addCart = postData("/user/products/add_to_cart", { productId: Id, productQuantity: quantity });
             toast.promise(
                 addCart,
                 {
@@ -149,10 +149,9 @@ function Cart() {
                                     </button>
                                     <div className='w-8 bg-gray-200 text-center text-[16px] flex items-center justify-center'>
                                         {product.productCount}
-<<<<<<< HEAD
+
                                         {/* {quantity} */}
-=======
->>>>>>> a2377fefb354eebce9ea8036e0d9783570eb9ac6
+
                                     </div>
                                     <button
                                         className='w-6 rounded-r-xl text-sm flex justify-center items-center'

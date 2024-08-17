@@ -28,7 +28,7 @@ function Header() {
     const [count, setCount] = useState('')
     const getCartData = async () => {
         try {
-            const result = await getData("/products/cart_products_count");
+            const result = await getData('/user/products/cart_products_count');
             console.log("fetched Cartdata count successful", result?.data?.productCartsCount);
             setCount(result?.data?.productCartsCount)
         } catch (error) {

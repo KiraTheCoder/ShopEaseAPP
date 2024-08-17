@@ -11,7 +11,7 @@ function ItemsCollection() {
   },[])
   
   const fetchData = async () => {
-    const result = await getData("/products");  
+    const result = await getData("/user/products/all");  
     // console.log(result?.data);
     setProducts(result?.data)
 }

@@ -33,7 +33,7 @@ function ProductCart() {
     // Add to cart function
     const AddCart = async (Id, quantity) => {
         try {
-            const addProduct = postData("/products/add_to_cart", { productId: Id, productQuantity: quantity });
+            const addProduct = postData("/user/products/add_to_cart", { productId: Id, productQuantity: quantity });
             console.log("Add to Cart successful", addProduct);
             toast.promise(
                 addProduct,
