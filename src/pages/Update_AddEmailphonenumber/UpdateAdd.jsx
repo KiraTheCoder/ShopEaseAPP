@@ -6,10 +6,18 @@ import { Formik, Form } from 'formik';
 import { postData, patchData } from "@/services/apiCall";
 import { Link } from 'react-router-dom';
 
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "@/services/zustandStore/zustandStore"
+
 function UpdateAdd() {
     const [flag1, setFlag1] = useState(false);
     const [otpID, setOtpID] = useState('');
 
+    const isLoggedin = useAuthStore(s => s.token)
+    const navigate = useNavigate()
+    if (!isLoggedin) {
+        navigate("/login")
+    }
     async function submitForm(values, actions) {
         const val = values.phoneNumberOrEmail;
         const isPhoneNumber = /^\d{10}$/.test(val);

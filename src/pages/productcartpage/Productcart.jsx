@@ -1,55 +1,60 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DeliveryInfo from "@/components/cards/deliveryInfo/DeliveryInfo";
 import Offercard from "@/components/cards/offercard/Offercard";
 import { Button } from "@/components/form";
 import ProductInfo from "@/components/productDetails/prductinfo/ProductInfo";
 import { postData } from "@/services/apiCall";
-import { useGetProduct, useCartStore } from "@/services/zustandStore";
+import { useGetProduct } from "@/services/zustandStore";
 import { MdDeleteForever } from "react-icons/md";
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "@/services/zustandStore/zustandStore"
+import ItemsCollection from "../ItemsCollection/ItemsCollection";
 
 function ProductCart() {
+    const isLoggedin = useAuthStore(s => s.token)
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (!isLoggedin) {
+            navigate("/login")
+        }
+    })
+
     const Product = useGetProduct((state) => state.product);
     const { images, discount, price, productName, description, color, _id } = Product;
     const MRP = Math.ceil(price / (1 - discount / 100));
-    const [mainImg, setMainImg] = useState(images[0]);
+    const [mainImg, setMainImg] = useState(images?.[0]);
 
     const [quantity, setQuantity] = useState(1)
+
+
+
     // Add to cart function
     const AddCart = async (Id, quantity) => {
         try {
-            const result = await postData("/products/add_to_cart", { productId: Id, productQuantity:quantity });
-            console.log("Add to Cart successful", result);
+            const addProduct = postData("/products/add_to_cart", { productId: Id, productQuantity: quantity });
+            console.log("Add to Cart successful", addProduct);
             toast.promise(
-                result,
+                addProduct,
                 {
-                    // pending: 'Product addddd...',
+                    pending: 'Product addddd...',
                     success: 'Product Add Successfully 👌',
                     error: 'something went wrong.. 🤯',
                 }
             );
 
-
         } catch (error) {
-            // toast.warn("Failed to add to cart", error)
-            // if (error.response) {
-                // toast.warn("Server responded with:", error.response.data.message)
-            //     // console.error("Server responded with:", error.response.status, error.response.data);
-            // } else {
-            //     // console.error("No response received or other error:", error.message);
-                toast.warn("No response received or other error:", error.message)
-               
-            // }
+            toast.error("No response received or other error:" + error?.message)
         }
     };
     const handleIncrement = () => {
-        setQuantity( quantity + 1);
+        setQuantity(quantity + 1);
     };
 
     const handleDecrement = () => {
-        if (quantity>1) {
-            setQuantity( quantity - 1);
+        if (quantity > 1) {
+            setQuantity(quantity - 1);
         }
     };
 
@@ -103,7 +108,7 @@ function ProductCart() {
                         <div className="flex w-[6rem] overflow-hidden h-auto gap-2 bg-slate-50 shadow-[0_0_10px_2px_rgba(0,0,0,0.2)] overflow-x-auto">
                             <div className="w-[4.5rem] m-auto h-auto flex-shrink-0 flex flex-col justify-center items-center">
                                 <img
-                                    src={`data:${images[0]?.contentType};base64,${images[0]?.data}`}
+                                    src={`data:${images?.[0]?.contentType};base64,${images?.[0]?.data}`}
                                     alt={productName}
                                     className="cursor-pointer w-full"
                                 />
@@ -115,7 +120,7 @@ function ProductCart() {
                                 className='w-6 rounded-l-xl text-sm flex justify-center items-center'
                                 onClick={() => handleDecrement()}
                             >
-                                {quantity > 1 ? <FaMinus /> : <MdDeleteForever className='text-[#db4444]' />}
+                                <FaMinus />
                             </button>
                             <div className='w-8 bg-gray-200 text-center text-[16px] flex items-center justify-center'>
                                 {quantity}
@@ -139,9 +144,10 @@ function ProductCart() {
             <section>
                 <ProductInfo details={Product} />
             </section>
-            <section className="w-full my-8">
+            <section className=" bg-green-600 my-8">
                 <h2 className="font-bold text-xl text-center italic">Viewers Also Liked</h2>
                 {/* <CartCollection /> */}
+                <ItemsCollection/>
             </section>
         </>
     );
