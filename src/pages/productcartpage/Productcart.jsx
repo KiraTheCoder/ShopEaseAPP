@@ -10,6 +10,7 @@ import { FaPlus, FaMinus } from "react-icons/fa6";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/services/zustandStore/zustandStore"
+import ItemsCollection from "../ItemsCollection/ItemsCollection";
 
 function ProductCart() {
     const isLoggedin = useAuthStore(s => s.token)
@@ -119,7 +120,7 @@ function ProductCart() {
                                 className='w-6 rounded-l-xl text-sm flex justify-center items-center'
                                 onClick={() => handleDecrement()}
                             >
-                                {quantity > 1 ? <FaMinus /> : <MdDeleteForever className='text-[#db4444]' />}
+                                <FaMinus />
                             </button>
                             <div className='w-8 bg-gray-200 text-center text-[16px] flex items-center justify-center'>
                                 {quantity}
@@ -143,9 +144,10 @@ function ProductCart() {
             <section>
                 <ProductInfo details={Product} />
             </section>
-            <section className="w-full my-8">
+            <section className=" bg-green-600 my-8">
                 <h2 className="font-bold text-xl text-center italic">Viewers Also Liked</h2>
                 {/* <CartCollection /> */}
+                <ItemsCollection/>
             </section>
         </>
     );

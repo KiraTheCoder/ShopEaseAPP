@@ -12,7 +12,7 @@ function Cart() {
     const isLoggedin = useAuthStore(s => s.token);
     const navigate = useNavigate();
     const [cartData, setCartData] = useState([]);
-    const [totalBill, setTotalBill] = useState(0);
+    // const [totalBill, setTotalBill] = useState(0);
 
     useEffect(() => {
         if (!isLoggedin) {
@@ -21,16 +21,16 @@ function Cart() {
         getCartData();
     }, []);
 
-    useEffect(() => {
-        const totalPrice = cartData.reduce((total, product) => total + product.price * product.productCount, 0);
-        const totalMRP = cartData.reduce((total, product) => {
-            const productMRP = Math.ceil(product.price / (1 - product.discount / 100));
-            return total + productMRP * product.productCount;
-        }, 0);
+    // useEffect(() => {
+    //     const totalPrice = cartData.reduce((total, product) => total + product.price * product.productCount, 0);
+    //     const totalMRP = cartData.reduce((total, product) => {
+    //         const productMRP = Math.ceil(product.price / (1 - product.discount / 100));
+    //         return total + productMRP * product.productCount;
+    //     }, 0);
 
-        const tBill = totalPrice > 500 ? totalPrice - totalMRP : totalPrice - totalMRP + 50;
-        setTotalBill(tBill);
-    }, [cartData]);
+    //     const tBill = totalPrice > 500 ? totalPrice - totalMRP : totalPrice - totalMRP + 50;
+    //     setTotalBill(tBill);
+    // }, [cartData]);
 
     const getCartData = async () => {
         try {
@@ -103,6 +103,9 @@ function Cart() {
         const productMRP = Math.ceil(product.price / (1 - product.discount / 100));
         return total + productMRP * product.productCount;
     }, 0);
+    const discountAmount = totalMRP - totalPrice
+    const tBill = totalPrice >= 1 && totalPrice < 500 ? totalMRP + 50 : totalMRP;
+    const payableAmount = tBill - discountAmount
 
     return (
         <div className='w-[90vw] sm:w-[80vw] lg:w-[85vw] xl:w-[80vw] m-auto my-4 sm:my-12'>
@@ -124,7 +127,10 @@ function Cart() {
                                     <h5 className='text-[15px] font-DM font-semibold'>{product?.productName}</h5>
                                     <p className='text-[14px]'>Size: <span className='text-gray-500'>{product?.size}</span></p>
                                     <p className='text-[14px]'>Color: <span className='text-gray-500'>{product?.color}</span></p>
+                                    <div className='flex gap-4'>
                                     <p className='font-Five text-sm'>₹ {product?.price}</p>
+                                    <p className='italic text-[12px] line-through text-red-400'>MRP: {Math.ceil(product?.price / (1 - product?.discount / 100))}</p>
+                                    </div>
                                 </div>
                             </div>
                             <div className='flex flex-col items-end justify-between'>
@@ -137,7 +143,7 @@ function Cart() {
                                         className='w-6 rounded-l-xl text-sm flex justify-center items-center'
                                         onClick={() => handleDecrement(product._id, product.productCount)}
                                     >
-                                        <FaMinus />
+                                        {product.productCount > 1 ? <FaMinus /> : <MdDeleteForever className='text-[#db4444]' />}
                                     </button>
                                     <div className='w-8 bg-gray-200 text-center text-[16px] flex items-center justify-center'>
                                         {product.productCount}
@@ -172,12 +178,12 @@ function Cart() {
                     <hr />
                     <div className='my-2'>
                         <h5 className='font-DM text-[15px] font-bold'>Price Details</h5>
-                        <p className='text-[14px] my-1'>Total MRP: <span className='float-right'>₹ {totalPrice}</span></p>
-                        <p className='text-[14px] my-1'>Discount on MRP: <span className='float-right'>₹ {totalMRP}</span></p>
+                        <p className='text-[14px] my-1'>Total MRP: <span className='float-right'>₹ {totalMRP}</span></p>
+                        <p className='text-[14px] my-1'>Discount on MRP: <span className='float-right'>₹ {discountAmount}</span></p>
                         <p className='text-[14px] my-1'>Coupon Discount: <span className='float-right text-orange-500 font-medium italic'>Apply Coupon</span></p>
-                        <p className='text-[14px] my-1'>Convenience Fee: <span className='float-right text-orange-500 font-medium line-through'>{totalPrice > 500 ? <span>00</span> : 50}</span></p>
+                        <p className='text-[14px] my-1'>Convenience Fee: <span className='float-right text-orange-500 font-medium '>₹ {totalPrice >= 1 && totalPrice < 500 ? 50 : "00"}</span></p>
                         <hr />
-                        <p className='text-[14px] my-1 font-bold'>Total Amount: <span className='float-right'>₹ {totalBill}</span></p>
+                        <p className='text-[14px] my-1 font-bold'>Total Amount: <span className='float-right'>₹ {payableAmount}</span></p>
                     </div>
                     <button className='bg-orange-400 w-[100%] mt-2 h-[2.5rem] rounded-md hover:bg-orange-500 font-bold hover:text-white transition-colors text-sm flex justify-center items-center'>
                         Checkout <FaArrowRight className='ml-4' />
