@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import couple from "@/assets/images/footerImages/couple.png";
 import couple2 from "@/assets/images/footerImages/couple2.png"
 import ItemsCollection from "../ItemsCollection/ItemsCollection";
-// import useOnlineStatus from "@/services/hooks/customhooks/useOnlineStatus";
+// import useOnlineStatus from "@/services/hooks";
 
 export default function Home() {
 
