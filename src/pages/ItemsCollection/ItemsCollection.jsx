@@ -13,9 +13,9 @@ function ItemsCollection() {
   const fetchData = async () => {
     const result = await getData("/user/products/all");  
     // console.log(result?.data);
+    // / upadte
     setProducts(result?.data)
 }
-
 return products?.length== 0 ? (
   <Shimmer/>
   )
