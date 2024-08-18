@@ -20,12 +20,15 @@ function Cart() {
         } else {
             getCartData();
         }
+
     }, [isLoggedin, navigate]);
 
     useEffect(() => {
         const totalQuantity = cartData.reduce((total, product) => total + product.productCount, 0);
         setCount(totalQuantity);
     }, [cartData, setCount]);
+
+
 
     const getCartData = async () => {
         try {
@@ -67,6 +70,20 @@ function Cart() {
             toast.promise(
                 addCart,
                 {
+
+                    pending: {
+                        render: 'Product adding...',
+                        autoClose: 500,
+                    },
+                    success: {
+                        render: 'Product Added Successfully 👌',
+                        autoClose: 500,
+                    },
+                    error: {
+                        render: 'Something went wrong.. 🤯',
+                        autoClose: 500,
+                    },
+
                     pending: {
                         render: 'Product adding...',
                         autoClose: 500,
@@ -81,7 +98,6 @@ function Cart() {
                     },
                 }
             );
-
 
             const result = await addCart;
             if (result?.success) {
@@ -114,10 +130,7 @@ function Cart() {
     const payableAmount = tBill - discountAmount;
 
     return (
-        <div className='w-[90vw] sm:w-[80vw] lg:w-[85vw] xl:w-[80vw] m-auto my-4
-
-Kiran Clg 2, [18-08-2024 20:03]
-sm:my-12'>
+        <div className='w-[90vw] sm:w-[80vw] lg:w-[85vw] xl:w-[80vw] m-auto my-4  sm:my-12'>
             <h2 className='uppercase font-inter font-bold text-xl sm:text-3xl flex items-center gap-4 my-3'>
                 Your cart
                 <FaCartArrowDown className='text-[#db4444]' />

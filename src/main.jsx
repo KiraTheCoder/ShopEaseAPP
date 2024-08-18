@@ -2,7 +2,6 @@ import { createRoot } from 'react-dom/client'
 import {StrictMode} from "react"
 import App from './App.jsx'
 import './index.css'
-
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import About from './pages/Aboutpage/About.jsx';
 import Contact from './pages/contactpage/Contact.jsx';
