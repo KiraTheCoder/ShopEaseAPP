@@ -46,9 +46,25 @@ const useGetCount = create(
     getStorage: () => localStorage,
   })
 );
+////////////////// product pagination  ////////////////
+const pagination = (set) => ({
+  pageNo: 1,
+  setPageNo: (pageNo) => set({ pageNo }),
+});
+
+
+const usePagination = create(
+  devtools(persist(pagination, {
+    name: "pageNo",
+    getStorage: () => localStorage,
+  }))
+);
+
+
+
 
 ///////  Exports /////////////////////////
-export { useAuthStore, useGetProduct, useGetCount };
+export { useAuthStore, useGetProduct, useGetCount, usePagination };
 
 /* 
 get().state --> useful when work conditional state
