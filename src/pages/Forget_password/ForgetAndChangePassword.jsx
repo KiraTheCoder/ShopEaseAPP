@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import LoginImg from "@/assets/images/footerImages/loginImg.jpeg";
 import { changePassword, otpForm } from "@/services/lib/YupFormikValidator";
 import { TextInput, Button } from '@/components/form';
@@ -6,17 +6,13 @@ import { Formik, Form } from 'formik';
 import { postData } from "@/services/apiCall";
 import { patchData } from '@/services/apiCall';
 import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "@/services/zustandStore/zustandStore"
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 function ForgetAndChangePassword() {
     const [flag1, setFlag1] = useState(false);
-    const [otpID, setOtpID] = useState('');
-    const isLoggedin = useAuthStore(s => s.token)
+    const [otpID, setOtpID] = useState('string');
     const navigate = useNavigate()
-    if (!isLoggedin) {
-        navigate("/login")
-    }
 
     async function submitForm(values, actions) {
         const val = values.phoneNumberOrEmail;
@@ -41,17 +37,28 @@ function ForgetAndChangePassword() {
                 if (values.phoneNumber) {
                     values.otpID = otpID;
                 }
-                console.log(flag1);
-                console.log("before hit change url", values);
-                const response = await patchData("/user/change_password", values);
+                delete values.otpID
+                const response = patchData("/user/change_password", values);
                 console.log("this is response message", response);
-                actions.resetForm();
-                alert("Change password successful 🥰");
+                toast.promise(response, {
+                    pending: "password changing.",
+                    success: "password changed successfully",
+                    reject: "password  can't changed"
+                })
+                await response;
+                navigate("/")
             } else {
-                const otpData = await postData("/user/send_forgot_password_otp", values);
-                setOtpID(otpData?.data?.otpID);
+                const otpDataPromise = postData("/user/send_forgot_password_otp", values);
+                toast.promise(otpDataPromise, {
+                    pending: "sending OTP",
+                    success: "OTP sent",
+                    reject: "OTP can't be sent"
+                })
+
+                const otpData = await otpDataPromise
                 setFlag1(otpData?.success);
-                alert("OTP sent successfully to your phone number or email.");
+                setOtpID(otpData?.data?.otpID);
+                changePassword.initialVaues.phoneNumberOrEmail = val
             }
         } catch (error) {
             actions.resetForm();
@@ -69,8 +76,9 @@ function ForgetAndChangePassword() {
                     initialValues={flag1 ? { ...changePassword.initialVaues, otpID } : otpForm.initialVaues}
                     validationSchema={flag1 ? changePassword.validationSchema : otpForm.validationSchema}
                     onSubmit={submitForm}
+                    enableReinitialize
                 >
-                    {({ values }) => (
+                    {() => (
                         <Form>
                             <h2 className='font-inter text-[1.2rem] text-center sm:text-start sm:text-[1.4rem] font-Five my-1 tracking-wider'>
                                 {flag1 ? "Change Password to ShopEase" : "Forget password to ShopEase"}

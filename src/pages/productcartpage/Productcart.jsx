@@ -5,12 +5,13 @@ import { Button } from "@/components/form";
 import ProductInfo from "@/components/productDetails/prductinfo/ProductInfo";
 import { postData } from "@/services/apiCall";
 import { useGetProduct } from "@/services/zustandStore";
-import { MdDeleteForever } from "react-icons/md";
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/services/zustandStore/zustandStore"
 import ItemsCollection from "../ItemsCollection/ItemsCollection";
+import { useGetCount } from "@/services/zustandStore/zustandStore";
+import { getData } from "@/services/apiCall";
 
 function ProductCart() {
     const isLoggedin = useAuthStore(s => s.token)
@@ -20,29 +21,36 @@ function ProductCart() {
             navigate("/login")
         }
     })
-
     const Product = useGetProduct((state) => state.product);
+    console.log(Product);
+
     const { images, discount, price, productName, description, color, _id } = Product;
     const MRP = Math.ceil(price / (1 - discount / 100));
     const [mainImg, setMainImg] = useState(images?.[0]);
 
     const [quantity, setQuantity] = useState(1)
-
+    const { setCount } = useGetCount((state) => state);
 
 
     // Add to cart function
     const AddCart = async (Id, quantity) => {
         try {
-            const addProduct = postData("/user/products/add_to_cart", { productId: Id, productQuantity: quantity });
-            console.log("Add to Cart successful", addProduct);
+            const addProductPromise = postData("/user/products/add_to_cart", { productId: Id, productQuantity: quantity });
+            console.log("Add to Cart successful", addProductPromise);
             toast.promise(
-                addProduct,
+                addProductPromise,
                 {
                     pending: 'Product addddd...',
                     success: 'Product Add Successfully 👌',
                     error: 'something went wrong.. 🤯',
                 }
             );
+
+            const addProduct = await addProductPromise;
+            if (addProduct.success) {
+                setCount(await (await getData("/user/products/cart_products_count"))?.data?.productCartsCount)
+
+            }
 
         } catch (error) {
             toast.error("No response received or other error:" + error?.message)
@@ -147,7 +155,7 @@ function ProductCart() {
             <section className=" bg-green-600 my-8">
                 <h2 className="font-bold text-xl text-center italic">Viewers Also Liked</h2>
                 {/* <CartCollection /> */}
-                <ItemsCollection/>
+                <ItemsCollection />
             </section>
         </>
     );
