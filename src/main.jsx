@@ -15,6 +15,10 @@ import UpdateAdd from './pages/Update_AddEmailphonenumber/UpdateAdd.jsx';
 import ProductCart from '@/pages/productcartpage/Productcart'
 import Cart from '@/pages/cartpage/Cart.jsx';
 import SomethingWentWrong from "@/components/error/SomethingWentWrong.jsx"
+import UserAccount from './pages/userAccount/UserAccount.jsx';
+import MyProfile from './components/userProfle/myAccount/myProfile/MyProfile.jsx';
+import Address from './components/userProfle/myAccount/AddressBook/Address.jsx';
+import UserprofileImg from './components/userProfle/userMainProfile/UserprofileImg.jsx';
 
 const router = createBrowserRouter([
   {
@@ -25,14 +29,6 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
-      // {
-      //   path: "/uploaded",
-      //   element: <Uploaded />
-      // },
-      // {
-      //   path:"/onsale",
-      //   element:<Onsale/>
-      // },
       {
         path: "/about",
         element: <About />
@@ -64,6 +60,24 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />
+      },
+      {
+        path: "/useraccount",
+        element: <UserAccount />,
+        children:[
+          {
+            path:"/useraccount",
+            element:<UserprofileImg/>
+          },
+          {
+            path:"/useraccount/profile",
+            element:<MyProfile/>
+          },
+          {
+            path:"/useraccount/address",
+            element:<Address/>
+          }
+        ]
       }
     ],
     // errorElement: <SomethingWentWrong />
