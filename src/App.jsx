@@ -8,11 +8,11 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <>
-      <Header />
-      <ToastContainer />
-      <Outlet />
-      {/* <TestAPP/> */}
-      <Footer />
+      {/* <Header /> */}
+      {/* <ToastContainer /> */}
+      {/* <Outlet /> */}
+      <TestAPP/>
+      {/* <Footer /> */}
     </>
   )
 }
