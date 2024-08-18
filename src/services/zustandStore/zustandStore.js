@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
+////////////// auth //////////////////
 const authStore = (set) => ({
   token: "",
   setToken: (newToken) => set({ token: newToken }),
@@ -16,24 +17,28 @@ const useAuthStore = create(
   )
 );
 
+
+////////////// product //////////////////
 const getProduct = (set) => ({
   product: "",
   setProduct: (product) => set({ product }),
 });
 
+
 const useGetProduct = create(
-  devtools(getProduct, {
+  devtools(persist(getProduct, {
     name: "product",
     getStorage: () => localStorage,
-  })
+  }))
 );
 
-// product count
 
+////////////////// product count  ////////////////
 const getCount = (set) => ({
   count: "",
   setCount: (count) => set({ count }),
 });
+
 
 const useGetCount = create(
   devtools(getCount, {
@@ -42,7 +47,8 @@ const useGetCount = create(
   })
 );
 
-export { useAuthStore, useGetProduct , useGetCount};
+///////  Exports /////////////////////////
+export { useAuthStore, useGetProduct, useGetCount };
 
 /* 
 get().state --> useful when work conditional state

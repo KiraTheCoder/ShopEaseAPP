@@ -12,7 +12,6 @@ function Cart() {
     const isLoggedin = useAuthStore((state) => state.token);
     const navigate = useNavigate();
     const [cartData, setCartData] = useState([]);
-    const [pQuantity, setPQuantity] = useState(0);
 
     useEffect(() => {
         if (!isLoggedin) {
@@ -20,13 +19,12 @@ function Cart() {
         } else {
             getCartData();
         }
-    }, [isLoggedin]);
+    }, [isLoggedin,navigate]);
 
     useEffect(() => {
         const totalQuantity = cartData.reduce((total, product) => total + product.productCount, 0);
-        setPQuantity(totalQuantity);
-        setCount(totalQuantity);  // Set the count in Zustand
-    }, [cartData]);
+        setCount(totalQuantity);  
+    }, [cartData,setCount]);
 
     const getCartData = async () => {
         try {
@@ -40,7 +38,7 @@ function Cart() {
 
     const deleteProduct = async (Id) => {
         try {
-            const result = await deleteData("user/products/delete_from_cart", { productId: Id });
+            const result = await deleteData("/user/products/delete_from_cart", { productId: Id });
             console.log("Deleted product from cart successfully", result);
             if (result?.success) {
                 getCartData();
@@ -68,11 +66,21 @@ function Cart() {
             toast.promise(
                 addCart,
                 {
-                    pending: 'Product adding...',
-                    success: 'Product Added Successfully 👌',
-                    error: 'Something went wrong.. 🤯',
+                  pending: {
+                    render: 'Product adding...',
+                    autoClose: 500,
+                  },
+                  success: {
+                    render: 'Product Added Successfully 👌',
+                    autoClose: 500, 
+                  },
+                  error: {
+                    render: 'Something went wrong.. 🤯',
+                    autoClose: 500, 
+                  },
                 }
-            );
+              );
+              
 
             const result = await addCart;
             if (result?.success) {

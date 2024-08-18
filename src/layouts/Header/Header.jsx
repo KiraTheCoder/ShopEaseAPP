@@ -5,6 +5,8 @@ import { FaCartPlus } from "react-icons/fa";
 import { HiMenu, HiX } from "react-icons/hi";
 import { useAuthStore, useGetCount } from "@/services/zustandStore/zustandStore";
 import { FaCircleUser } from "react-icons/fa6";
+import { useScrollToTop } from "@/services/hooks"
+import { getData } from "@/services/apiCall"
 
 const CustomNavLink = ({ to, children, onClick, isActiveLink }) => (
     <NavLink
@@ -21,15 +23,18 @@ const CustomNavLink = ({ to, children, onClick, isActiveLink }) => (
 );
 
 function Header() {
-    const pCount = useGetCount((state) => state.count);
-    const [count, setCount] = useState('')
+    useScrollToTop()
+    const { count, setCount } = useGetCount((state) => state);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { removeToken, token } = useAuthStore((state) => state);
     const isLoggedIn = !!token;
 
     useEffect(() => {
-        setCount(pCount);
-    }, [pCount]);
+        (async () => {
+            setCount(await (await getData("/user/products/cart_products_count"))?.data?.productCartsCount)
+        })()
+    }, [setCount]);
+
 
     const handleToggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -130,8 +135,8 @@ export default Header;
 //         to={to}
 //         onClick={onClick}
 //         className={({ isActive }) =>
-//             `text-[12px] sm:text-[0.5rem] md:text-[0.6rem] lg:text-[0.8rem] xl:text-[1rem] font-medium text-white relative after:content-[''] 
-//             after:absolute after:left-0 after:bottom-0 after:h-[1.3px] sm:after:h-[1.5px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-[0.18rem] 
+//             `text-[12px] sm:text-[0.5rem] md:text-[0.6rem] lg:text-[0.8rem] xl:text-[1rem] font-medium text-white relative after:content-['']
+//             after:absolute after:left-0 after:bottom-0 after:h-[1.3px] sm:after:h-[1.5px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-[0.18rem]
 //             ${isActive || isActiveLink ? 'after:block' : 'after:hidden'}`
 //         }
 //     >
@@ -178,7 +183,7 @@ export default Header;
 //                     <CustomNavLink to="/brands">Brands</CustomNavLink>
 //                     {isLoggedIn ?
 //                         <NavLink to="/" onClick={() => {
-//                             removeToken()                            
+//                             removeToken()
 //                         }} className={ " text-white"}>logout</NavLink>
 //                         :
 //                         <CustomNavLink to={`/login`} >login</CustomNavLink>
@@ -215,7 +220,7 @@ export default Header;
 //                     <CustomNavLink to="/brands">Brands</CustomNavLink>
 //                     {isLoggedIn ?
 //                         <CustomNavLink to="/" onClick={() => {
-//                             removeToken()                            
+//                             removeToken()
 //                         }}>logout</CustomNavLink>
 //                         :
 //                         <CustomNavLink to={`/login`} >login</CustomNavLink>
