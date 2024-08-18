@@ -28,7 +28,21 @@ const useGetProduct = create(
   })
 );
 
-export { useAuthStore, useGetProduct };
+// product count
+
+const getCount = (set) => ({
+  count: "",
+  setCount: (count) => set({ count }),
+});
+
+const useGetCount = create(
+  devtools(getCount, {
+    name: "count",
+    getStorage: () => localStorage,
+  })
+);
+
+export { useAuthStore, useGetProduct , useGetCount};
 
 /* 
 get().state --> useful when work conditional state
