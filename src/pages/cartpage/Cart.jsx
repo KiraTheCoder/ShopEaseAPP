@@ -110,7 +110,7 @@ function Cart() {
 
     const totalPrice = cartData.reduce((total, product) => total + product.price * product.productCount, 0);
     const totalMRP = cartData.reduce((total, product) => {
-        const productMRP = Math.ceil(product.price / (1 - product.discount / 100));
+        const productMRP = Math.ceil(product.price / (1 - parseInt(product.discount) / 100));
         return total + productMRP * product.productCount;
     }, 0);
     const discountAmount = totalMRP - totalPrice;
