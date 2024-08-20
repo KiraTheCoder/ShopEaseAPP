@@ -6,8 +6,8 @@ import { Outlet } from 'react-router-dom'
 
 function UserAccount() {
     return (
-        <div className=' w-[80vw] py-4 m-auto flex gap-12 my-4 '>
-            <div className=' w-[15rem]'>
+        <div className='w-[95vw] sm:w-[90vw] lg:w-[80vw] py-4 m-auto flex flex-wrap sm:flex-nowrap gap-3 sm:gap-4 md:gap-6 lg:gap-12 my-4 '>
+            <div className='w-full sm:w-[15rem] bg-slate-200 flex sm:flex-col justify-around sm:justify-start md:flex-none '>
                 <div className=''>
                     <h4 className='font-semibold text-md'>Manage my account</h4>
                     <ul className='ml-4 list-none leading-7 text-[14px]'>
@@ -16,7 +16,7 @@ function UserAccount() {
                         <li><NavLink to="/" className={({ isActive }) => ` cursor-pointer ${isActive ? "text-orange-500 " : "text-gray-600"}`}>My Payment Options</NavLink></li>
                     </ul>
                 </div>
-                <div className='mt-3'>
+                <div className='sm:mt-3'>
                     <h4 className='font-semibold text-md'>My Orders</h4>
                     <ul className=' ml-4 list-none leading-7 text-[14px]'>
                         <li>My Returns</li>
@@ -24,7 +24,7 @@ function UserAccount() {
                     </ul>
                 </div>
             </div>
-            <div className='my-3'>
+            <div className='my-3 w-full flex justify-center sm:auto'>
                 <Outlet/>
             </div>
         </div>

@@ -18,6 +18,7 @@ import UserAccount from './pages/userAccount/UserAccount.jsx';
 import MyProfile from './components/userProfle/myAccount/myProfile/MyProfile.jsx';
 import Address from './components/userProfle/myAccount/AddressBook/Address.jsx';
 import UserprofileImg from './components/userProfle/userMainProfile/UserprofileImg.jsx';
+import Billing from './components/userProfle/BillingDetail/Billing.jsx';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />
+      },
+      {
+        path: "/brands",
+        element: <Brands />
       },
       {
         path: "/contact",
@@ -61,6 +66,10 @@ const router = createBrowserRouter([
         element: <Cart />
       },
       {
+        path: "/billing",
+        element: <Billing />
+      },
+      {
         path: "/useraccount",
         element: <UserAccount />,
         children:[
@@ -75,7 +84,8 @@ const router = createBrowserRouter([
           {
             path:"/useraccount/address",
             element:<Address/>
-          }
+          },
+      
         ]
       }
     ],

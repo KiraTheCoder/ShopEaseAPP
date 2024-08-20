@@ -5,7 +5,7 @@ import { FaPlus, FaMinus, FaArrowRight } from "react-icons/fa6";
 import { FaCartArrowDown } from "react-icons/fa";
 import { getData, deleteData, patchData, postData } from '@/services/apiCall';
 import { toast } from 'react-toastify';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuthStore, useGetCount } from "@/services/zustandStore/zustandStore";
 
 function Cart() {
@@ -209,7 +209,7 @@ function Cart() {
                         <p className='text-[14px] my-1 font-bold'>Total Amount: <span className='float-right'>₹ {payableAmount}</span></p>
                     </div>
                     <button className='bg-orange-400 w-[100%] mt-2 h-[2.5rem] rounded-md hover:bg-orange-500 font-bold hover:text-white transition-colors text-sm flex justify-center items-center'>
-                        Checkout <FaArrowRight className='ml-4' />
+                        <Link to={"/billing"} >Checkout <FaArrowRight className='ml-4' /></Link>
                     </button>
                 </div>
             </div>
