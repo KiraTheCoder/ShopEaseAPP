@@ -1,11 +1,12 @@
+
 import { useEffect, useState } from 'react';
 import { MdOutlineLocalOffer, MdDeleteForever } from "react-icons/md";
-import { FaPlus, FaMinus ,FaArrowRight} from "react-icons/fa6";
+import { FaPlus, FaMinus, FaArrowRight } from "react-icons/fa6";
 import { FaCartArrowDown } from "react-icons/fa";
 import { getData, deleteData, patchData, postData } from '@/services/apiCall';
 import { toast } from 'react-toastify';
-import { useNavigate } from "react-router-dom";
-import { useAuthStore,useGetCount } from "@/services/zustandStore/zustandStore";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuthStore, useGetCount } from "@/services/zustandStore/zustandStore";
 
 function Cart() {
     const setCount = useGetCount((state) => state.setCount);
@@ -19,12 +20,15 @@ function Cart() {
         } else {
             getCartData();
         }
-    }, [isLoggedin,navigate]);
+
+    }, [isLoggedin, navigate]);
 
     useEffect(() => {
         const totalQuantity = cartData.reduce((total, product) => total + product.productCount, 0);
-        setCount(totalQuantity);  
-    }, [cartData,setCount]);
+        setCount(totalQuantity);
+    }, [cartData, setCount]);
+
+
 
     const getCartData = async () => {
         try {
@@ -66,21 +70,34 @@ function Cart() {
             toast.promise(
                 addCart,
                 {
-                  pending: {
-                    render: 'Product adding...',
-                    autoClose: 500,
-                  },
-                  success: {
-                    render: 'Product Added Successfully 👌',
-                    autoClose: 500, 
-                  },
-                  error: {
-                    render: 'Something went wrong.. 🤯',
-                    autoClose: 500, 
-                  },
+
+                    pending: {
+                        render: 'Product adding...',
+                        autoClose: 500,
+                    },
+                    success: {
+                        render: 'Product Added Successfully 👌',
+                        autoClose: 500,
+                    },
+                    error: {
+                        render: 'Something went wrong.. 🤯',
+                        autoClose: 500,
+                    },
+
+                    pending: {
+                        render: 'Product adding...',
+                        autoClose: 500,
+                    },
+                    success: {
+                        render: 'Product Added Successfully 👌',
+                        autoClose: 500,
+                    },
+                    error: {
+                        render: 'Something went wrong.. 🤯',
+                        autoClose: 500,
+                    },
                 }
-              );
-              
+            );
 
             const result = await addCart;
             if (result?.success) {
@@ -113,7 +130,7 @@ function Cart() {
     const payableAmount = tBill - discountAmount;
 
     return (
-        <div className='w-[90vw] sm:w-[80vw] lg:w-[85vw] xl:w-[80vw] m-auto my-4 sm:my-12'>
+        <div className='w-[90vw] sm:w-[80vw] lg:w-[85vw] xl:w-[80vw] m-auto my-4  sm:my-12'>
             <h2 className='uppercase font-inter font-bold text-xl sm:text-3xl flex items-center gap-4 my-3'>
                 Your cart
                 <FaCartArrowDown className='text-[#db4444]' />
@@ -124,8 +141,10 @@ function Cart() {
                         <div key={product._id} className='flex justify-between border-b-2 p-2'>
                             <div className='flex gap-2'>
                                 <img
-                                    src={`data:${product?.images[0]?.contentType};base64,${product?.images[0]?.data}`}
-                                    alt={product?.productName}
+                                    src={product?.images && product.images.length > 0 ?
+                                        `data:${product.images[0].contentType};base64,${product.images[0].data}` :
+                                        null}
+                                    alt={product?.productName || 'Product Image'}
                                     className='bg-gray-900 h-[5rem] w-[5rem] rounded-lg'
                                 />
                                 <div>
@@ -171,8 +190,7 @@ function Cart() {
                 <div className='border-2 mt-6 lg:mt-0 rounded-lg p-2 h-auto lg:h-[17rem] xl:h-[18rem] w-[23rem] lg:w-[17rem] xl:w-[23rem]'>
                     <h4 className='font-bold flex items-center gap-2'>Coupons <MdOutlineLocalOffer className='text-orange-600' /></h4>
                     <div className='flex justify-between my-2'>
-                        <input
-                            type="text"
+                        <input type="text"
                             placeholder='Coupon code'
                             className='text-center placeholder:italic placeholder:text-[14px] border-[1px] w-[75%] h-[2.2rem] p-1 rounded-md border-slate-600 focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-orange-500'
                         />
@@ -191,7 +209,7 @@ function Cart() {
                         <p className='text-[14px] my-1 font-bold'>Total Amount: <span className='float-right'>₹ {payableAmount}</span></p>
                     </div>
                     <button className='bg-orange-400 w-[100%] mt-2 h-[2.5rem] rounded-md hover:bg-orange-500 font-bold hover:text-white transition-colors text-sm flex justify-center items-center'>
-                        Checkout <FaArrowRight className='ml-4' />
+                        <Link to={"/billing"} >Checkout <FaArrowRight className='ml-4' /></Link>
                     </button>
                 </div>
             </div>
@@ -241,7 +259,7 @@ export default Cart;
 //         try {
 //             const result = await getData("/user/products/cart_products");
 //             console.log("Fetched cart data successfully", result?.data?.products);
-//             setCartData(result?.data?.products || []);
+//             setCartData(result?.data?.products  []);
 
 //         } catch (error) {
 //             console.error("Failed to fetch cart data", error);
@@ -260,7 +278,6 @@ export default Cart;
 //             console.error("Failed to delete product from cart", error);
 //         }
 //     };
-
 //     const minusProduct = async (Id) => {
 //         try {
 //             const result = await patchData("/user/products/minus_from_cart", { productId: Id });
@@ -309,7 +326,7 @@ export default Cart;
 //         }
 //     };
 
-// // secount in zustand 
+// // secount in zustand
 // setCount(pQuantity)
 
 //     const totalPrice = cartData.reduce((total, product) => total + product.price * product.productCount, 0);
@@ -333,7 +350,7 @@ export default Cart;
 //                         <div key={product._id} className='flex justify-between border-b-2 p-2'>
 //                             <div className='flex gap-2'>
 //                                 <img
-//                                     src={`data:${product?.images[0]?.contentType};base64,${product?.images[0]?.data}`}
+//                                     src={data:${product?.images[0]?.contentType};base64,${product?.images[0]?.data}}
 //                                     alt={product?.productName}
 //                                     className='bg-gray-900 h-[5rem] w-[5rem] rounded-lg'
 //                                 />
