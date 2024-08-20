@@ -84,18 +84,6 @@ function Cart() {
                         autoClose: 500,
                     },
 
-                    pending: {
-                        render: 'Product adding...',
-                        autoClose: 500,
-                    },
-                    success: {
-                        render: 'Product Added Successfully 👌',
-                        autoClose: 500,
-                    },
-                    error: {
-                        render: 'Something went wrong.. 🤯',
-                        autoClose: 500,
-                    },
                 }
             );
 
