@@ -6,9 +6,10 @@ import { FaArrowAltCircleRight } from "react-icons/fa";
 import Shimmer from "@/components/shimmer/Shimmer"
 import { usePagination } from "@/services/zustandStore"
 
-const pages = [1, 2, 3, 4, 5, 6, 6, 7, 8];
+
 
 function ItemsCollection() {
+  const pages = [1, 2, 3, 4, 5, 6, 6, 7, 8];
   const [products, setProducts] = useState([])
   const { pageNo, setPageNo } = usePagination(state => state)
 

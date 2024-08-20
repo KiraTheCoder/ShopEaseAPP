@@ -73,14 +73,16 @@ function Header() {
                     </div>
                     <div className="w-[22%] sm:w-[15%] md:w-[20%] lg:w-[15%] flex justify-around sm:justify-between md:justify-between lg:justify-start lg:gap-3 items-center">
                         <div className="relative">
-                            <p className="text-white bg-orange-500 rounded-full h-3 w-3 flex justify-center items-center ml-2 absolute top-[1.7rem] text-[12px]">
+                            <p className="text-white bg-orange-500 rounded-full h-[14px] w-[14px] flex justify-center items-center ml-1 absolute bottom-5 text-[10px]">
                                 {count}
                             </p>
                             <NavLink to="/cart">
                                 <FaCartPlus className="text-sm sm:text-xl text-white" />
                             </NavLink>
                         </div>
-                        <FaCircleUser className="text-sm sm:text-xl text-white" />
+                        <NavLink to={"/useraccount"}>
+                            <FaCircleUser className="text-sm sm:text-xl text-white" />
+                        </NavLink>
                     </div>
                 </div>
             </div>
@@ -416,6 +418,4 @@ export default Header;
 // }
 
 // export default Header;
-
-
 

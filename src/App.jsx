@@ -8,7 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <>
-
       <Header />
       <ToastContainer  />
       <Outlet />
