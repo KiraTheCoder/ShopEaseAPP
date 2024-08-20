@@ -38,8 +38,8 @@ export default function Billing() {
 
   return (
     <div className="h-auto w-full">
-      <div className="h-auto w-auto flex justify-around border">
-        <div className="h-auto w-[30rem] py-9 px-[4rem]">
+      <div className="h-auto w-auto flex justify-around flex-wrap border">
+        <div className="h-auto w-[30rem] bg-orange-300 py-9 px-[4rem]">
           <h1 className="font-semibold text-2xl py-2">Billing Details</h1>
 
           <Formik
@@ -50,8 +50,7 @@ export default function Billing() {
           >
             {() => (
               <Form action="">
-                <h2 className='font-inter text-[1.2rem] text-center sm:text-start sm:text-[1.4rem] font-Five my-1 tracking-wider'>Sign Up to ShopEase</h2>
-                <p className='text-[13px] sm:text-[14px] text-center sm:text-start font-Poppins tracking-wider'>Enter your details below</p>
+                <p className='text-[13px] sm:text-[14px] text-center sm:text-start font-Poppins tracking-wider'>Enter your Address details below</p>
                 <TextInput label="Name *" name={"fullName"} type="text" />
                 <TextInput label="Street Name *" name={"streetName"} type="text" />
                 <TextInput label="Apartment/Floor *" name={"aprtmentOrFloor"} type="text" />
@@ -63,7 +62,7 @@ export default function Billing() {
           </Formik>
         </div>
 
-        <div className="h-auto w-[30rem] py-[5rem]">
+        <div className="h-auto w-[30rem] bg-pink-500 py-[5rem]">
           {/* Billing summary and payment options */}
           <div className="h-auto w-[20rem] flex justify-between my-8">
             <p className="text-sm font-normal">LCD Monitor</p>
@@ -101,11 +100,7 @@ export default function Billing() {
             <input type="radio" name="tick" id="radio2" className="form-checkbox h-4 w-4 rounded" />
             <label htmlFor="radio2" className="text-[13px] font-medium">Cash on delivery</label>
           </div>
-
-          <div className="py-3">
-            <input type="text" className="h-[5vh] w-[17vw] border border-black text-[10px] pl-5 rounded-sm" placeholder="Apply coupon" />
-            <button className="h-[5vh] w-[12vw] bg-red-500 text-white text-[10px] ml-2 rounded-sm">Apply Coupon</button>
-          </div>
+          <Button type={"submit"} name={"Final Submit"} style="w-[100%] my-0 mb-2" />
         </div>
       </div>
     </div>
