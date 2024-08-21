@@ -39,6 +39,7 @@ export default function Billing() {
       toast.error(error?.response?.data?.message || "An error occurred.");
     }
   }
+console.log("my cart data", cartData);
 
   return (
     <div className="h-auto w-full">
