@@ -31,6 +31,12 @@ const nameValidate = Yup.string()
   .min(3, "atleast 3 character")
   .max(15, "atmost 15 character");
 
+  const streetAddressValidate = Yup.string()
+  .trim()
+  .min(1, 'Street address is required')
+  .max(200, 'Street address is too long');
+
+
 const otpValidate = Yup.string().required("required");
 
 const textareaValidate = Yup.string().required("required");
@@ -154,4 +160,26 @@ const productUpload={
   }),
 }
 
-export { LoginForm, signUpForm, otpForm, sendMessageForm,changePassword,updateAddemailPhoneNumber, productUpload };
+// user Billing Address 
+const BillingAddress={
+  initialValues:{
+    Name:"",
+    Street_Address:"",
+    companyName: "",
+    city_town:"",
+    phoneNumberOrEmail:"",
+  },
+
+  validationSchema: Yup.object({
+    Name:nameValidate,
+    Street_Address:streetAddressValidate,
+    companyName:nameValidate,
+    city_town:nameValidate,
+    phoneNumberOrEmail:phoneNumberOrEmailValidate,
+  }),
+}
+
+
+
+
+export { LoginForm, signUpForm, otpForm, sendMessageForm,changePassword,updateAddemailPhoneNumber, productUpload, BillingAddress };

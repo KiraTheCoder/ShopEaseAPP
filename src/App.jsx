@@ -8,10 +8,10 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <ToastContainer  />
-      <Outlet />
-      {/* <TestAPP/> */}
+      {/* <Outlet /> */}
+      <TestAPP/>
       <Footer />
     </>
   )

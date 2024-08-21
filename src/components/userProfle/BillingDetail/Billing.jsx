@@ -1,18 +1,61 @@
+import { Button, TextInput } from "@/components/form";
+import { Formik,Form } from "formik";
 import React from "react";
-
+// import { Form } from "react-router-dom";
+import { BillingAddress } from "@/services/lib/YupFormikValidator";
 export default function Billing() {
+
+  async function submitForm(values, actions) {
+    const val = values.phoneNumberOrEmail;
+    const isPhoneNumber = /^\d{10}$/.test(val);
+    const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+
+    if (isPhoneNumber) {
+        values.phoneNumber = "+91" + val;
+        delete values.phoneNumberOrEmail; // Remove original field if needed
+    } else if (isEmail) {
+        values.email = val;
+        delete values.phoneNumberOrEmail; // Remove original field if needed
+    }
+
+    console.log("Form submitted with values:", values);
+    if (actions.resetForm) {
+      actions.resetForm();
+  }
+  }
 
   return (
     <>
       <div className="h-auto w-full">
         <div className="h-auto w-auto flex justify-around border">
           <div className="h-auto w-[30rem] py-9 px-[4rem]">
-            <p className="text-[13px] font-medium text-gray-500 py-4">Account / My Account / Product / View Cart / CheckOut</p>
 
             <div className="h-auto ">
               <h1 className="font-semibold text-2xl py-2">Billing Details</h1>
 
-              <form>
+              <Formik
+    initialValues={BillingAddress.initialValues}
+    enableReinitialize
+    validationSchema={BillingAddress.validationSchema}
+    onSubmit={submitForm}
+>
+    {({ handleSubmit }) => (
+        <Form onSubmit={handleSubmit}>
+            <h2 className='font-inter text-[1.2rem] text-center sm:text-start sm:text-[1.4rem] font-Five my-1 tracking-wider'>Sign Up to ShopEase</h2>
+            <p className='text-[13px] sm:text-[14px] text-center sm:text-start font-Poppins tracking-wider'>Enter your details below</p>
+            <TextInput label="Name *" name="Name" type="input" />
+            <TextInput label="Company Name *" name="companyName" type="input" />
+            <TextInput label="Street Address *" name="Street_Address" type="input" />
+            <TextInput label="City/Town *" name="city_town" type="input" />
+            <TextInput label="Mobile No. *" name="phoneNumberOrEmail" type="input" />
+            <Button type="submit" name={"Submit Data"} style="w-[100%] my-0 mb-2" />
+        </Form>
+    )}
+</Formik>
+
+
+
+              {/* <form>
                 <div className="py-1">
                   <label htmlFor="name" className=" text-[13px] font-medium text-gray-500">First Name</label>
                   <input
@@ -86,7 +129,9 @@ export default function Billing() {
                   </label>
                 </div>
 
-              </form>
+              </form> */}
+
+
             </div>
           </div>
 
