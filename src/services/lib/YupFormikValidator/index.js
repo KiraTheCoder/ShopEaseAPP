@@ -7,11 +7,22 @@ const phoneNumberOrEmailValidate = Yup.mixed()
     "is-phone-or-email",
     "Must be a valid phone number or email",
     function (value) {
-      if (!value) return false; // Value is required
-      const isPhoneNumber = /^\d{10}$/.test(value);
+      if (!value) return false; // Value is required 
+      const isPhoneNumber = /^\d{10}$/.test(value);   
       const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-
       return isPhoneNumber || isEmail;
+    }
+  );
+  
+const phoneNumberValidate = Yup.mixed()
+  .required("This field is required")
+  .test(
+    "is-phone",
+    "Must be a valid phone number",
+    function (value) {
+      if (!value) return false; // Value is required 
+      const isPhoneNumber = /^\d{10}$/.test(value);   
+      return isPhoneNumber ;
     }
   );
 
@@ -33,10 +44,20 @@ const nameValidate = Yup.string()
 
   const streetAddressValidate = Yup.string()
   .trim()
-  .min(1, 'Street address is required')
-  .max(200, 'Street address is too long');
 
+  .min(1, "Street name required")
+  .max(200, "Street Address is too long");
 
+  const aprtmentOrFloorValidation= Yup.string()
+  .trim()
+  .min(1, "Aprtment Or Floor name required")
+  .max(200, "Aprtment Or Floor name is too long");
+
+  const townOrCityValidation= Yup.string()
+  .trim()
+  .min(1, "Town or City  required")
+  .max(200, "Town or City  is too long");
+  
 const otpValidate = Yup.string().required("required");
 
 const textareaValidate = Yup.string().required("required");
@@ -160,26 +181,24 @@ const productUpload={
   }),
 }
 
-// user Billing Address 
-const BillingAddress={
+const billingAddress={
   initialValues:{
-    Name:"",
-    Street_Address:"",
-    companyName: "",
-    city_town:"",
-    phoneNumberOrEmail:"",
+    fullName:"",
+    streetName:"",
+    aprtmentOrFloor:"",
+    townOrCity:"",
+    PhoneNumber:"",
   },
 
   validationSchema: Yup.object({
-    Name:nameValidate,
-    Street_Address:streetAddressValidate,
-    companyName:nameValidate,
-    city_town:nameValidate,
-    phoneNumberOrEmail:phoneNumberOrEmailValidate,
+    fullName:nameValidate,
+    streetName:streetAddressValidate,
+    aprtmentOrFloor:aprtmentOrFloorValidation,
+    townOrCity:townOrCityValidation,
+    PhoneNumber:phoneNumberValidate,
   }),
 }
 
 
 
-
-export { LoginForm, signUpForm, otpForm, sendMessageForm,changePassword,updateAddemailPhoneNumber, productUpload, BillingAddress };
+export { LoginForm, signUpForm, otpForm, sendMessageForm,changePassword,updateAddemailPhoneNumber, productUpload, billingAddress };
