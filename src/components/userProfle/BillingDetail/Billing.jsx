@@ -1,5 +1,6 @@
 import { Button, TextInput } from "@/components/form";
 import { Formik, Form } from 'formik'
+import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { postData } from "@/services/apiCall";
 import { billingAddress } from "@/services/lib/YupFormikValidator";
@@ -76,7 +77,7 @@ export default function Billing() {
                       ? `data:${product.images[0].contentType};base64,${product.images[0].data}` 
                       : 'placeholder-image-url'} // Fallback image URL if no image is available
                       alt={product?.productName || 'Product Image'}
-                      className='bg-gray-900 h-[5rem] w-[5rem] rounded-lg'
+                      className=' h-[4rem] w-[4rem] rounded-lg'
                       />
                   <p className="text-sm font-semibold">{product?.productName || 'Product Name'}</p>
                   <p className="text-sm font-semibold">({product?.productCount || 'No of products'})</p>
@@ -113,7 +114,9 @@ export default function Billing() {
           </div>
           
           <Button type={"submit"} name={"Final Submit"} style="w-[60%]  m-4" />
-                      
+          <li className="my-4 list-none">
+           <Link to={"/cart"} className="text-blue-700 ">↩ Back...</Link>            
+          </li>
         </div>
       </div>
     </div>
