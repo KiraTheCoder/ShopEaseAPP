@@ -1,211 +1,124 @@
-import { Button, TextInput } from "@/components/form";
-import { Formik,Form } from "formik";
-import React from "react";
-// import { Form } from "react-router-dom";
-import { BillingAddress } from "@/services/lib/YupFormikValidator";
+import { Formik, Form } from 'formik'
+import { Link } from "react-router-dom";
+import { toast } from 'react-toastify';
+import { postData } from "@/services/apiCall";
+import { billingAddress } from "@/services/lib/YupFormikValidator";
+import { useGetCount } from "@/services/zustandStore/zustandStore";
+
 export default function Billing() {
 
+  const { cartitems} = useGetCount((state) => state);
+ const {cartData, payableAmount, totalPrice}=cartitems
+  
   async function submitForm(values, actions) {
-    const val = values.phoneNumberOrEmail;
+    // Adjust phoneNumber or email based on validation
+    console.log("rohit", values);
+    const val = values.phoneNumber;
     const isPhoneNumber = /^\d{10}$/.test(val);
-    const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
 
     if (isPhoneNumber) {
-        values.phoneNumber = "+91" + val;
-        delete values.phoneNumberOrEmail; // Remove original field if needed
-    } else if (isEmail) {
-        values.email = val;
-        delete values.phoneNumberOrEmail; // Remove original field if needed
+      values.phoneNumber = "+91" + val;
     }
 
     console.log("Form submitted with values:", values);
-    if (actions.resetForm) {
+
+    try {
+      const saveAdd = postData("/user/address/", values);
+      toast.promise(
+        saveAdd, {
+          pending: "User address is being saved...",
+          success: "User address saved successfully!",
+          error: "User address couldn't be saved."
+        }
+      );
+
+      await saveAdd;
       actions.resetForm();
-  }
+    } 
+    catch (error) {
+      toast.error(error?.response?.data?.message || "An error occurred.");
+    }
   }
 
   return (
-    <>
-      <div className="h-auto w-full">
-        <div className="h-auto w-auto flex justify-around border">
-          <div className="h-auto w-[30rem] py-9 px-[4rem]">
+    <div className="h-auto w-full">
+      <div className="h-auto w-auto flex justify-around flex-wrap border">
+        <div className="h-auto w-[30rem]  py-9 px-[4rem]">
+          <h1 className="font-semibold text-2xl py-2">Billing Details</h1>
 
-            <div className="h-auto ">
-              <h1 className="font-semibold text-2xl py-2">Billing Details</h1>
+          <Formik
+            initialValues={billingAddress.initialValues}
+            enableReinitialize
+            validationSchema={billingAddress.validationSchema}
+            onSubmit={submitForm}
+          >
+            {() => (
+              <Form action="">
+                <p className='text-[13px] sm:text-[14px] text-center sm:text-start font-Poppins tracking-wider'>Enter your Address details below</p>
+                <TextInput label="Name *" name={"fullName"} type="text" />
+                <TextInput label="Street Name *" name={"streetName"} type="text" />
+                <TextInput label="Apartment/Floor *" name={"aprtmentOrFloor"} type="text" />
+                <TextInput label="City/Town *" name={"townOrCity"} type="text" />
+                <TextInput label="Mobile No. *" name={"PhoneNumber"} type="text" />
+                <Button type={"submit"} name={"SAVE"} style="w-[100%] my-0 mb-2" />
+              </Form>
+            )}
+          </Formik>
+        </div>
 
-              <Formik
-    initialValues={BillingAddress.initialValues}
-    enableReinitialize
-    validationSchema={BillingAddress.validationSchema}
-    onSubmit={submitForm}
->
-    {({ handleSubmit }) => (
-        <Form onSubmit={handleSubmit}>
-            <h2 className='font-inter text-[1.2rem] text-center sm:text-start sm:text-[1.4rem] font-Five my-1 tracking-wider'>Sign Up to ShopEase</h2>
-            <p className='text-[13px] sm:text-[14px] text-center sm:text-start font-Poppins tracking-wider'>Enter your details below</p>
-            <TextInput label="Name *" name="Name" type="input" />
-            <TextInput label="Company Name *" name="companyName" type="input" />
-            <TextInput label="Street Address *" name="Street_Address" type="input" />
-            <TextInput label="City/Town *" name="city_town" type="input" />
-            <TextInput label="Mobile No. *" name="phoneNumberOrEmail" type="input" />
-            <Button type="submit" name={"Submit Data"} style="w-[100%] my-0 mb-2" />
-        </Form>
-    )}
-</Formik>
+        <div className="h-auto w-[30rem]  py-[5rem]">
+          {/* Billing summary and payment options */}
+          {cartData.length > 0 ? cartData.map((product) => (
+            <div key={product._id} className="h-auto w-[20rem] flex justify-between items-center my-4">
+              <div className="flex gap-4 items-center">
+                  <img 
+                    src={product?.images?.length > 0 
+                      ? `data:${product.images[0].contentType};base64,${product.images[0].data}` 
+                      : 'placeholder-image-url'} // Fallback image URL if no image is available
+                      alt={product?.productName || 'Product Image'}
+                      className=' h-[4rem] w-[4rem] rounded-lg'
+                      />
+                  <p className="text-sm font-semibold">{product?.productName || 'Product Name'}</p>
+                  <p className="text-sm font-semibold">({product?.productCount || 'No of products'})</p>
+              </div>
+              <p className="text-sm">₹ {(product?.price)*(product.productCount) || 'Price not available'}</p>
+            </div>
+             )) : <p>No items in cart</p>}
 
+          <div className="h-auto w-[20rem] my-5">
+            <div className="flex justify-between border-b border-gray-300 py-3">
+              <p className="text-sm font-semibold">Subtotal:</p>
+              <p className="text-sm">₹ {totalPrice}</p>
+            </div>
 
+            <div className="flex justify-between border-b border-gray-300 py-3">
+              <p className="text-sm font-semibold">Shipping:</p>
+              <p className="text-sm">₹ {totalPrice>500 ? "00" : "50"}</p>
+            </div>
 
-              {/* <form>
-                <div className="py-1">
-                  <label htmlFor="name" className=" text-[13px] font-medium text-gray-500">First Name</label>
-                  <input
-                    type="text"
-                    id="First Name"
-                    className=" py-1 w-full border-none outline-none bg-gray-100 border rounded-md  sm:text-[13px]"
-                  />
-                </div>
-
-                <div className="py-1">
-                  <label htmlFor="name" className=" text-[13px] font-medium text-gray-500">Company Name</label>
-                  <input
-                    type="text"
-                    id="Company Name"
-                    className="py-1 w-full border-none outline-none bg-gray-100 border rounded-md  sm:text-[13px]"
-                  />
-                </div>
-
-                <div className="py-1">
-                  <label htmlFor="name" className=" text-[13px] font-medium text-gray-500">Street Addres</label>
-                  <input
-                    type="text"
-                    id="Strseet Addres"
-                    className="py-1 w-full border-none outline-none bg-gray-100 border rounded-md  sm:text-[13px]"
-                  />
-                </div>
-
-                <div className="py-1">
-                  <label htmlFor="name" className=" text-[13px] font-medium text-gray-500">Town/City</label>
-                  <input
-                    type="text"
-                    id="Town/City"
-                    className="py-1 w-full border-none outline-none bg-gray-100 border rounded-md  sm:text-[13px]"
-                  />
-                </div>
-
-                <div className="py-1">
-                  <label htmlFor="name" className=" text-[13px] font-medium text-gray-500">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    className="py-1 w-full border-none outline-none bg-gray-100 border rounded-md  sm:text-[13px]"
-                  />
-                </div>
-
-                <div className="py-1">
-                  <label htmlFor="name" className=" text-[13px] font-medium text-gray-500">Phone Number</label>
-                  <input
-                    type="text"
-                    id="Phone Number"
-                    className="py-1 w-full border-none outline-none bg-gray-100 border rounded-md  sm:text-[13px]"
-                  />
-                </div>
-
-                <div className="py-1">
-                  <label htmlFor="name" className=" text-[13px] font-medium text-gray-500">Email Address</label>
-                  <input
-                    type="text"
-                    id="Email Address"
-                    className="py-1 w-full border-none outline-none bg-gray-100 border rounded-md  sm:text-[13px]"
-                  />
-                </div>
-                <div className="flex items-center space-x-3">
-                  <input
-                    type="checkbox"
-                    id="checkbox"
-                    className="form-checkbox h-4 w-4  border-red-500 rounded"
-                  />
-                  <label htmlFor="checkbox" className="text-[13px] font-medium">
-                    Save this information for faster check-out next time
-                  </label>
-                </div>
-
-              </form> */}
-
+            <div className="flex justify-between pt-3">
+              <p className="text-sm font-semibold">Total:</p>
+              <p className="text-sm">₹ {payableAmount}</p>
 
             </div>
           </div>
 
-
-          <div className="h-auto w-[30rem] py-[5rem]">
-            <div className="h-auto w-[20rem]  flex justify-between my-8">
-
-              <div className="h-5">
-                <p className="text-sm font-normal ">LCD Monitor</p>
-              </div>
-              <p className="text-sm">$650</p>
-            </div>
-
-            <div className="h-auto w-[20rem]  flex justify-between">
-              <div className="h-5">
-                <p className="text-sm font-normal ">LCD Monitor</p>
-              </div>
-              <p className="text-sm">$650</p>
-            </div>
-
-            <div className="h-auto w-[20rem] my-5 ">
-              <div className="flex justify-between border-b border-gray-300 py-3">
-                <p className="text-sm">Subtotal:</p>
-                <p className="text-sm">S500</p>
-              </div>
-
-              <div className="flex justify-between border-b border-gray-300 py-3">
-                <p className="text-sm">Shipping:</p>
-                <p className="text-sm">Free</p>
-              </div>
-
-              <div className="flex justify-between pt-3">
-                <p className="text-sm">Total:</p>
-                <p className="text-sm">s500</p>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-3 py-2">
-              <input
-                type="radio"
-                name="tick"
-                id="radio"
-                className="form-checkbox h-4 w-4  rounded"
-              />
-              <label htmlFor="checkbox" className="text-[13px] font-medium">
-                <p>Bank</p>
-              </label>
-            </div>
-
-            <div className="flex items-center space-x-3 py-2">
-              <input
-                type="radio"
-                name="tick"
-                id="radio"
-                className="form-checkbox h-4 w-4 rounded"
-              />
-              <label htmlFor="checkbox" className="text-[13px] font-medium">
-                <p>Cash on delivery</p>
-              </label>
-            </div>
-
-            <div className="py-3">
-              <input type="text" className="h-[5vh] w-[17vw] border border-black text-[10px] pl-5 rounded-sm " placeholder="Apply coupon" />
-              <button className="h-[5vh] w-[12vw] bg-red-500 text-white text-[10px] ml-2 rounded-sm">Apply Coupon</button>
-            </div>
-
-            <button className="h-[5vh] w-[12vw] bg-red-500 text-white text-[10px] rounded-sm">Apply Coupon</button>
-
+          <div className="flex items-center space-x-3 py-2">
+            <input type="radio" name="tick" id="radio1" className="form-checkbox h-4 w-4 rounded" />
+            <label htmlFor="radio1" className="text-[13px] font-medium">Bank</label>
           </div>
+
+          <div className="flex items-center space-x-3 py-2">
+            <input type="radio" name="tick" id="radio2" className="form-checkbox h-4 w-4 rounded" />
+            <label htmlFor="radio2" className="text-[13px] font-medium">Cash on delivery</label>
+          </div>
+          
+          <Button type={"submit"} name={"Final Submit"} style="w-[60%]  m-4" />
+          <li className="my-4 list-none">
+           <Link to={"/cart"} className="text-blue-700 ">↩ Back...</Link>            
+          </li>
         </div>
       </div>
-    </>
-  )
-
-
-
+    </div>
+  );
 }

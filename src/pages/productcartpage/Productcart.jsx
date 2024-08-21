@@ -22,7 +22,6 @@ function ProductCart() {
         }
     })
     const Product = useGetProduct((state) => state.product);
-    console.log(Product);
 
     const { images, discount, price, productName, description, color, _id } = Product;
     const MRP = Math.ceil(price / (1 - discount / 100));
@@ -36,7 +35,6 @@ function ProductCart() {
     const AddCart = async (Id, quantity) => {
         try {
             const addProductPromise = postData("/user/products/add_to_cart", { productId: Id, productQuantity: quantity });
-            console.log("Add to Cart successful", addProductPromise);
             toast.promise(
                 addProductPromise,
                 {
@@ -49,7 +47,6 @@ function ProductCart() {
             const addProduct = await addProductPromise;
             if (addProduct.success) {
                 setCount(await (await getData("/user/products/cart_products_count"))?.data?.productCartsCount)
-
             }
 
         } catch (error) {
@@ -162,3 +159,5 @@ function ProductCart() {
 }
 
 export default ProductCart;
+
+

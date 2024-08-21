@@ -9,7 +9,13 @@ import { usePagination } from "@/services/zustandStore"
 
 
 function ItemsCollection() {
-  const pages = [1, 2, 3, 4, 5, 6, 6, 7, 8];
+  const pages = [1, 2, 3];
+
+  // user/products/pages 
+  // {
+limit:10
+
+  // }
   const [products, setProducts] = useState([])
   const { pageNo, setPageNo } = usePagination(state => state)
 
@@ -19,6 +25,7 @@ function ItemsCollection() {
         pageNo: pageNo,
         limit: 10
       });
+      
       setProducts(result?.data)
     })()
   }, [pageNo])
@@ -41,7 +48,6 @@ function ItemsCollection() {
         <FaArrowAltCircleLeft
           className={`${pageNo <= 1 ? "opacity-35" : null} hover:cursor-pointer`}
           size={23}
-          disabled={pageNo <= 1}
           onClick={() => {
             if (!(pageNo <= 1)) {
               const previousPage = pageNo - 1
@@ -63,11 +69,10 @@ function ItemsCollection() {
           }
         </div>
         <FaArrowAltCircleRight
-          className={`${pageNo >= pages.length - 1 ? "opacity-35" : null} hover:cursor-pointer`}
+          className={`${pageNo > pages.length - 1 ? "opacity-35" : null} hover:cursor-pointer`}
           size={23}
-          disabled={pageNo >= pages.length - 1}
           onClick={() => {
-            if (!(pageNo >= pages.length - 1)) {
+            if (!(pageNo > pages.length - 1)) {
               const nextPage = pageNo + 1
               setPageNo(nextPage)
             }
