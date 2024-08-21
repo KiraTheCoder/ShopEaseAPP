@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { MdOutlineLocalOffer, MdDeleteForever } from "react-icons/md";
 import { FaPlus, FaMinus, FaArrowRight } from "react-icons/fa6";
@@ -42,7 +41,7 @@ function Cart() {
 
     const deleteProduct = async (Id) => {
         try {
-            const deleteItem = await deleteData("/user/products/delete_from_cart", { productId: Id });
+            const deleteItem = deleteData("/user/products/delete_from_cart", { productId: Id });
             toast.promise(
                 deleteItem,
                 {
@@ -175,7 +174,7 @@ function Cart() {
                                         `data:${product.images[0].contentType};base64,${product.images[0].data}` :
                                         null}
                                     alt={product?.productName || 'Product Image'}
-                                    className='bg-gray-900 h-[5rem] w-[5rem] rounded-lg'
+                                    className=' h-[5rem] w-[5rem] rounded-lg'
                                 />
                                 <div>
                                     <h5 className='text-[15px] font-DM font-semibold'>{product?.productName}</h5>
@@ -217,7 +216,7 @@ function Cart() {
                         </div>
                     )}
                 </div>
-                <div className='border-2 mt-6 lg:mt-0 rounded-lg py-4 px-2 h-auto  w-[23rem] lg:w-[17rem] xl:w-[23rem]'>
+                <div className='border-2 mt-6 lg:mt-0 rounded-lg py-4 px-2 sm:h-[21rem]  w-[23rem] lg:w-[17rem] xl:w-[23rem]'>
                     <h4 className='font-bold flex items-center gap-2'>Coupons <MdOutlineLocalOffer className='text-orange-600' /></h4>
                     <div className='flex justify-between my-2'>
                         <input type="text"

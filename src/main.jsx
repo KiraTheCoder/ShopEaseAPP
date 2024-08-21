@@ -16,9 +16,10 @@ import Cart from '@/pages/cartpage/Cart.jsx';
 import SomethingWentWrong from "@/components/error/SomethingWentWrong.jsx"
 import UserAccount from './pages/userAccount/UserAccount.jsx';
 import MyProfile from './components/userProfle/myAccount/myProfile/MyProfile.jsx';
-import Address from './components/userProfle/myAccount/AddressBook/Address.jsx';
 import UserprofileImg from './components/userProfle/userMainProfile/UserprofileImg.jsx';
 import Billing from './components/userProfle/BillingDetail/Billing.jsx';
+import { Address } from './components/userProfle/myAccount/AddressBook/Address.jsx';
+import CreateAddress from './components/createAddress/CreateAddress.jsx';
 
 const router = createBrowserRouter([
   {
@@ -84,6 +85,11 @@ const router = createBrowserRouter([
           {
             path:"/useraccount/address",
             element:<Address/>
+          },
+      
+          {
+            path:"/useraccount/createaddress",
+            element:<CreateAddress/>
           },
       
         ]
