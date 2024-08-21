@@ -36,13 +36,19 @@ const useGetProduct = create(
 ////////////////// product count  ////////////////
 const getCount = (set) => ({
   count: "",
+  cartitems:"",
+  subAmount:"",
   setCount: (count) => set({ count }),
+  setCartitems: (cartitems)=> set ({cartitems}),
+  // setSubAmount: (subAmount)=> set ({subAmount})
 });
 
 
 const useGetCount = create(
   devtools(getCount, {
     name: "count",
+    cart:"cartitems",
+    // payAmt:"subAmount",
     getStorage: () => localStorage,
   })
 );

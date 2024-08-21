@@ -25,7 +25,6 @@ limit:10
         pageNo: pageNo,
         limit: 10
       });
-      console.log(result);
       
       setProducts(result?.data)
     })()
