@@ -20,6 +20,7 @@ import UserprofileImg from './components/userProfle/userMainProfile/UserprofileI
 import Billing from './components/userProfle/BillingDetail/Billing.jsx';
 import { Address } from './components/userProfle/myAccount/AddressBook/Address.jsx';
 import CreateAddress from './components/createAddress/CreateAddress.jsx';
+import UpdateName from './components/updateName/UpdateName.jsx';
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
           {
             path:"/useraccount/profile",
             element:<MyProfile/>
+          },
+          {
+            path:"/useraccount/updateName",
+            element:<UpdateName/>
           },
           {
             path:"/useraccount/address",

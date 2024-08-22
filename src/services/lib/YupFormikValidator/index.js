@@ -199,5 +199,15 @@ const billingAddress={
   }),
 }
 
+const updateName={
+  initialValues:{
+    name:"",
+  },
 
-export { LoginForm, signUpForm, otpForm, sendMessageForm,changePassword,updateAddemailPhoneNumber, productUpload, billingAddress };
+  validationSchema: Yup.object({
+    name:nameValidate,
+  }),
+}
+
+
+export { LoginForm, signUpForm, otpForm, sendMessageForm,changePassword,updateAddemailPhoneNumber, productUpload, billingAddress,updateName };
