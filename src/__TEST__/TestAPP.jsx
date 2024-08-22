@@ -1,4 +1,4 @@
-import Billing from "@/components/userProfle/BillingDetail/Billing"
+import Billing from "@/pages/BillingDetail/Billing"
 import Cart from "@/pages/cartpage/Cart"
 import UserAccount from "@/pages/userAccount/UserAccount"
 

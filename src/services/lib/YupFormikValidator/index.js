@@ -210,4 +210,15 @@ const updateName={
 }
 
 
-export { LoginForm, signUpForm, otpForm, sendMessageForm,changePassword,updateAddemailPhoneNumber, productUpload, billingAddress,updateName };
+//  for order form
+
+const orderForm = {
+  initialValues: {
+    paymentMethod: '', // Assuming 'tick' is the field for selecting payment method
+  },
+  validationSchema: Yup.object({
+    paymentMethod: Yup.string().required('Please select a payment method.'),
+  }),
+};
+
+export { LoginForm, signUpForm, otpForm, sendMessageForm,changePassword,updateAddemailPhoneNumber, productUpload, billingAddress,updateName,orderForm };

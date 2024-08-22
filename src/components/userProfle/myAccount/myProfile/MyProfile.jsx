@@ -14,18 +14,19 @@ function MyProfile() {
     async function getUserData() {
         try {
             const userdataPromise = getData("/user/user_data");
-            toast.promise(
-                userdataPromise, {
-                    pending: "User data is being received...",
-                    success: "User data received successfully!",
-                    error: "User data couldn't be received."
-                }
-            );
+            // toast.promise(
+            //     userdataPromise, {
+            //         pending: "User data is being received...",
+            //         success: "User data received successfully!",
+            //         error: "User data couldn't be received."
+            //     }
+            // );
             const userdata = await userdataPromise;
             setUserData(userdata);
             console.log("User data received", userdata);
         } catch (error) {
-            toast.error(error?.response?.data?.message || "An error occurred.");
+            console.log('error in this page ', error)
+            // toast.error(error?.response?.data?.message || "An error occurred.");
         }
     }
 
