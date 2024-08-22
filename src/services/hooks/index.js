@@ -13,16 +13,17 @@ import { toast } from 'react-toastify';
     async function fetchAddress() {
         try {
             const fetchAdd = getData("/user/address/");
-            toast.promise(
-                fetchAdd, {
-                    pending: "User address is being fetched...",
-                    success: "User address fetched successfully!",
-                    error: "User address couldn't be fetched."
-                });
-            const response = await fetchAdd;
-            setUserAddress(response?.data?.addresses);
+            // toast.promise(
+            //     fetchAdd, {
+            //         pending: "User address is being fetched...",
+            //         success: "User address fetched successfully!",
+            //         error: "User address couldn't be fetched."
+            //     });
+            // const response = await fetchAdd;
+            // setUserAddress(response?.data?.addresses);
         } catch (error) {
-            toast.error(error?.response?.data?.message || "An error occurred.");
+            console.log('error in hooks',error)
+            // toast.error(error?.response?.data?.message || "An error occurred.");
         }
     }
 

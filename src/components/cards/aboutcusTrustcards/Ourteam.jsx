@@ -1,5 +1,5 @@
 import { FaInstagram, FaTwitter, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
-import rohit from "@/assets/images/footerImages/rohit1.jpg";
+import rohit from "@/assets/images/footerImages/rrrrrrr.jpg";
 import manshi from "@/assets/images/footerImages/manshi.jpg"
 import khushi from "@/assets/images/footerImages/kk.jpg";
 import kiran from "@/assets/images/footerImages/kiran.jpg";
@@ -20,13 +20,13 @@ const TeamCard = ({ name, role, imgSrc, icon }) => {
     return (
         <div className="flex justify-center items-center pt-6 pb-8 " >
 
-            <div className="w-[16.2rem] h-88 bg-lime-600  rounded-lg cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-105 hover:bg-[#db4444] flex flex-col items-center text-center group  hover:shadow-custom outline-none">
+            <div className="w-[16.2rem] h-88  rounded-lg cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-105 hover:bg-[#db4444] flex flex-col items-center text-center group  hover:shadow-custom outline-none hover:font-bold">
                 <div className="w-full h-[16rem] outline-none flex justify-center items-start rounded-t-lg overflow-hidden  ">
                     <img src={imgSrc} alt={name} className="w-[100%] h-auto bg-slate-100 object-cover" />
                 </div>
                 <div className="p-2">
                     <h5 className="text-lg font-semibold text-[#db4444] group-hover:text-white">{name}</h5>
-                    <p className=" text-sm text-gray-500 group-hover:text-[#54E346]">{role}</p>
+                    <p className=" text-sm text-gray-600 ">{role}</p>
                 </div>
                 <div className='w-[50%] h-12 flex justify-around items-center '>
                     <div><FaInstagram className='text-[1.2rem] text-[#db4444] group-hover:text-white' /></div>
