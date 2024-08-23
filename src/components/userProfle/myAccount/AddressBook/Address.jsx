@@ -7,9 +7,11 @@ import { FaRegEdit } from "react-icons/fa";
 import { useState } from "react";
 import CreateAddress from "@/components/createAddress/CreateAddress";
 
-function Address({ selectedAddress, setSelectedAddress }) {
+function Address({ selectedAddress, setSelectedAddress ,forNavigate }) {
     const { userAddress, refetch } = useFetchUserAddress(); 
     const [addId, setAddId] = useState('');
+    console.log("flage navigate", forNavigate);
+    
     const deleteAdd = async (Id) => {
         try {
             const deleteAddress = deleteData("/user/address", { addressId: Id });
@@ -35,7 +37,7 @@ function Address({ selectedAddress, setSelectedAddress }) {
     return (
         <div>
             {addId ? (
-                <CreateAddress AddId={addId} />
+                <CreateAddress AddId={addId} forNavi={forNavigate} />
             ) : (
                 <>
                     <h3 className='uppercase font-DM font-bold text-lg text-[#db4444]'>My Addressbook</h3>
@@ -60,13 +62,13 @@ function Address({ selectedAddress, setSelectedAddress }) {
                                  <span className="font-semibold">Mobile No.:</span> {value.PhoneNumber}
                                </label>
                                <div>
-                                   <li className='list-none flex gap-10 flex-col text-[11px] text-[#db4444] underline cursor-pointer' onClick={() => setAddId(value._id)} >
-                                                <FaRegEdit className="text-blue-400 text-xl"/>
+                                   <li className='list-none flex gap-10 flex-col text-[11px] text-[#db4444] underline cursor-pointer' >
+                                            <FaRegEdit className="text-blue-400 text-xl" onClick={() => setAddId(value._id)} />
                                             <MdDeleteForever
                                                 className='text-[#db4444] text-[1.5rem] cursor-pointer'
                                                 onClick={() => deleteAdd(value._id)}
                                             />
-                                            </li>
+                                   </li>
                                </div>
                              </div>
                            ))}

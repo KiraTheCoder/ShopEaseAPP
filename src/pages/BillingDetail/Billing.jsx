@@ -81,7 +81,7 @@ export default function Billing() {
       <div className="py-12 h-auto w-auto flex justify-around flex-wrap border">
         {userAddress.length > 0 ? (
           <>
-          <Address selectedAddress={selectedAddress} setSelectedAddress={setSelectedAddress} />
+          <Address selectedAddress={selectedAddress} setSelectedAddress={setSelectedAddress} forNavigate={"samepage"}/>
         </>
 
         ) : (

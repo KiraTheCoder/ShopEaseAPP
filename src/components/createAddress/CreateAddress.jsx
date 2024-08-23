@@ -3,9 +3,12 @@ import { Formik, Form } from 'formik';
 import { billingAddress } from "@/services/lib/YupFormikValidator";
 import { toast } from 'react-toastify';
 import { patchData, postData } from "@/services/apiCall";
+import { useNavigate } from "react-router-dom";
+function CreateAddress({ AddId, forNavi }) {
+    const navigate = useNavigate()
 
-function CreateAddress({AddId}) {
     
+    console.log("flage navigate 2 2 2 2 2", forNavi);
     async function submitForm(values, actions) {
         const val = values.phoneNumber;
         const isPhoneNumber = /^\d{10}$/.test(val);
@@ -13,13 +16,12 @@ function CreateAddress({AddId}) {
         if (isPhoneNumber) {
             values.phoneNumber = "+91" + val;
         }
-        
-          if (AddId) {
-            values.addressId=AddId;
-          }
 
+        if (AddId) {
+            values.addressId = AddId;
+        }
 
-        if (values.addressId=AddId) {
+        if (values.addressId = AddId) {
             try {
                 const updateAdd = patchData("/user/address/", values);
                 toast.promise(
@@ -29,31 +31,47 @@ function CreateAddress({AddId}) {
                     error: "User address couldn't be update."
                 }
                 );
-    
                 await updateAdd;
+                if (forNavi) {
+                    console.log("received succ",forNavi);
+                    
+                    navigate("/billing")
+                }
+                else {
+                    
+                    console.log("no received succ",forNavi);
+                    navigate("/useraccount/address")
+                }
                 actions.resetForm();
             }
             catch (error) {
                 toast.error(error?.response?.data?.message || "An error occurred.");
             }
         }
-        else{
-        try {
-            const saveAdd = postData("/user/address/", values);
-            toast.promise(
-                saveAdd, {
-                pending: "User address is being saved...",
-                success: "User address saved successfully!",
-                error: "User address couldn't be saved."
-            }
-            );
+        else {
+            try {
+                const saveAdd = postData("/user/address/", values);
+                toast.promise(
+                    saveAdd, {
+                    pending: "User address is being saved...",
+                    success: "User address saved successfully!",
+                    error: "User address couldn't be saved."
+                }
+                );
 
-            await saveAdd;
-            actions.resetForm();
+                await saveAdd;
+                if (forNavi) {
+                    navigate("/billing")
+                }
+                else {
+                    navigate("/useraccount/address")
+                }
+                actions.resetForm();
+            }
+            catch (error) {
+                toast.error(error?.response?.data?.message || "An error occurred.");
+            }
         }
-        catch (error) {
-            toast.error(error?.response?.data?.message || "An error occurred.");
-        }}
     }
 
     return (
