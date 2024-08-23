@@ -26,10 +26,13 @@ function Address() {
                 refetch(); 
             }
         } catch (error) {
+            // console.log('error ',error)
             toast.warn("Failed to delete address: " + error.message);
         }
     };
 
+   
+    if (!userAddress) return <div className="font-semibold">No addresses found.</div>;
 
     return (
         <div>
@@ -42,7 +45,7 @@ function Address() {
                         <div className="w-[30rem] flex gap-5 flex-wrap my-2 items-end">
                             {userAddress?.map((value, index) => (
                                 <div key={index} className='flex items-center gap-4'>
-                                    <div className='w-[20rem] flex items-center flex-wrap gap-2 text-[14px] p-3 bg-slate-200 capitalize'>
+                                    <div className='w-[20rem] flex items-center flex-wrap gap-2 text-[14px] p-3 bg-slate-200 capitalize border-4 border-amber-700'>
                                         <span className="font-semibold">Name:</span> {value?.fullName}, <span className="font-semibold">Street:</span> {value?.streetName}, <span className="font-semibold">Apartment / Floor:</span> {value?.aprtmentOrFloor}, <span className="font-semibold">Town / City:</span> {value?.townOrCity}, <span className="font-semibold">Mobile No.:</span> {value?.PhoneNumber}
                                     </div>
                                     <div>
