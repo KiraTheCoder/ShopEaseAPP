@@ -30,7 +30,6 @@ function ProductCart() {
     const [quantity, setQuantity] = useState(1)
     const { setCount } = useGetCount((state) => state);
 
-
     // Add to cart function
     const AddCart = async (Id, quantity) => {
         try {

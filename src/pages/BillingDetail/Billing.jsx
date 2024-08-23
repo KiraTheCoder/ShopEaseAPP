@@ -6,18 +6,16 @@ import { postData } from "@/services/apiCall";
 import { billingAddress, orderForm } from "@/services/lib/YupFormikValidator";
 import { useGetCount } from "@/services/zustandStore/zustandStore";
 import { Address, useFetchUserAddress } from "../../components/userProfle/myAccount/AddressBook/Address";
-import { MdDeleteForever } from "react-icons/md";
+import { useState } from "react";
+import congratulationsMsg from "@/assets/images/footerImages/thankYou.png"
 
 export default function Billing() {
   const { userAddress } = useFetchUserAddress();
   const { cartitems } = useGetCount((state) => state);
   const { cartData, payableAmount, totalPrice } = cartitems;
-
-
+  const [selectedAddress, setSelectedAddress] = useState(null);
+   const [congratulations, setCongratulations]=useState('')
   const productIDs = cartData.map((value) => { return value._id })
-
-  
-console.log("userAddress", userAddress);
 
   async function submitForm(values, actions) {
     const val = values.phoneNumber;
@@ -47,38 +45,49 @@ console.log("userAddress", userAddress);
 
   async function oderForm(values, actions) {
 
-    console.log("hello", values);
-
-    values.totalAmount = payableAmount
+    if (!selectedAddress) {
+      toast.error( "select your address first");
+    
+    }
+    delete selectedAddress._id
+    
+    values.totalAmount = `${payableAmount}`
     values.productIDs = productIDs
-    values.addresses = userAddress[0]
+    values.addresses = selectedAddress
 
     console.log("order form data", values);
 
-    // try {
-    //   const saveAdd = postData("/user/orders/", values);
-    //   toast.promise(
-    //     saveAdd, {
-    //     pending: "your order is being process...",
-    //     success: "your order successfully!",
-    //     error: "your order cancle"
-    //   }
-    //   );
-    //   await saveAdd;
-    //   actions.resetForm();
-    // }
-    // catch (error) {
-    //   toast.error(error?.response?.data?.message || "An error occurred.");
-    // }
+    try {
+      const OrderDone = postData("/user/orders/", values);
+      toast.promise(
+        OrderDone, {
+        pending: "your order is being process...",
+        success: "your order successfully!",
+        error: "your order cancle"
+      }
+      );
+     const result  =await OrderDone;
+      console.log("OrderDone", result);
+      setCongratulations(result.success)
+      actions.resetForm();
+    }
+    catch (error) {
+      toast.error(error?.response?.data?.message || "An error occurred.");
+    }
   }
 
-  return (
+
+  return congratulations? <div className="h-[100vh] w-[100vw] flex justify-center items-center">
+            <div className=" w-auto px-4  flex justify-center items-center flex-col">
+              <img src={congratulationsMsg} alt="than you" className="h-auto w-[50vw]"/>
+            </div>
+    </div> : (
     <div className="h-auto w-full">
       <div className="py-12 h-auto w-auto flex justify-around flex-wrap border">
         {userAddress.length > 0 ? (
           <>
-            <Address />
-          </>
+          <Address selectedAddress={selectedAddress} setSelectedAddress={setSelectedAddress} />
+        </>
 
         ) : (
           <div className="h-auto w-[30rem] px-[4rem]">
@@ -142,9 +151,6 @@ console.log("userAddress", userAddress);
             </div>
           </div>
 
-          {/*  */}
-
-
           <Formik
             initialValues={orderForm.initialValues}
             enableReinitialize
@@ -166,20 +172,7 @@ console.log("userAddress", userAddress);
               </Form>
             )}
           </Formik>
-          {/*  */}
-
-
-          {/* <div className="flex items-center space-x-3 py-2">
-            <input type="radio" name="tick" id="radio1" className="form-checkbox h-4 w-4 rounded" />
-            <label htmlFor="radio1" className="text-[13px] font-medium">Bank</label>
-          </div>
-
-          <div className="flex items-center space-x-3 py-2">
-            <input type="radio" name="tick" id="radio2" className="form-checkbox h-4 w-4 rounded" />
-            <label htmlFor="radio2" className="text-[13px] font-medium">Cash on delivery</label>
-          </div>
-          
-          <Button type={"submit"} name={"ORDER"} style="w-[60%] m-4" /> */}
+        
           <li className="my-4 list-none">
             <Link to={"/cart"} className="text-blue-700">↩ Back...</Link>
           </li>

@@ -3,6 +3,7 @@ import { getData } from "@/services/apiCall";
 import { useEffect, useState } from "react";
 import { toast } from 'react-toastify';
 import { Link } from "react-router-dom";
+import { FaRegEdit } from "react-icons/fa";
 
 function MyProfile() {
     const [userData, setUserData] = useState(null);
@@ -49,16 +50,16 @@ function MyProfile() {
                     <ShowFieldData heading={"First Name"} data={firstName} />
                     {middleName && <ShowFieldData heading={"Middle Name"} data={middleName} />}
                     <ShowFieldData heading={"Last Name"} data={lastName} />
-                    <div><Link to={"/useraccount/updateName"} className='list-none text-[10px] text-[#db4444] underline'>Modify name</Link></div>
+                    <div><Link to={"/useraccount/updateName"} className='list-none '><FaRegEdit className="text-blue-400 text-xl"/></Link></div>
                 </div>
                 <div className='flex gap-5 flex-wrap border my-2 items-end'>
                     <ShowFieldData heading={"Email"} data={email || "N/A"} />
                     <ShowFieldData heading={"Mobile No"} data={phoneNumber || "N/A"} />
-                    <div><Link to={"/updateAdd"} className='list-none text-[10px] text-[#db4444] underline'>Add email Or PhoneNo.</Link></div>
+                    <div><Link to={"/updateAdd"} className='list-none '><FaRegEdit className="text-blue-400 text-xl"/></Link></div>
                 </div>
                 <div className='flex gap-5 flex-wrap border my-2 items-end'>
                     <ShowFieldData heading={"Password"} data={"•••••••••••••••"} />
-                    <div><Link to={"/forgetpassword"} className='list-none text-[10px] text-[#db4444] underline'>Modify password</Link></div>
+                    <div><Link to={"/forgetpassword"} className='list-none '><FaRegEdit className="text-blue-400 text-xl"/></Link></div>
                 </div>
             </div>
         </div>
