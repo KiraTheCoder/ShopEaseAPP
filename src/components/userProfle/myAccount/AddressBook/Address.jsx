@@ -7,10 +7,9 @@ import { FaRegEdit } from "react-icons/fa";
 import { useState } from "react";
 import CreateAddress from "@/components/createAddress/CreateAddress";
 
-function Address({ selectedAddress, setSelectedAddress ,forNavigate }) {
+function Address({ selectedAddress, setSelectedAddress  }) {
     const { userAddress, refetch } = useFetchUserAddress(); 
     const [addId, setAddId] = useState('');
-    console.log("flage navigate", forNavigate);
     
     const deleteAdd = async (Id) => {
         try {
@@ -37,7 +36,7 @@ function Address({ selectedAddress, setSelectedAddress ,forNavigate }) {
     return (
         <div>
             {addId ? (
-                <CreateAddress AddId={addId} forNavi={forNavigate} />
+                <CreateAddress AddId={addId}  />
             ) : (
                 <>
                     <h3 className='uppercase font-DM font-bold text-lg text-[#db4444]'>My Addressbook</h3>

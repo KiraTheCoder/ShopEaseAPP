@@ -4,11 +4,8 @@ import { billingAddress } from "@/services/lib/YupFormikValidator";
 import { toast } from 'react-toastify';
 import { patchData, postData } from "@/services/apiCall";
 import { useNavigate } from "react-router-dom";
-function CreateAddress({ AddId, forNavi }) {
+function CreateAddress({ AddId }) {
     const navigate = useNavigate()
-
-    
-    console.log("flage navigate 2 2 2 2 2", forNavi);
     async function submitForm(values, actions) {
         const val = values.phoneNumber;
         const isPhoneNumber = /^\d{10}$/.test(val);
@@ -31,18 +28,11 @@ function CreateAddress({ AddId, forNavi }) {
                     error: "User address couldn't be update."
                 }
                 );
-                await updateAdd;
-                if (forNavi) {
-                    console.log("received succ",forNavi);
-                    
-                    navigate("/billing")
-                }
-                else {
-                    
-                    console.log("no received succ",forNavi);
+                const updateAddress = await updateAdd;
+                if (updateAddress.success) {
                     navigate("/useraccount/address")
+                    actions.resetForm();
                 }
-                actions.resetForm();
             }
             catch (error) {
                 toast.error(error?.response?.data?.message || "An error occurred.");
@@ -59,14 +49,11 @@ function CreateAddress({ AddId, forNavi }) {
                 }
                 );
 
-                await saveAdd;
-                if (forNavi) {
-                    navigate("/billing")
-                }
-                else {
+                const result = await saveAdd;
+                if (result.success) {
                     navigate("/useraccount/address")
+                    actions.resetForm();
                 }
-                actions.resetForm();
             }
             catch (error) {
                 toast.error(error?.response?.data?.message || "An error occurred.");

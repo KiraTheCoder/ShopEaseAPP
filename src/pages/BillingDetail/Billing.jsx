@@ -7,6 +7,7 @@ import { billingAddress, orderForm } from "@/services/lib/YupFormikValidator";
 import { useGetCount } from "@/services/zustandStore/zustandStore";
 import { Address, useFetchUserAddress } from "../../components/userProfle/myAccount/AddressBook/Address";
 import { useState } from "react";
+import congratulationsMsg from "@/assets/images/footerImages/thankYou.png"
 
 export default function Billing() {
   const { userAddress } = useFetchUserAddress();
@@ -76,12 +77,16 @@ export default function Billing() {
   }
 
 
-  return congratulations? <div className="h-[100vh] w-[100vw] flex justify-center items-center"><div className="h-[15rem] w-auto px-4 bg-slate-400 rounded-lg flex justify-center items-center flex-col"><h2 className=" text-[3rem] uppercase">congratulations...</h2> <p className="text-4xl">🥰</p></div></div> : (
+  return congratulations? <div className="h-[100vh] w-[100vw] flex justify-center items-center">
+            <div className=" w-auto px-4  flex justify-center items-center flex-col">
+              <img src={congratulationsMsg} alt="than you" className="h-auto w-[50vw]"/>
+            </div>
+    </div> : (
     <div className="h-auto w-full">
       <div className="py-12 h-auto w-auto flex justify-around flex-wrap border">
         {userAddress.length > 0 ? (
           <>
-          <Address selectedAddress={selectedAddress} setSelectedAddress={setSelectedAddress} forNavigate={"samepage"}/>
+          <Address selectedAddress={selectedAddress} setSelectedAddress={setSelectedAddress} />
         </>
 
         ) : (
