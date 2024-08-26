@@ -20,17 +20,18 @@ export default function Billing() {
   const { buyingProduct,setBuyProduct } = useBuyProduct();  
 
   let buyTotalAmt = buyingProduct?.quantity * buyingProduct?.price; 
+  let buyTotalAmtShow = buyingProduct?.quantity * buyingProduct?.price; 
   if (buyTotalAmt>0 && buyTotalAmt<500) {
-     buyTotalAmt= buyTotalAmt+50
-  } 
-  totalPrice = buyTotalAmt ? buyTotalAmt : totalPrice;
+      buyTotalAmt= buyTotalAmt+50 ;
+    }
+    totalPrice = buyTotalAmt ? buyTotalAmt : totalPrice ;
 
   const productIDs = Array.isArray(buyingProduct)
   ? buyingProduct.map((value) => value._id)
   : (cartData ? cartData.map((value) => value._id) : []);
 
-  console.log("produ", buyingProduct);
-  
+console.log("cart data is ", cartData);
+
 
   async function submitForm(values, actions) {
     const val = values.phoneNumber;
@@ -192,7 +193,7 @@ export default function Billing() {
           <div className="h-auto w-[20rem] my-5">
             <div className="flex justify-between border-b border-gray-300 py-3">
               <p className="text-sm font-semibold">Subtotal:</p>
-              <p className="text-sm">₹ {totalPrice}</p>
+              <p className="text-sm">₹ {buyTotalAmtShow?buyTotalAmtShow:totalPrice}</p>
             </div>
 
             <div className="flex justify-between border-b border-gray-300 py-3">
