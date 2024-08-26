@@ -4,7 +4,8 @@ import Offercard from "@/components/cards/offercard/Offercard";
 import { Button } from "@/components/form";
 import ProductInfo from "@/components/productDetails/prductinfo/ProductInfo";
 import { postData } from "@/services/apiCall";
-import { useGetProduct } from "@/services/zustandStore";
+import { useGetProduct, useBuyProduct } from "@/services/zustandStore";
+// import {useBuyProduct} from "@/services/zustandStore"
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
@@ -22,12 +23,18 @@ function ProductCart() {
         }
     })
     const Product = useGetProduct((state) => state.product);
+    
+    //.................. Buy product....................
+    const {setBuyProduct, buyingProduct} = useBuyProduct ((state)=> state.buyingProduct)
+    console.log("@@@@@", buyingProduct);
+    
 
     const { images, discount, price, productName, description, color, _id } = Product;
     const MRP = Math.ceil(price / (1 - discount / 100));
     const [mainImg, setMainImg] = useState(images?.[0]);
 
     const [quantity, setQuantity] = useState(1)
+
     const { setCount } = useGetCount((state) => state);
 
     // Add to cart function
@@ -61,6 +68,12 @@ function ProductCart() {
             setQuantity(quantity - 1);
         }
     };
+ 
+   const Buyproduct = (quantity)=>{
+   Product.quantity = quantity
+   setBuyProduct(Product)
+
+   }
 
     return (
         <>
@@ -87,6 +100,7 @@ function ProductCart() {
                                 name={"BUY NOW"}
                                 type={"submit"}
                                 style={"py-2 px-10 text-white font-bold text-sm rounded-3xl bg-green-800 hover:bg-green-600 hover:text-black"}
+                                onClick={() => Buyproduct(quantity)}
                             />
                             <Button
                                 name={"ADD TO CART"}

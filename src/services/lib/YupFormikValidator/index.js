@@ -44,7 +44,7 @@ const nameValidate = Yup.string()
 
   const streetAddressValidate = Yup.string()
   .trim()
-
+  .required("Street or Address required")
   .min(1, "Street name required")
   .max(200, "Street Address is too long");
 
@@ -55,6 +55,7 @@ const nameValidate = Yup.string()
 
   const townOrCityValidation= Yup.string()
   .trim()
+  .required('Town or City is required')
   .min(1, "Town or City  required")
   .max(200, "Town or City  is too long");
   

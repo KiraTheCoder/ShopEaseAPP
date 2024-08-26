@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { postData } from "@/services/apiCall";
 import { billingAddress, orderForm } from "@/services/lib/YupFormikValidator";
-import { useGetCount } from "@/services/zustandStore/zustandStore";
+import { useBuyProduct, useGetCount } from "@/services/zustandStore/zustandStore";
 import { Address, useFetchUserAddress } from "../../components/userProfle/myAccount/AddressBook/Address";
 import { useState } from "react";
 import congratulationsMsg from "@/assets/images/footerImages/thankYou.png"
@@ -16,6 +16,9 @@ export default function Billing() {
   const [selectedAddress, setSelectedAddress] = useState(null);
    const [congratulations, setCongratulations]=useState('')
   const productIDs = cartData.map((value) => { return value._id })
+  const rohit = useBuyProduct ((state)=> state.buyingProduct)
+  console.log('gfash'+ rohit)
+
 
   async function submitForm(values, actions) {
     const val = values.phoneNumber;
@@ -75,7 +78,7 @@ export default function Billing() {
       toast.error(error?.response?.data?.message || "An error occurred.");
     }
   }
-
+  
 
   return congratulations? <div className="h-[100vh] w-[100vw] flex justify-center items-center">
             <div className=" w-auto px-4  flex justify-center items-center flex-col">
