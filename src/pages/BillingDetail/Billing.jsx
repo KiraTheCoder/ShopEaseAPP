@@ -17,14 +17,20 @@ export default function Billing() {
   let { cartData, payableAmount, totalPrice } = cartitems;
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [congratulations, setCongratulations] = useState(false);
-  const { buyingProduct } = useBuyProduct();  
+  const { buyingProduct,setBuyProduct } = useBuyProduct();  
 
-  let buyTotalAmt = buyingProduct?.quantity * buyingProduct?.price;  
+  let buyTotalAmt = buyingProduct?.quantity * buyingProduct?.price; 
+  if (buyTotalAmt>0 && buyTotalAmt<500) {
+     buyTotalAmt= buyTotalAmt+50
+  } 
   totalPrice = buyTotalAmt ? buyTotalAmt : totalPrice;
 
+  const productIDs = Array.isArray(buyingProduct)
+  ? buyingProduct.map((value) => value._id)
+  : (cartData ? cartData.map((value) => value._id) : []);
 
-
-  const productIDs = cartData.map((value) => value._id);
+  console.log("produ", buyingProduct);
+  
 
   async function submitForm(values, actions) {
     const val = values.phoneNumber;
@@ -56,7 +62,10 @@ export default function Billing() {
     }
   }
 
-  async function orderForm(values, actions) {
+  async function orderSubmit(values, actions) {
+
+    console.log("for data", values);
+    
     if (!selectedAddress) {
       toast.error("Select your address first");
       return;
@@ -66,7 +75,7 @@ export default function Billing() {
     delete addressCopy._id;
 
     values.totalAmount = `${buyTotalAmt? buyTotalAmt:payableAmount}`;
-    values.productIDs = `${buyingProduct._id? buyingProduct._id :productIDs}`;
+    values.productIDs=productIDs
     values.addresses = addressCopy;
 
     try {
@@ -83,6 +92,8 @@ export default function Billing() {
       if (result.success) {
         setCongratulations(true);
         actions.resetForm();
+        setBuyProduct(" ")
+
       }
     } catch (error) {
       toast.error(error?.response?.data?.message || "An error occurred.");
@@ -134,30 +145,41 @@ export default function Billing() {
           {buyingProduct ? (
             <div className="h-auto w-[20rem] flex justify-between items-center my-4">
               <div className="flex gap-4 items-center">
-                <img
-                  src={buyingProduct?.images[0]?.length > 0
-                    ? `data:${buyingProduct.images[0].contentType};base64,${buyingProduct.images[0].data}`
-                    : 'placeholder-image-url'} // Fallback image URL if no image is available
+               <img
+                  src={
+                    buyingProduct?.images?.length > 0 && buyingProduct.images[0]?.data
+                      ? `data:${buyingProduct.images[0].contentType};base64,${buyingProduct.images[0].data}`
+                      : 'placeholder-image-url' // Fallback image URL if no image is available
+                  }
                   alt={buyingProduct?.productName || 'Product Image'}
                   className="h-[4rem] w-[4rem] rounded-sm"
                 />
                 <p className="text-sm font-semibold">{buyingProduct?.productName || 'Product Name'}</p>
-                <p className="text-sm font-semibold">({buyingProduct?.productCount || 'No of products'})</p>
+                <p className="text-sm font-semibold">({buyingProduct?.quantity || 'No of products'})</p>
               </div>
-              <p className="text-sm">₹ {(buyingProduct?.price) * (buyingProduct.productCount) || 'Price not available'}</p>
+              <p className="text-sm">₹ {(buyingProduct?.price)*(buyingProduct.quantity) || 'Price not available'}</p>
             </div>
           ) : (
             <>
-              {cartData.length > 0 ? cartData.map((product) => (
+              {cartData.length > 0 ? cartData?.map((product) => (
                 <div key={product._id} className="h-auto w-[20rem] flex justify-between items-center my-4">
                   <div className="flex gap-4 items-center">
-                    <img
+                    {/* <img
                       src={product?.images?.length > 0
                         ? `data:${product.images[0].contentType};base64,${product.images[0].data}`
                         : 'placeholder-image-url'} // Fallback image URL if no image is available
                       alt={product?.productName || 'Product Image'}
                       className="h-[4rem] w-[4rem] rounded-sm"
-                    />
+                    /> */}
+                   <img
+                  src={
+                    product?.images?.length > 0 && product.images[0]?.data
+                      ? `data:${product.images[0].contentType};base64,${product.images[0].data}`
+                      : 'placeholder-image-url' // Fallback image URL if no image is available
+                  }
+                  alt={product?.productName || 'Product Image'}
+                  className="h-[4rem] w-[4rem] rounded-sm"
+                />
                     <p className="text-sm font-semibold">{product?.productName || 'Product Name'}</p>
                     <p className="text-sm font-semibold">({product?.productCount || 'No of products'})</p>
                   </div>
@@ -175,12 +197,12 @@ export default function Billing() {
 
             <div className="flex justify-between border-b border-gray-300 py-3">
               <p className="text-sm font-semibold">Shipping:</p>
-              <p className="text-sm">₹ {totalPrice > 500 ? "00" : "50"}</p>
+              <p className="text-sm"> ₹ {totalPrice > 500 ? "00" : "50"}</p>
             </div>
 
             <div className="flex justify-between pt-3">
               <p className="text-sm font-semibold">Total:</p>
-              <p className="text-sm">₹ {payableAmount}</p>
+              <p className="text-sm">₹ {buyTotalAmt?buyTotalAmt:payableAmount}</p>
             </div>
           </div>
 
@@ -188,9 +210,9 @@ export default function Billing() {
             initialValues={orderForm.initialValues}
             enableReinitialize
             validationSchema={orderForm.validationSchema}
-            onSubmit={orderForm}
+            onSubmit={orderSubmit}
           >
-            {() => (
+            {({ errors, touched }) => (
               <Form>
                 <div className="flex items-center space-x-3 py-2">
                   <Field type="radio" name="paymentMethod" id="radio1" value="Bank" className="form-checkbox h-4 w-4 rounded" />
@@ -201,7 +223,7 @@ export default function Billing() {
                   <label htmlFor="radio2" className="text-[13px] font-medium">Cash on delivery</label>
                 </div>
                 <ErrorMessage name="paymentMethod" component="div" className="text-red-500 text-xs mt-1" />
-                <Button type="submit" name="ORDER" style="w-[60%] m-4" />
+                <Button type={"submit"} name={"ORDER"} style="w-[60%] m-4" />
               </Form>
             )}
           </Formik>
@@ -354,8 +376,8 @@ export default function Billing() {
 //             <div className="h-auto w-[20rem] flex justify-between items-center my-4">
 //               <div className="flex gap-4 items-center">
 //                 <img
-//                   src={buyingProduct?.images[0]?.length > 0
-//                     ? `data:${buyingProduct.images[0].contentType};base64,${buyingProduct.images[0].data}`
+//                   src={buyingProduct?.images[0]?.length > 0 ?
+                    //  `data:${buyingProduct.images[0].contentType};base64,${buyingProduct.images[0].data}`
 //                     : 'placeholder-image-url'} // Fallback image URL if no image is available
 //                   alt={buyingProduct?.productName || 'Product Image'}
 //                   className="h-[4rem] w-[4rem] rounded-sm"
@@ -371,8 +393,8 @@ export default function Billing() {
 //                 <div key={product._id} className="h-auto w-[20rem] flex justify-between items-center my-4">
 //                   <div className="flex gap-4 items-center">
 //                     <img
-//                       src={product?.images?.length > 0
-//                         ? `data:${product.images[0].contentType};base64,${product.images[0].data}`
+//                       src={product?.images?.length > 0 ?
+//                         `data:${product.images[0].contentType};base64,${product.images[0].data}`
 //                         : 'placeholder-image-url'} // Fallback image URL if no image is available
 //                       alt={product?.productName || 'Product Image'}
 //                       className="h-[4rem] w-[4rem] rounded-sm"

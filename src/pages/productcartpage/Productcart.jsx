@@ -100,7 +100,7 @@ function ProductCart() {
                                 name={"BUY NOW"}
                                 type={"submit"}
                                 style={"py-2 px-10 text-white font-bold text-sm rounded-3xl bg-green-800 hover:bg-green-600 hover:text-black"}
-                                onClick={() => Buyproduct(quantity)}
+                                onClick={() =>{ Buyproduct(quantity); navigate("/billing")}}
                             />
                             <Button
                                 name={"ADD TO CART"}

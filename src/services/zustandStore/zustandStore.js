@@ -52,19 +52,6 @@ const useGetCount = create(
   })
 );
 
-// ////////////////// Buy Product  ////////////////
-// const getBuyProduct = (set) => ({
-//   buyingProduct: "",
-//   setBuyProduct: (buyingProduct) => set({ buyingProduct }),
-// });
-
-// const useBuyProduct = create(
-//   devtools(getBuyProduct, {
-//     name: "buyingProduct",
-//     getStorage: () => localStorage,
-//   })
-// );
-
 
 ////////////////// Buy Product  ////////////////
 const getBuyProduct = (set) => ({
