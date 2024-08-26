@@ -25,7 +25,7 @@ function ProductCart() {
     const Product = useGetProduct((state) => state.product);
     
     //.................. Buy product....................
-    const {setBuyProduct, buyingProduct} = useBuyProduct ((state)=> state.buyingProduct)
+  const { buyingProduct, setBuyProduct } = useBuyProduct();
     console.log("@@@@@", buyingProduct);
     
 
@@ -71,7 +71,7 @@ function ProductCart() {
  
    const Buyproduct = (quantity)=>{
    Product.quantity = quantity
-   setBuyProduct(Product)
+   setBuyProduct(Product);
 
    }
 

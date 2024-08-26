@@ -21,6 +21,7 @@ import Billing from './pages/BillingDetail/Billing.jsx';
 import { Address } from './components/userProfle/myAccount/AddressBook/Address.jsx';
 import CreateAddress from './components/createAddress/CreateAddress.jsx';
 import UpdateName from './components/updateName/UpdateName.jsx';
+import NewArrivals from './pages/NewArrivalsPage/NewArrivals.jsx';
 
 const router = createBrowserRouter([
   {
@@ -36,8 +37,8 @@ const router = createBrowserRouter([
         element: <About />
       },
       {
-        path: "/brands",
-        element: <Brands />
+        path: "/newarrivals",
+        element: <NewArrivals />
       },
       {
         path: "/contact",

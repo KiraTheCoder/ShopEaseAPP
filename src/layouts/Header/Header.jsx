@@ -48,8 +48,7 @@ function Header() {
                 </div>
                 <nav className="hidden md:flex justify-around w-[35%]">
                     <CustomNavLink to="/">Shop</CustomNavLink>
-                    <CustomNavLink to="/contact">New Arrivals</CustomNavLink>
-                    <CustomNavLink to="/brands">Brands</CustomNavLink>
+                    <CustomNavLink to="/newarrivals">New Arrivals</CustomNavLink>
                     {isLoggedIn ? (
                         <NavLink
                             to="/"
@@ -96,10 +95,8 @@ function Header() {
                 </button>
                 <div className={`w-[87%] sm:w-[80%] flex justify-around sm:justify-start sm:gap-7 ${isMenuOpen ? 'block' : 'hidden'}`}>
                     <CustomNavLink to="/">Shop</CustomNavLink>
-                    <CustomNavLink to="/onsale">On Sale</CustomNavLink>
-                    <CustomNavLink to="/contact">New Arrivals</CustomNavLink>
-                    <CustomNavLink to="/brands">Brands</CustomNavLink>
-                    {isLoggedIn ? (
+                    <CustomNavLink to="/newarrivals">New Arrivals</CustomNavLink>
+                   {isLoggedIn ? (
                         <CustomNavLink
                             to="/"
                             onClick={() => removeToken()}
