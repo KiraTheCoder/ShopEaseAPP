@@ -20,6 +20,7 @@ import { toast } from 'react-toastify';
             //         success: "User address fetched successfully!",
             //         error: "User address couldn't be fetched."
             //     });
+
             const response = await fetchAdd;
             setUserAddress(response?.data?.addresses);
             // setUserAddress(fetchAdd?.data?.addresses);

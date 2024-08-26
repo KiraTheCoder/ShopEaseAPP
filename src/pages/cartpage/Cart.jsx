@@ -123,7 +123,7 @@ function Cart() {
                     error: {
                         render: 'Something went wrong.. 🤯',
                         autoClose: 500,
-                    },
+                    }
 
                 }
             );
@@ -238,8 +238,11 @@ function Cart() {
                         <hr />
                         <p className='text-[14px] my-1 font-bold'>Total Amount: <span className='float-right'>₹ {payableAmount}</span></p>
                     </div>
-                    <button className='bg-orange-400 w-[100%] mt-2 h-[2.5rem] rounded-md hover:bg-orange-500 font-bold hover:text-white transition-colors text-sm '>
-                        <Link to={"/billing"} className='flex justify-center items-center gap-3'>Checkout <FaArrowRight className='' /></Link>
+                    <button className='bg-orange-400 w-[100%] mt-2 h-[2.5rem] rounded-md hover:bg-orange-500 font-bold hover:text-white transition-colors text-sm ' onClick={()=>{if (cartData.length > 0)
+                     {navigate('/billing')
+                    }}}>
+                        {/* <Link to={"/billing"} className='flex justify-center items-center gap-3'>Checkout <FaArrowRight className='' /></Link> */}
+                        Chechout
                     </button>
                 </div>
             </div>

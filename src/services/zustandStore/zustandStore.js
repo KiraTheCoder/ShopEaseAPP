@@ -43,7 +43,6 @@ const getCount = (set) => ({
   // setSubAmount: (subAmount)=> set ({subAmount})
 });
 
-
 const useGetCount = create(
   devtools(getCount, {
     name: "count",
@@ -52,6 +51,20 @@ const useGetCount = create(
     getStorage: () => localStorage,
   })
 );
+
+////////////////// Buy Product  ////////////////
+const getBuyProduct = (set) => ({
+  buyingProduct: "",
+  setBuyProduct: (buyingProduct) => set({ buyingProduct }),
+});
+
+const useBuyProduct = create(
+  devtools(getBuyProduct, {
+    name: "buyingProduct",
+    getStorage: () => localStorage,
+  })
+);
+
 ////////////////// product pagination  ////////////////
 const pagination = (set) => ({
   pageNo: 1,
@@ -70,7 +83,7 @@ const usePagination = create(
 
 
 ///////  Exports /////////////////////////
-export { useAuthStore, useGetProduct, useGetCount, usePagination };
+export { useAuthStore, useGetProduct, useGetCount, usePagination, useBuyProduct };
 
 /* 
 get().state --> useful when work conditional state
