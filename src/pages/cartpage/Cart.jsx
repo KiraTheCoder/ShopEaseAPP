@@ -10,6 +10,7 @@ import { useAuthStore, useGetCount } from "@/services/zustandStore/zustandStore"
 function Cart() {
     const setCount = useGetCount((state) => state.setCount);
     const setCartitems = useGetCount((state) => state.setCartitems);
+    // const {setCount, setCartitems}=useGetCount((s)=>s)
     // const setSubAmount = useGetCount((state) => state.setSubAmount);
     const isLoggedin = useAuthStore((state) => state.token);
     const navigate = useNavigate();
@@ -231,7 +232,7 @@ function Cart() {
                     <div className='my-2'>
                         <h5 className='font-DM text-[15px] font-bold'>Price Details</h5>
                         <p className='text-[14px] my-1'>Total MRP: <span className='float-right'>₹ {totalMRP}</span></p>
-                        <p className='text-[14px] my-1'>Discount on MRP: <span className='float-right'>₹ {discountAmount}</span></p>
+                        <p className='text-[14px] my-1'>Discount on MRP: <span className='float-right'>- ₹ {discountAmount}</span></p>
                         <p className='text-[14px] my-1'>Coupon Discount: <span className='float-right text-orange-500 font-medium italic'>Apply Coupon</span></p>
                         <p className='text-[14px] my-1'>Convenience Fee: <span className='float-right text-orange-500 font-medium '>₹ {totalPrice >= 1 && totalPrice < 500 ? 50 : "00"}</span></p>
                         <hr />

@@ -10,7 +10,7 @@ import { usePagination } from "@/services/zustandStore"
 
 function ItemsCollection() {
   let limit = 10
-  const [pagesLength, setPagesLength] = [3]
+  const [pagesLength, setPagesLength] = [1]
   const [products, setProducts] = useState([])
   const { pageNo, setPageNo } = usePagination(state => state)
 
@@ -27,6 +27,8 @@ function ItemsCollection() {
         limit: limit
       });
 
+      console.log("all items", result2);
+      
       setProducts(result2?.data)
     })()
   }, [pageNo])

@@ -10,7 +10,7 @@ import { useState } from "react";
 import congratulationsMsg from "@/assets/images/footerImages/thankYou.png"
 
 export default function Billing() {
-  const { userAddress } = useFetchUserAddress();
+  const { userAddress, refetch } = useFetchUserAddress();
   const { cartitems } = useGetCount((state) => state);
   const { cartData, payableAmount, totalPrice } = cartitems;
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -35,8 +35,11 @@ export default function Billing() {
       }
       );
 
-      await saveAdd;
+     const result= await saveAdd;
+     if (result.success) {
+      refetch()
       actions.resetForm();
+     }
     }
     catch (error) {
       toast.error(error?.response?.data?.message || "An error occurred.");
@@ -77,7 +80,7 @@ export default function Billing() {
   }
 
 
-  return congratulations? <div className="h-[100vh] w-[100vw] flex justify-center items-center">
+  return congratulations? <div className="h-auto w-full flex justify-center items-center">
             <div className=" w-auto px-4  flex justify-center items-center flex-col">
               <img src={congratulationsMsg} alt="than you" className="h-auto w-[50vw]"/>
             </div>

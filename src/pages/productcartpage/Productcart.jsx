@@ -24,7 +24,7 @@ function ProductCart() {
     const Product = useGetProduct((state) => state.product);
 
     const { images, discount, price, productName, description, color, _id } = Product;
-    const MRP = Math.ceil(price / (1 - discount / 100));
+    const MRP = Math.ceil(price / (1 - parseInt(discount) / 100));
     const [mainImg, setMainImg] = useState(images?.[0]);
 
     const [quantity, setQuantity] = useState(1)
