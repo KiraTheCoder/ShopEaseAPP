@@ -7,7 +7,6 @@ import Shimmer from "@/components/shimmer/Shimmer"
 import { usePagination } from "@/services/zustandStore"
 
 
-
 function ItemsCollection() {
   let limit = 10
   const [pagesLength, setPagesLength] = [1]
@@ -26,9 +25,6 @@ function ItemsCollection() {
         pageNo: pageNo,
         limit: limit
       });
-
-      console.log("all items", result2);
-      
       setProducts(result2?.data)
     })()
   }, [pageNo])

@@ -62,7 +62,7 @@ function Cart() {
 
                 }
             );
-        const result =await deleteItem;
+            const result = await deleteItem;
             if (result?.success) {
                 getCartData();
             }
@@ -95,7 +95,7 @@ function Cart() {
                 }
             );
 
-           const result=  await removeitem;
+            const result = await removeitem;
             if (result?.success) {
                 getCartData();
             }
@@ -158,7 +158,7 @@ function Cart() {
     const tBill = totalPrice >= 1 && totalPrice < 500 ? totalMRP + 50 : totalMRP;
     const payableAmount = tBill - discountAmount;
 
-    setCartitems({cartData, payableAmount, totalPrice})
+    setCartitems({ cartData, payableAmount, totalPrice })
     return (
         <div className='w-[90vw] sm:w-[80vw] lg:w-[85vw] xl:w-[80vw] m-auto my-4  sm:my-12'>
             <h2 className='uppercase font-inter font-bold text-xl sm:text-3xl flex items-center gap-4 my-3'>
@@ -212,9 +212,14 @@ function Cart() {
                             </div>
                         </div>
                     )) : (
-                        <div className='p-4 text-center'>
-                            <p className='font-semibold text-orange-600 text-xl'>Your cart is empty.</p>
-                        </div>
+                        <>
+                            <div className='p-4 text-center'>
+                                <p className='font-semibold text-orange-600 text-xl'>Your cart is empty.</p>
+                            </div>
+                            <li className="my-4 list-none text-center">
+                                <Link to="/" className="text-blue-700">↩ Go to home ...</Link>
+                            </li>
+                        </>
                     )}
                 </div>
                 <div className='border-2 mt-6 lg:mt-0 rounded-lg py-4 px-2 sm:h-[21rem]  w-[23rem] lg:w-[17rem] xl:w-[23rem]'>
@@ -238,9 +243,11 @@ function Cart() {
                         <hr />
                         <p className='text-[14px] my-1 font-bold'>Total Amount: <span className='float-right'>₹ {payableAmount}</span></p>
                     </div>
-                    <button className='bg-orange-400 w-[100%] mt-2 h-[2.5rem] rounded-md hover:bg-orange-500 font-bold hover:text-white transition-colors text-sm ' onClick={()=>{if (cartData.length > 0)
-                     {navigate('/billing')
-                    }}}>
+                    <button className='bg-orange-400 w-[100%] mt-2 h-[2.5rem] rounded-md hover:bg-orange-500 font-bold hover:text-white transition-colors text-sm ' onClick={() => {
+                        if (cartData.length > 0) {
+                            navigate('/billing')
+                        }
+                    }}>
                         {/* <Link to={"/billing"} className='flex justify-center items-center gap-3'>Checkout <FaArrowRight className='' /></Link> */}
                         Chechout
                     </button>
