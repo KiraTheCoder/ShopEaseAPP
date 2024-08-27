@@ -1,10 +1,13 @@
 import { getData } from '@/services/apiCall';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-
+import { useNavigate } from 'react-router-dom';
+import { useGetProduct } from '@/services/zustandStore';
 function MyHistory() {
     // Correctly initialize state
     const [historyItems, setHistoryItems] = useState([]);
+    const  setProduct = useGetProduct((state=>state.setProduct))
+    const navigate=useNavigate()
 
     useEffect(() => {
         historyData();
@@ -39,6 +42,10 @@ function MyHistory() {
                 {historyItems.length > 0 ? (
                     historyItems.map((item) => (
                         <div
+                            onClick={()=>{
+                            setProduct(item)
+                            navigate("/useraccount/historyitems")
+                            }} 
                             key={item.id}
                             className="border p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow "
                         >

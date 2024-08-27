@@ -26,8 +26,6 @@ function ProductCart() {
     
     //.................. Buy product....................
   const { buyingProduct, setBuyProduct } = useBuyProduct();
-    console.log("@@@@@", buyingProduct);
-    
 
     const { images, discount, price, productName, description, color, _id } = Product;
     const MRP = Math.ceil(price / (1 - parseInt(discount) / 100));

@@ -23,6 +23,7 @@ import CreateAddress from './components/createAddress/CreateAddress.jsx';
 import UpdateName from './components/updateName/UpdateName.jsx';
 import NewArrivals from './pages/NewArrivalsPage/NewArrivals.jsx';
 import MyHistory from './components/userProfle/myOrders/myHistory/MyHistory.jsx';
+import HistoryItem from './components/userProfle/myOrders/myHistory/HistoryItem.jsx';
 
 const router = createBrowserRouter([
   {
@@ -96,6 +97,10 @@ const router = createBrowserRouter([
           {
             path:"/useraccount/myhistory",
             element:<MyHistory/>
+          },
+          {
+            path:"/useraccount/historyitems",
+            element:<HistoryItem/>
           },
       
           {

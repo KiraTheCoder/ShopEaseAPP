@@ -6,7 +6,7 @@ import { postData, deleteData } from "@/services/apiCall";
 import { billingAddress, orderForm } from "@/services/lib/YupFormikValidator";
 import { useBuyProduct, useGetCount } from "@/services/zustandStore/zustandStore";
 import { Address, useFetchUserAddress } from "../../components/userProfle/myAccount/AddressBook/Address";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import congratulationsMsg from "@/assets/images/footerImages/thankYou.png";
 
 export default function Billing() {
@@ -16,7 +16,7 @@ export default function Billing() {
   const [congratulations, setCongratulations] = useState(false);
   const { buyingProduct, setBuyProduct } = useBuyProduct();
 
-  const { cartData, payableAmount } = cartitems;
+    const { cartData, payableAmount } = cartitems;
 
   // Calculate total amount
   let buyTotalAmt = buyingProduct?.quantity * buyingProduct?.price;
@@ -28,7 +28,7 @@ export default function Billing() {
   // Extract product IDs from cart or buyingProduct
   const productIDs = buyingProduct
     ? [buyingProduct._id]
-    : cartData.map((product) => product._id);
+    : cartData?.map((product) => product._id);
 
   async function submitForm(values, actions) {
     const isPhoneNumber = /^\d{10}$/.test(values.phoneNumber);
@@ -92,7 +92,7 @@ export default function Billing() {
       if (result.success) {
         setCongratulations(true);
         actions.resetForm();
-        setBuyProduct(" ");
+        // setBuyProduct(null);
       }
     } catch (error) {
       toast.error(error?.response?.data?.message || "An error occurred.");
@@ -170,7 +170,7 @@ export default function Billing() {
             </div>
           ) : (
             <>
-              {cartData.length > 0 ? cartData?.map((product) => (
+              {cartData?.length > 0 ? cartData?.map((product) => (
                 <div key={product._id} className="h-auto w-[20rem] flex justify-between items-center my-4">
                   <div className="flex gap-4 items-center">
                     <img
@@ -259,7 +259,7 @@ export default function Billing() {
         </Formik>
 
           <Link to="/" className="w-full inline-block">
-            <Button name="CONTINUE SHOPPING" style="w-[100%] my-0 mb-2" />
+            <Button name="CONTINUE SHOPPING" style="w-[60%] m-4" />
           </Link>
         </div>
       </div>
