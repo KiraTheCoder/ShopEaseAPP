@@ -1,12 +1,8 @@
-import MyProfile from '@/components/userProfle/myAccount/myProfile/MyProfile'
-// import Address from '@/components/userProfle/myAccount/AddressBook/Address'
-import UserprofileImg from '@/components/userProfle/userMainProfile/UserprofileImg'
-import { NavLink } from 'react-router-dom'
-import { Outlet } from 'react-router-dom'
+import { NavLink,Outlet  } from 'react-router-dom'
 
 function UserAccount() {
     return (
-        <div className='w-[95vw] h-[80vh] sm:w-[90vw] lg:w-[80vw] py-4 m-auto flex flex-wrap sm:flex-nowrap gap-3 sm:gap-4 md:gap-6 lg:gap-12 my-4 overflow-scroll'>
+        <div className='w-[95vw] h-[80vh] sm:w-[90vw] lg:w-[80vw] py-4 m-auto flex flex-wrap sm:flex-nowrap gap-3 sm:gap-4 md:gap-6 lg:gap-12 my-4 overflow-scroll scrollbar-hide '>
             <div className='w-full sm:w-[15rem] bg-slate-200 flex sm:flex-col justify-around sm:justify-start md:flex-none '>
                 <div className=''>
                     <h4 className='font-semibold text-md'>Manage my account</h4>
@@ -25,7 +21,7 @@ function UserAccount() {
                     </ul>
                 </div>
             </div>
-            <div className='my-3 w-full flex justify-center sm:auto'>
+            <div className='my-3 w-full flex justify-center sm:auto scrollbar-hide'>
                 <Outlet/>
             </div>
         </div>
