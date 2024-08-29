@@ -9,14 +9,14 @@ function UserAccount() {
                     <ul className='ml-4 list-none leading-7 text-[14px]'>
                         <li className=''><NavLink to="/useraccount/profile" className={({ isActive }) => ` hover:text-orange-400 cursor-pointer ${isActive ? "text-orange-500 " : "text-gray-600"}`}>My Profile</NavLink></li>
                         <li className=''><NavLink to="/useraccount/address" className={({ isActive }) => ` hover:text-orange-400 cursor-pointer ${isActive ? "text-orange-500 " : "text-gray-600"}`}>AddressBook</NavLink></li>
-                        <li className=''><NavLink to="/" className={({ isActive }) => ` hover:text-orange-400 cursor-pointer ${isActive ? "text-orange-500 " : "text-gray-600"}`}>My Payment Options</NavLink></li>
+                        {/* <li className=''><NavLink to="/" className={({ isActive }) => ` hover:text-orange-400 cursor-pointer ${isActive ? "text-orange-500 " : "text-gray-600"}`}>My Payment Options</NavLink></li> */}
                     </ul>
                 </div>
                 <div className='sm:mt-3'>
                     <h4 className='font-semibold text-md'>My Orders</h4>
                     <ul className=' ml-4 list-none leading-7 text-[14px]'>
-                        <li>My Returns</li>
-                        <li>My Cancellations</li>
+                        {/* <li>My Returns</li>
+                        <li>My Cancellations</li> */}
                         <li className=''><NavLink to="/useraccount/myhistory" className={({ isActive }) => ` hover:text-orange-400 cursor-pointer ${isActive ? "text-orange-500 " : "text-gray-600"}`}>My History</NavLink></li>
                     </ul>
                 </div>

@@ -39,7 +39,7 @@ function Address({ selectedAddress, setSelectedAddress  }) {
                 <CreateAddress AddId={addId}  />
             ) : (
                 <>
-                    <h3 className='uppercase font-DM font-bold text-lg text-[#db4444]'>My Addressbook</h3>
+                    <h3 className='uppercase font-DM font-bold text-lg text-orange-500'>My Addressbook</h3>
                     <div className='my-2'>
                         <div className="w-[30rem] flex gap-5 flex-wrap my-2 items-end">
                         {userAddress.map((value, index) => (
@@ -81,12 +81,7 @@ function Address({ selectedAddress, setSelectedAddress  }) {
         </div>
     );
 }
-
 export { Address, useFetchUserAddress };
-
-
-
-
 
 
 

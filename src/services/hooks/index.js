@@ -12,20 +12,10 @@ import { toast } from 'react-toastify';
 
     async function fetchAddress() {
         try {
-            // const fetchAdd =await getData("/user/address/");
             const fetchAdd = getData("/user/address/");
-            // toast.promise(
-            //     fetchAdd, {
-            //         pending: "User address is being fetched...",
-            //         success: "User address fetched successfully!",
-            //         error: "User address couldn't be fetched."
-            //     });
-
             const response = await fetchAdd;
             setUserAddress(response?.data?.addresses);
-            // setUserAddress(fetchAdd?.data?.addresses);
         } catch (error) {
-            // toast.error(error?.response?.data?.message || "An error occurred.");
             console.log(error?.response?.data?.message || "An error occurred.");
         }
     }

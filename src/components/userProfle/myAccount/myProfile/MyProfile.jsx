@@ -1,7 +1,6 @@
 import ShowFieldData from "@/components/ShowFieldData/ShowFieldData";
 import { getData } from "@/services/apiCall";
 import { useEffect, useState } from "react";
-import { toast } from 'react-toastify';
 import { Link } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
 
@@ -15,25 +14,14 @@ function MyProfile() {
     async function getUserData() {
         try {
             const userdataPromise = getData("/user/user_data");
-            // toast.promise(
-            //     userdataPromise, {
-            //         pending: "User data is being received...",
-            //         success: "User data received successfully!",
-            //         error: "User data couldn't be received."
-            //     }
-            // );
             const userdata = await userdataPromise;
             setUserData(userdata);
-            console.log("User data received", userdata);
         } catch (error) {
             console.log('error in this page ', error)
-            // toast.error(error?.response?.data?.message || "An error occurred.");
         }
     }
 
     const { name, phoneNumber, email } = userData?.data || {};
-    
-    // Splitting the name string by spaces into an array
     let arr = name ? name.split(" ") : []; 
 
     let firstName = arr[0] || "N/A";
@@ -44,7 +32,7 @@ function MyProfile() {
 
     return (
         <div className="w-auto p-1">
-            <h3 className='uppercase font-DM font-bold text-lg text-[#db4444]'>My Profile</h3>
+            <h3 className='uppercase font-DM font-bold text-lg text-orange-500'>My Profile</h3>
             <div className='my-2'>
                 <div className='flex gap-5 flex-wrap border my-2 items-end'>
                     <ShowFieldData heading={"First Name"} data={firstName} />

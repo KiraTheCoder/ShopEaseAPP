@@ -2,12 +2,12 @@ import { Button, TextInput } from "@/components/form";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
-import { postData, deleteData } from "@/services/apiCall";
+import { postData, deleteData, getData } from "@/services/apiCall";
 import { billingAddress, orderForm } from "@/services/lib/YupFormikValidator";
 import { useBuyProduct, useGetCount } from "@/services/zustandStore/zustandStore";
 import { Address, useFetchUserAddress } from "../../components/userProfle/myAccount/AddressBook/Address";
-import { useEffect, useState } from "react";
 import congratulationsMsg from "@/assets/images/footerImages/thankYou.png";
+import { useEffect, useState } from "react";
 
 export default function Billing() {
   const { userAddress, refetch } = useFetchUserAddress();
@@ -15,8 +15,21 @@ export default function Billing() {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [congratulations, setCongratulations] = useState(false);
   const { buyingProduct, setBuyProduct } = useBuyProduct();
+  const { cartData, payableAmount } = cartitems;
 
-    const { cartData, payableAmount } = cartitems;
+// cart related code start
+const setCount = useGetCount((state) => state.setCount);
+const [cart, setCart] = useState([]);
+
+    
+    useEffect(() => {
+        const totalQuantity = cart.reduce((total, product) => total + product.productCount,0);
+        setCount(totalQuantity);
+    }, [cart, setCount]);
+
+
+// cart related code end
+
 
   // Calculate total amount
   let buyTotalAmt = buyingProduct?.quantity * buyingProduct?.price;
@@ -31,6 +44,7 @@ export default function Billing() {
     : cartData?.map((product) => product._id);
 
   async function submitForm(values, actions) {
+    
     const isPhoneNumber = /^\d{10}$/.test(values.phoneNumber);
 
     if (isPhoneNumber) {
@@ -66,9 +80,6 @@ export default function Billing() {
       return;
     }
 
-    console.log("for order", values);
-    
-    
     const addressCopy = { ...selectedAddress };
     delete addressCopy._id;
     
@@ -77,7 +88,6 @@ export default function Billing() {
     values.addresses = addressCopy;
     
     try {
-      console.log("before order", values);
       const OrderDone = postData("/user/orders/", values);
       toast.promise(
         OrderDone,
@@ -92,26 +102,57 @@ export default function Billing() {
       if (result.success) {
         setCongratulations(true);
         actions.resetForm();
-        // setBuyProduct(null);
+        setBuyProduct(null);
       }
     } catch (error) {
       toast.error(error?.response?.data?.message || "An error occurred.");
     } finally {
       actions.setSubmitting(false);
     }
+
+    // cart data empty code
+    const deleteProduct = async () => {
+
+      const getCartData = async () => {
+        try {
+            const result = await getData("/user/products/cart_products");
+            setCart(result?.data?.products || []);
+        } catch (error) {
+            console.error("Failed to fetch cart data", error);
+        }
+    };
+    
+      
+      if (!buyingProduct) {
+        const fetchProducts = async () => {
+          try {
+            const results = await Promise.all(
+              productIDs.map(async (productId) => {
+                return deleteData("/user/products/delete_from_cart", { productId: productId  });
+              })
+            );
+            results.map((result)=>{
+              if (result.success) {
+                      toast.success("Your cart is Empty Now.");
+                      getCartData()
+                    }
+            })
+          } catch (error) {
+            console.error('Error something went wrong :', error);
+          }
+        };
+        fetchProducts();
+     };
+    
+    }
+
+deleteProduct();
   }
 
-  const deleteProduct = async (Id) => {
-    try {
-      const deleteItem = await deleteData("/user/products/delete_from_cart", { productId: Id });
-      if (deleteItem.success) {
-        refetch();
-        toast.success("Product removed from cart successfully.");
-      }
-    } catch (error) {
-      toast.warn("Failed to delete product from cart: " + error);
-    }
-  };
+
+
+
+
 
   return congratulations ? (
     <div className="h-auto w-full flex justify-center items-center">
@@ -126,27 +167,25 @@ export default function Billing() {
           <Address selectedAddress={selectedAddress} setSelectedAddress={setSelectedAddress} />
         ) : (
           <div className="h-auto w-[30rem] px-[4rem]">
-            <h1 className="font-semibold text-2xl py-2">Billing Details</h1>
-            <Formik
-              initialValues={billingAddress.initialValues}
-              enableReinitialize
-              validationSchema={billingAddress.validationSchema}
-              onSubmit={submitForm}
-            >
-              {() => (
-                <Form>
-                  <p className='text-[13px] sm:text-[14px] text-center sm:text-start font-Poppins tracking-wider'>
-                    Enter your Address details below
-                  </p>
-                  <TextInput label="Name *" name="fullName" type="text" />
-                  <TextInput label="Street Name *" name="streetName" type="text" />
-                  <TextInput label="Apartment/Floor *" name="aprtmentOrFloor" type="text" />
-                  <TextInput label="City/Town *" name="townOrCity" type="text" />
-                  <TextInput label="Mobile No. *" name="phoneNumber" type="text" />
-                  <Button type="submit" name="SAVE" style="w-[100%] my-0 mb-2" />
-                </Form>
-              )}
-            </Formik>
+            <h1 className="font-semibold text-2xl py-2 text-orange-500">Billing Details</h1>
+              <Formik
+                    initialValues={billingAddress.initialValues}
+                    enableReinitialize
+                    validationSchema={billingAddress.validationSchema}
+                    onSubmit={submitForm}
+                  >
+                    {() => (
+                      <Form>
+                        <TextInput label="Name *" name="fullName" type="text" />
+                        <TextInput label="Street Name *" name="streetName" type="text" />
+                        <TextInput label="Apartment/Floor *" name="aprtmentOrFloor" type="text" />
+                        <TextInput label="City/Town *" name="townOrCity" type="text" />
+                        <TextInput label="Mobile No. *" name="phoneNumber" type="text" />
+                        <Button type="submit" name="SAVE" style="w-[100%] my-0 mb-2 bg-orange-400 hover:bg-orange-500" />
+                      </Form>
+                    )}
+               </Formik>
+                  
           </div>
         )}
 
@@ -186,12 +225,12 @@ export default function Billing() {
                     <p className="text-sm font-semibold">({product?.productCount || 'No of products'})</p>
                   </div>
                   <p className="text-sm">₹ {(product?.price) * (product.productCount) || 'Price not available'}</p>
-                  <button 
+                 {/* <button 
                     className="text-red-500 hover:text-red-700 ml-4"
                     onClick={() => deleteProduct(product._id)}
                   >
                     Remove
-                  </button>
+                  </button>*/}
                 </div>
               )) : <p>No items in cart</p>}
             </>
@@ -214,34 +253,12 @@ export default function Billing() {
             </div>
           </div>
 
-          {/* <Formik
-            initialValues={orderForm.initialValues}
-            enableReinitialize
-            validationSchema={orderForm.validationSchema}
-            onSubmit={orderSubmit}
-          >
-            {() => (
-              <Form>
-                <div className="my-4 flex items-center gap-2">
-                  <Field type="checkbox" name="termsCondition" id="termsCondition" />
-                  <label htmlFor="termsCondition">Agree to terms and conditions *</label>
-                </div>
-                <ErrorMessage
-                  name="termsCondition"
-                  component="div"
-                  className="text-red-500 text-sm font-semibold mb-2"
-                />
-
-                <Button type={"submit"} name={"PLACE ORDER"} style="w-[60%] m-4" />
-            </Form>
-            )}
-          </Formik> */}
-          <Formik
+        <Formik
           initialValues={orderForm.initialValues}
           enableReinitialize
           validationSchema={orderForm.validationSchema}
           onSubmit={orderSubmit}
-        >
+         >
           {({ errors, touched }) => (
             <Form>
               <div className="flex items-center space-x-3 py-2">
@@ -253,13 +270,13 @@ export default function Billing() {
                 <label htmlFor="radio2" className="text-[13px] font-medium">Cash on delivery</label>
               </div>
               <ErrorMessage name="paymentMethod" component="div" className="text-red-500 text-xs mt-1" />
-              <Button type={"submit"} name={"PLACE ORDER"} style="w-[60%] m-4" />
+              <Button type={"submit"} name={"PLACE ORDER"} style="w-[60%] m-4 bg-orange-400 hover:bg-orange-500"  />
             </Form>
           )}
         </Formik>
 
           <Link to="/" className="w-full inline-block">
-            <Button name="CONTINUE SHOPPING" style="w-[60%] m-4" />
+            <Button name="CONTINUE SHOPPING" style="w-[60%] m-4 bg-orange-400 hover:bg-orange-500" />
           </Link>
         </div>
       </div>
@@ -304,8 +321,7 @@ export default function Billing() {
 
 //   console.log("cartdata",cartData);
   
-//   const productIDs = buyingProduct
-//     ?[ buyingProduct._id]
+//   const productIDs = buyingProduct     ?[ buyingProduct._id]
 //     : (cartData ? cartData.map((value) => value._id) : []);
 
 //   console.log("cart data is ", productIDs);
