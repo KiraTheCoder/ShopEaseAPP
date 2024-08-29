@@ -14,3 +14,17 @@
     animation: scroll 15s linear infinite;
   }
   
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* In your global CSS file, e.g., styles.css */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
+}

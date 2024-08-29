@@ -26,18 +26,15 @@ function MyHistory() {
                 }
             );
             const result = await historyDone;
-            console.log("history data", result?.data?.orderHistory?.orderHistory);
             setHistoryItems(result?.data?.orderHistory?.orderHistory || []);
         } catch (error) {
             toast.error(error?.response?.data?.message || "An error occurred.");
         }
     }
 
-    console.log(historyItems);
-
     return (
-        <div className="p-4">
-            <h2 className="text-2xl font-bold mb-4 text-[#db4444]">My History</h2>
+        <div className="p-4 scrollbar-hide ">
+            <h2 className="text-2xl font-bold mb-4 text-orange-500">My History</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {historyItems.length > 0 ? (
                     historyItems.map((item) => (
@@ -48,7 +45,7 @@ function MyHistory() {
                             }} 
                             key={item.id}
                             className="border p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow "
-                        >
+                         >
                             <p className="text-gray-600 mb-2">Price: ₹ {item?.totalAmount}</p>
                             <p className="text-gray-600 mb-2">Address: <span className='text-[13px] text-gray-400'>{"user address"}</span></p>
                             <p className="text-gray-600 mb-2">Payment: {item?.paymentMethod}</p>

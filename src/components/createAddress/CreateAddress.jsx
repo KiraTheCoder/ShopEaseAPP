@@ -64,7 +64,7 @@ function CreateAddress({ AddId }) {
 
     return (
         <div>
-            <h2 className="uppercase text-[#db4444] font-bold">New Address</h2>
+            <h2 className="uppercase text-[#db4444] font-bold">Create Address</h2>
             <div>
 
                 <Formik

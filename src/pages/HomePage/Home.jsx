@@ -15,19 +15,19 @@ export default function Home() {
    //    )
 
 
-   const images = [couple, couple2]; // Add more image here if needed
+   // const images = [couple, couple2]; // Add more image here if needed
 
-   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+   // const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-   useEffect(() => {
-      const interval = setInterval(() => {
-         setCurrentImageIndex((prevIndex) =>
-            prevIndex === images.length - 1 ? 0 : prevIndex + 1
-         );
-      }, 3000);
+   // useEffect(() => {
+   //    const interval = setInterval(() => {
+   //       setCurrentImageIndex((prevIndex) =>
+   //          prevIndex === images.length - 1 ? 0 : prevIndex + 1
+   //       );
+   //    }, 10000);
 
-      return () => clearInterval(interval);
-   }, [images.length]);
+   //    return () => clearInterval(interval);
+   // }, [images.length]);
 
    return (
       <>
@@ -60,12 +60,14 @@ export default function Home() {
                            <p className="text-gray-600 text-[12px] my-3 sm:my-4 sm:text-sm">Happy Customers</p>
                         </div>
                      </div>
+                    
 
                   </div>
 
                   <div className="h-auto w-[40rem]">
-                     {/* <img className="ml-2" src={images[currentImageIndex]} alt="Fashion" /> */}
-                     <img  className="ml-2" src={couple} alt="" />
+                   {/* <img className="ml-2" src={images[currentImageIndex]} alt="Fashion" />  */}
+
+                     <img className="ml-2" src={couple} alt="" />
                   </div>
 
                </div>
