@@ -31,6 +31,8 @@ export default function Billing() {
     : cartData?.map((product) => product._id);
 
   async function submitForm(values, actions) {
+    console.log('madam')
+
     const isPhoneNumber = /^\d{10}$/.test(values.phoneNumber);
 
     if (isPhoneNumber) {
@@ -39,6 +41,7 @@ export default function Billing() {
 
     try {
       const saveAdd = postData("/user/address/", values);
+
       toast.promise(
         saveAdd,
         {
@@ -47,6 +50,7 @@ export default function Billing() {
           error: "User address couldn't be saved.",
         }
       );
+
 
       const result = await saveAdd;
       if (result.success) {
