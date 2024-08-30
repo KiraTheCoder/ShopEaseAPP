@@ -70,7 +70,6 @@ function ProductCart() {
    const Buyproduct = (quantity)=>{
    Product.quantity = quantity
    setBuyProduct(Product);
-
    }
 
     return (

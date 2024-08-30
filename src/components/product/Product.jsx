@@ -7,11 +7,8 @@ import { getData, postData } from "@/services/apiCall";
 export const ProductCard = ({ product }) => {
   const setProduct = useGetProduct((state) => state.setProduct);
   const navigate = useNavigate();
-
   const { setCount } = useGetCount((state) => state);
-
   const AddCart = async (Id, quantity) => {
-
     try {
       const addProductPromise = postData("/user/products/add_to_cart", { productId: Id, productQuantity: quantity });
       toast.promise(
@@ -24,14 +21,10 @@ export const ProductCard = ({ product }) => {
       );
 
       const addProduct = await addProductPromise;
-      console.log("addProduct", addProduct);
+      // console.log("addProduct", addProduct);
       
       if (addProduct?.success) {
-
-        setCount(await (await getData("/user/products/cart_products_count"))?.data?.productCartsCount);
-        // const rohit=await getData("/user/products/cart_products_count")
-        // console.log("rohit", rohit);
-        
+        setCount(await (await getData("/user/products/cart_products_count"))?.data?.productCartsCount);     
       }
     } catch (error) {
       toast.error("No response received or other error: " + error?.message);

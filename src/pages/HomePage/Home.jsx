@@ -7,27 +7,10 @@ import ItemsCollection from "../ItemsCollection/ItemsCollection";
 export default function Home() {
 
    //  const onlineStatus= useOnlineStatus()
-   //  console.log("status", onlineStatus);
-
    // if (onlineStatus===false) 
    //    return (
    //       <h1 className="bg-pink-700 my-16">you are offline please cheeck your internet connection ...!</h1>
    //    )
-
-
-   // const images = [couple, couple2]; // Add more image here if needed
-
-   // const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-   // useEffect(() => {
-   //    const interval = setInterval(() => {
-   //       setCurrentImageIndex((prevIndex) =>
-   //          prevIndex === images.length - 1 ? 0 : prevIndex + 1
-   //       );
-   //    }, 10000);
-
-   //    return () => clearInterval(interval);
-   // }, [images.length]);
 
    return (
       <>

@@ -24,6 +24,8 @@ import UpdateName from './components/updateName/UpdateName.jsx';
 import NewArrivals from './pages/NewArrivalsPage/NewArrivals.jsx';
 import MyHistory from './components/userProfle/myOrders/myHistory/MyHistory.jsx';
 import HistoryItem from './components/userProfle/myOrders/myHistory/HistoryItem.jsx';
+import { BillingAddress } from './components/userProfle/billingAddress/BillingAddress.jsx';
+import CreateBillingAdd from './components/userProfle/createBillingAdd/CreateBillingAdd.jsx';
 
 const router = createBrowserRouter([
   {
@@ -72,7 +74,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/billing",
-        element: <Billing />
+        element: <Billing />,
+      },
+      {
+        path: "/createbillingadd",
+        element: <CreateBillingAdd />,
       },
       {
         path: "/useraccount",

@@ -1,6 +1,6 @@
 import { Button, TextInput } from "@/components/form";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { postData, deleteData, getData } from "@/services/apiCall";
 import { billingAddress, orderForm } from "@/services/lib/YupFormikValidator";
@@ -8,6 +8,9 @@ import { useBuyProduct, useGetCount } from "@/services/zustandStore/zustandStore
 import { Address, useFetchUserAddress } from "../../components/userProfle/myAccount/AddressBook/Address";
 import congratulationsMsg from "@/assets/images/footerImages/thankYou.png";
 import { useEffect, useState } from "react";
+import CreateAddress from "@/components/createAddress/CreateAddress";
+import { BillingAddress } from "@/components/userProfle/billingAddress/BillingAddress";
+import CreateBillingAdd from "@/components/userProfle/createBillingAdd/CreateBillingAdd";
 
 export default function Billing() {
   const { userAddress, refetch } = useFetchUserAddress();
@@ -17,62 +20,33 @@ export default function Billing() {
   const { buyingProduct, setBuyProduct } = useBuyProduct();
   const { cartData, payableAmount } = cartitems;
 
+  useEffect(()=>{
+    refetch();
+  },[]);
+  
+
 // cart related code start
 const setCount = useGetCount((state) => state.setCount);
 const [cart, setCart] = useState([]);
-
     
     useEffect(() => {
         const totalQuantity = cart.reduce((total, product) => total + product.productCount,0);
         setCount(totalQuantity);
     }, [cart, setCount]);
-
-
 // cart related code end
-
 
   // Calculate total amount
   let buyTotalAmt = buyingProduct?.quantity * buyingProduct?.price;
   if (buyTotalAmt > 0 && buyTotalAmt < 500) {
     buyTotalAmt += 50; // Add shipping fee if the total is less than 500
   }
+
   const totalPrice = buyTotalAmt || payableAmount;
 
   // Extract product IDs from cart or buyingProduct
   const productIDs = buyingProduct
     ? [buyingProduct._id]
     : cartData?.map((product) => product._id);
-
-  async function submitForm(values, actions) {
-    
-    const isPhoneNumber = /^\d{10}$/.test(values.phoneNumber);
-
-    if (isPhoneNumber) {
-      values.phoneNumber = "+91" + values.phoneNumber;
-    }
-
-    try {
-      const saveAdd = postData("/user/address/", values);
-      toast.promise(
-        saveAdd,
-        {
-          pending: "User address is being saved...",
-          success: "User address saved successfully!",
-          error: "User address couldn't be saved.",
-        }
-      );
-
-      const result = await saveAdd;
-      if (result.success) {
-        refetch();
-        actions.resetForm();
-      }
-    } catch (error) {
-      toast.error(error?.response?.data?.message || "An error occurred.");
-    } finally {
-      actions.setSubmitting(false);
-    }
-  }
 
   async function orderSubmit(values, actions) {
     if (!selectedAddress) {
@@ -81,8 +55,7 @@ const [cart, setCart] = useState([]);
     }
 
     const addressCopy = { ...selectedAddress };
-    delete addressCopy._id;
-    
+    delete addressCopy._id; 
     values.totalAmount = `${totalPrice}`;
     values.productIDs = productIDs;
     values.addresses = addressCopy;
@@ -145,13 +118,8 @@ const [cart, setCart] = useState([]);
      };
     
     }
-
 deleteProduct();
   }
-
-
-
-
 
 
   return congratulations ? (
@@ -164,29 +132,9 @@ deleteProduct();
     <div className="h-auto w-full">
       <div className="py-12 h-auto w-auto flex justify-around flex-wrap border">
         {userAddress.length > 0 ? (
-          <Address selectedAddress={selectedAddress} setSelectedAddress={setSelectedAddress} />
+          <BillingAddress selectedAddress={selectedAddress} setSelectedAddress={setSelectedAddress} />
         ) : (
-          <div className="h-auto w-[30rem] px-[4rem]">
-            <h1 className="font-semibold text-2xl py-2 text-orange-500">Billing Details</h1>
-              <Formik
-                    initialValues={billingAddress.initialValues}
-                    enableReinitialize
-                    validationSchema={billingAddress.validationSchema}
-                    onSubmit={submitForm}
-                  >
-                    {() => (
-                      <Form>
-                        <TextInput label="Name *" name="fullName" type="text" />
-                        <TextInput label="Street Name *" name="streetName" type="text" />
-                        <TextInput label="Apartment/Floor *" name="aprtmentOrFloor" type="text" />
-                        <TextInput label="City/Town *" name="townOrCity" type="text" />
-                        <TextInput label="Mobile No. *" name="phoneNumber" type="text" />
-                        <Button type="submit" name="SAVE" style="w-[100%] my-0 mb-2 bg-orange-400 hover:bg-orange-500" />
-                      </Form>
-                    )}
-               </Formik>
-                  
-          </div>
+          <CreateBillingAdd />
         )}
 
         <div className="h-auto w-[30rem]">
