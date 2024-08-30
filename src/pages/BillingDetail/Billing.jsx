@@ -1,6 +1,6 @@
 import { Button, TextInput } from "@/components/form";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { postData, deleteData, getData } from "@/services/apiCall";
 import { billingAddress, orderForm } from "@/services/lib/YupFormikValidator";
@@ -8,27 +8,31 @@ import { useBuyProduct, useGetCount } from "@/services/zustandStore/zustandStore
 import { Address, useFetchUserAddress } from "../../components/userProfle/myAccount/AddressBook/Address";
 import congratulationsMsg from "@/assets/images/footerImages/thankYou.png";
 import { useEffect, useState } from "react";
-import CreateAddress from "@/components/createAddress/CreateAddress";
 import { BillingAddress } from "@/components/userProfle/billingAddress/BillingAddress";
 import CreateBillingAdd from "@/components/userProfle/createBillingAdd/CreateBillingAdd";
+// import MyPayment from "../paymentpage/MyPayment";
 
 export default function Billing() {
+  // const navigate=useNavigate()
   const { userAddress, refetch } = useFetchUserAddress();
   const { cartitems } = useGetCount((state) => state);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [congratulations, setCongratulations] = useState(false);
   const { buyingProduct, setBuyProduct } = useBuyProduct();
   const { cartData, payableAmount } = cartitems;
+  // cart related code start
+  const setCount = useGetCount((state) => state.setCount);
+  const [cart, setCart] = useState([]);
+  // payment option start
+  // const [paymentCompleted, setPaymentCompleted] = useState(false);
+
+
+
 
   useEffect(()=>{
     refetch();
   },[]);
   
-
-// cart related code start
-const setCount = useGetCount((state) => state.setCount);
-const [cart, setCart] = useState([]);
-    
     useEffect(() => {
         const totalQuantity = cart.reduce((total, product) => total + product.productCount,0);
         setCount(totalQuantity);
@@ -48,12 +52,19 @@ const [cart, setCart] = useState([]);
     ? [buyingProduct._id]
     : cartData?.map((product) => product._id);
 
+    // ordered called
   async function orderSubmit(values, actions) {
     if (!selectedAddress) {
       toast.error("Select your address first");
       return;
     }
 
+    // payment option start
+    // if (values.paymentMethod === 'Bank' && !paymentCompleted) {
+    //   toast.error("Please complete the payment before placing the order.");
+    //   return;
+    // }
+  
     const addressCopy = { ...selectedAddress };
     delete addressCopy._id; 
     values.totalAmount = `${totalPrice}`;
@@ -207,11 +218,20 @@ deleteProduct();
           validationSchema={orderForm.validationSchema}
           onSubmit={orderSubmit}
          >
-          {({ errors, touched }) => (
+          {({ values , errors, touched }) => (
             <Form>
               <div className="flex items-center space-x-3 py-2">
                 <Field type="radio" name="paymentMethod" id="radio1" value="Bank" className="form-checkbox h-4 w-4 rounded" />
-                <label htmlFor="radio1" className="text-[13px] font-medium">Bank</label>
+                <label htmlFor="radio1" className="text-[13px] font-medium"  >Bank</label>
+              </div>
+              <div>
+                {/* Conditionally render MyPayment component */}
+                {/* {values.paymentMethod === 'Bank' && (
+                  <MyPayment
+                    amount={totalPrice}
+                    onPaymentSuccess={() => setPaymentCompleted(true)}
+                  />
+                )} */}
               </div>
               <div className="flex items-center space-x-3 py-2">
                 <Field type="radio" name="paymentMethod" id="radio2" value="Cash on delivery" className="form-checkbox h-4 w-4 rounded" />

@@ -248,7 +248,6 @@ function Cart() {
                             navigate('/billing')
                         }
                     }}>
-                        {/* <Link to={"/billing"} className='flex justify-center items-center gap-3'>Checkout <FaArrowRight className='' /></Link> */}
                         Chechout
                     </button>
                 </div>

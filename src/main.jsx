@@ -26,6 +26,7 @@ import MyHistory from './components/userProfle/myOrders/myHistory/MyHistory.jsx'
 import HistoryItem from './components/userProfle/myOrders/myHistory/HistoryItem.jsx';
 import { BillingAddress } from './components/userProfle/billingAddress/BillingAddress.jsx';
 import CreateBillingAdd from './components/userProfle/createBillingAdd/CreateBillingAdd.jsx';
+import MyPayment from './pages/paymentpage/MyPayment.jsx';
 
 const router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
       {
         path: "/createbillingadd",
         element: <CreateBillingAdd />,
+      },
+      {
+        path: "/mypayment",
+        element: <MyPayment />,
       },
       {
         path: "/useraccount",
