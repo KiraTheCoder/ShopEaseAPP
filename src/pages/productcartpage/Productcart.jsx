@@ -9,10 +9,11 @@ import { useGetProduct, useBuyProduct } from "@/services/zustandStore";
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "@/services/zustandStore/zustandStore"
+import { useAuthStore, useGetSearchProduct } from "@/services/zustandStore/zustandStore"
 import ItemsCollection from "../ItemsCollection/ItemsCollection";
 import { useGetCount } from "@/services/zustandStore/zustandStore";
 import { getData } from "@/services/apiCall";
+import SearchProducts from "../searchProducts/SearchProducts";
 
 function ProductCart() {
     const isLoggedin = useAuthStore(s => s.token)
@@ -23,7 +24,7 @@ function ProductCart() {
         }
     })
     const Product = useGetProduct((state) => state.product);
-    
+    const { products, setSearchProduct } = useGetSearchProduct();
     //.................. Buy product....................
   const { buyingProduct, setBuyProduct } = useBuyProduct();
 
@@ -159,10 +160,13 @@ function ProductCart() {
             <section>
                 <ProductInfo details={Product} />
             </section>
-            <section className=" bg-green-600 my-8">
-                <h2 className="font-bold text-xl text-center italic">Viewers Also Liked</h2>
-                {/* <CartCollection /> */}
-                <ItemsCollection />
+            <section className=" m-auto my-8">
+                <h2 className="font-bold text-xl text-center italic mb-4">Viewers Also Liked</h2>
+                {
+            products ?
+            <SearchProducts/>:
+            <ItemsCollection />
+            }
             </section>
         </>
     );

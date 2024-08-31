@@ -4,7 +4,7 @@ import { postData } from "@/services/apiCall"
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import Shimmer from "@/components/shimmer/Shimmer"
-import { usePagination } from "@/services/zustandStore"
+import {usePagination } from "@/services/zustandStore"
 
 
 function ItemsCollection() {
@@ -13,6 +13,8 @@ function ItemsCollection() {
   const [products, setProducts] = useState([])
   const { pageNo, setPageNo } = usePagination(state => state)
 
+  // const Products = useGetSearchProduct((state) => state.products);
+  // setProducts(Products)
   useEffect(() => {
     (async () => {
       // const result1 = await getData("/user/products/all/count");
@@ -25,9 +27,11 @@ function ItemsCollection() {
         pageNo: pageNo,
         limit: limit
       });
+      console.log("all products", result2);
+      
       setProducts(result2?.data)
     })()
-  }, [pageNo])
+  }, [pageNo]) 
 
 
   if (products?.length == 0)

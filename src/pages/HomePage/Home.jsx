@@ -2,10 +2,16 @@ import React, { useEffect, useState } from "react";
 import couple from "@/assets/images/footerImages/couple.png";
 import couple2 from "@/assets/images/footerImages/couple2.png"
 import ItemsCollection from "../ItemsCollection/ItemsCollection";
+import SearchProducts from "../searchProducts/SearchProducts";
+import { useGetSearchProduct } from "@/services/zustandStore";
 // import useOnlineStatus from "@/services/hooks";
 
 export default function Home() {
-
+   // const searchedproducts = useGetSearchProduct((state) => state.products);
+   
+   const { products, setSearchProduct } = useGetSearchProduct();
+   console.log("home page seach product", products);
+   
    //  const onlineStatus= useOnlineStatus()
    // if (onlineStatus===false) 
    //    return (
@@ -68,7 +74,11 @@ export default function Home() {
          </div>
 
          <div className="m-auto my-4">
+            {
+            products ?
+            <SearchProducts/>:
             <ItemsCollection />
+            }
          </div>
       </>
    )

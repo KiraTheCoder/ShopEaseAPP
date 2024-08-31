@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { NavLink } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { FaCartPlus } from "react-icons/fa";
 import { HiMenu, HiX } from "react-icons/hi";
-import { useAuthStore, useGetCount } from "@/services/zustandStore/zustandStore";
+import { useAuthStore, useGetCount, useGetSearchProduct } from "@/services/zustandStore/zustandStore";
 import { FaCircleUser } from "react-icons/fa6";
-import { useScrollToTop } from "@/services/hooks"
-import { getData, postData } from "@/services/apiCall"
+import { useScrollToTop } from "@/services/hooks";
+import { getData, postData } from "@/services/apiCall";
+import { debounce } from "@/services/utils";
 
 const CustomNavLink = ({ to, children, onClick, isActiveLink }) => (
     <NavLink
@@ -23,26 +24,38 @@ const CustomNavLink = ({ to, children, onClick, isActiveLink }) => (
 );
 
 function Header() {
-    useScrollToTop()
+    useScrollToTop();
     const { count, setCount } = useGetCount((state) => state);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { removeToken, token } = useAuthStore((state) => state);
     const isLoggedIn = !!token;
-    const [searchText,setSearchText]=useState();
-const [searchData,setSearchData]=useState()
+    const searchText = useRef(null);
+    const [searchData, setSearchData] = useState([]);
+    const { products, setSearchProduct } = useGetSearchProduct();
+
+
+
+    const fetchCartProductCount = async () => {
+        const result = await getData("/user/products/cart_products_count");
+        setCount(result?.data?.productCartsCount || 0);
+    };
+
     useEffect(() => {
-        (async () => {
-            setCount(await (await getData("/user/products/cart_products_count"))?.data?.productCartsCount)
-        })()
-        (async () => {
-            setSearchData(await (await postData("/user/products/search", {searchText}))?.data?.productCartsCount)
-        })()
-    }, [setCount],[setSearchText]);
+        fetchCartProductCount();
+    }, [setCount]);
+
+    const handleSearch = useCallback(
+        debounce(async () => {
+            if (searchText.current?.value?.trim()) {
+                const result = await postData("/user/products/search", { keyword: searchText.current.value });
+                setSearchData(result?.data || []);
+                setSearchProduct(result?.data || [])
+            }
+        }, 300),
+        []
+    );
 
     const handleToggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
-    
-
 
     return (
         <div className="py-1 md:py-0 bg-cyan-950">
@@ -72,8 +85,8 @@ const [searchData,setSearchData]=useState()
                         <CiSearch className="text-md sm:text-[1.5rem] text-gray-500" />
                         <input
                             type="text"
-                            value={searchText}
-                            onChange={(e) => setSearchText(e.target.value)}                
+                            ref={searchText}
+                            onChange={handleSearch}
                             placeholder="Search for Product..."
                             className="h-[100%] w-[90%] px-1 rounded-full bg-transparent text-[13px] sm:text-[14px] md:text-[14px] lg:text-sm outline-none"
                         />
@@ -104,7 +117,7 @@ const [searchData,setSearchData]=useState()
                 <div className={`w-[87%] sm:w-[80%] flex justify-around sm:justify-start sm:gap-7 ${isMenuOpen ? 'block' : 'hidden'}`}>
                     <CustomNavLink to="/">Shop</CustomNavLink>
                     <CustomNavLink to="/newarrivals">New Arrivals</CustomNavLink>
-                   {isLoggedIn ? (
+                    {isLoggedIn ? (
                         <CustomNavLink
                             to="/"
                             onClick={() => removeToken()}
@@ -121,6 +134,7 @@ const [searchData,setSearchData]=useState()
 }
 
 export default Header;
+
 
 
 

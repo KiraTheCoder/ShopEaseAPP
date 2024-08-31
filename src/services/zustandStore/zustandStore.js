@@ -33,6 +33,21 @@ const useGetProduct = create(
 );
 
 
+////////////// product //////////////////
+
+const getSearchProduct = (set) => ({
+  products: "",
+  setSearchProduct: (products) => set({ products }),
+});
+
+const useGetSearchProduct = create(
+  devtools(getSearchProduct, {
+    name: "products",
+    getStorage: () => localStorage,
+  })
+);
+
+
 ////////////////// product count  ////////////////
 const getCount = (set) => ({
   count: "",
@@ -87,7 +102,7 @@ const usePagination = create(
 
 
 ///////  Exports /////////////////////////
-export { useAuthStore, useGetProduct, useGetCount, usePagination, useBuyProduct };
+export { useAuthStore, useGetProduct, useGetCount, usePagination, useBuyProduct, useGetSearchProduct };
 
 /* 
 get().state --> useful when work conditional state

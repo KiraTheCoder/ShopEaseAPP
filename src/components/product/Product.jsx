@@ -9,6 +9,8 @@ export const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const { setCount } = useGetCount((state) => state);
   const AddCart = async (Id, quantity) => {
+    console.log("hello", product);
+    
     try {
       const addProductPromise = postData("/user/products/add_to_cart", { productId: Id, productQuantity: quantity });
       toast.promise(

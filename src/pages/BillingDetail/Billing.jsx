@@ -1,16 +1,16 @@
-import { Button, TextInput } from "@/components/form";
+import { Button } from "@/components/form";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { postData, deleteData, getData } from "@/services/apiCall";
-import { billingAddress, orderForm } from "@/services/lib/YupFormikValidator";
+import { orderForm } from "@/services/lib/YupFormikValidator";
 import { useBuyProduct, useGetCount } from "@/services/zustandStore/zustandStore";
-import { Address, useFetchUserAddress } from "../../components/userProfle/myAccount/AddressBook/Address";
+import { useFetchUserAddress } from "../../components/userProfle/myAccount/AddressBook/Address";
 import congratulationsMsg from "@/assets/images/footerImages/thankYou.png";
 import { useEffect, useState } from "react";
 import { BillingAddress } from "@/components/userProfle/billingAddress/BillingAddress";
 import CreateBillingAdd from "@/components/userProfle/createBillingAdd/CreateBillingAdd";
-import MyPayment from "../paymentpage/MyPayment";
+import { useLocation } from 'react-router-dom';
 
 export default function Billing() {
   const { userAddress, refetch } = useFetchUserAddress();
@@ -25,7 +25,13 @@ export default function Billing() {
   // payment option start
   // const [paymentCompleted, setPaymentCompleted] = useState(false);
 
+  // const location= useLocation()
 
+  // useEffect(() => {
+  //   if (location.pathname !== "/cart") {
+  //     setBuyProduct(null);
+  //   }
+  // }, [location.pathname, setBuyProduct]);
 
 
   useEffect(()=>{
@@ -146,7 +152,6 @@ deleteProduct();
         ) : (
           <CreateBillingAdd />
         )}
-
         <div className="h-auto w-[30rem]">
           {buyingProduct ? (
             <div className="h-auto w-[20rem] flex justify-between items-center my-4">
