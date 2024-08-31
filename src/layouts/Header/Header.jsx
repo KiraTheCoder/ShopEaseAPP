@@ -6,7 +6,7 @@ import { HiMenu, HiX } from "react-icons/hi";
 import { useAuthStore, useGetCount } from "@/services/zustandStore/zustandStore";
 import { FaCircleUser } from "react-icons/fa6";
 import { useScrollToTop } from "@/services/hooks"
-import { getData } from "@/services/apiCall"
+import { getData, postData } from "@/services/apiCall"
 
 const CustomNavLink = ({ to, children, onClick, isActiveLink }) => (
     <NavLink
@@ -28,15 +28,21 @@ function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { removeToken, token } = useAuthStore((state) => state);
     const isLoggedIn = !!token;
-
+    const [searchText,setSearchText]=useState();
+const [searchData,setSearchData]=useState()
     useEffect(() => {
         (async () => {
             setCount(await (await getData("/user/products/cart_products_count"))?.data?.productCartsCount)
         })()
-    }, [setCount]);
-
+        (async () => {
+            setSearchData(await (await postData("/user/products/search", {searchText}))?.data?.productCartsCount)
+        })()
+    }, [setCount],[setSearchText]);
 
     const handleToggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+    
+
 
     return (
         <div className="py-1 md:py-0 bg-cyan-950">
@@ -66,6 +72,8 @@ function Header() {
                         <CiSearch className="text-md sm:text-[1.5rem] text-gray-500" />
                         <input
                             type="text"
+                            value={searchText}
+                            onChange={(e) => setSearchText(e.target.value)}                
                             placeholder="Search for Product..."
                             className="h-[100%] w-[90%] px-1 rounded-full bg-transparent text-[13px] sm:text-[14px] md:text-[14px] lg:text-sm outline-none"
                         />

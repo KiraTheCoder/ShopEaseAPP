@@ -10,10 +10,9 @@ import congratulationsMsg from "@/assets/images/footerImages/thankYou.png";
 import { useEffect, useState } from "react";
 import { BillingAddress } from "@/components/userProfle/billingAddress/BillingAddress";
 import CreateBillingAdd from "@/components/userProfle/createBillingAdd/CreateBillingAdd";
-// import MyPayment from "../paymentpage/MyPayment";
+import MyPayment from "../paymentpage/MyPayment";
 
 export default function Billing() {
-  // const navigate=useNavigate()
   const { userAddress, refetch } = useFetchUserAddress();
   const { cartitems } = useGetCount((state) => state);
   const [selectedAddress, setSelectedAddress] = useState(null);

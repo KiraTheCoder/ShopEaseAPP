@@ -8,29 +8,31 @@ const MyPayment = ({ amount, onPaymentSuccess }) => {
   const [cardHolderName, setCardHolderName] = useState('');
   const [error, setError] = useState('');
 
-  const handlePayment = () => {
-    // e.preventDefault();
+  const handlePayment = (e) => {
+    e.preventDefault();
 
-    // Basic validation
-    if (!cardNumber || !expiryDate || !cvv || !cardHolderName) {
-      setError('All fields are required');
-      return;
-    }
+    // // Basic validation
+    // if (!cardNumber || !expiryDate || !cvv || !cardHolderName) {
+    //   setError('All fields are required');
+    //   return;
+    // }
 
-    // Simulate payment processing
-    setTimeout(() => {
-      setError('');
-      onPaymentSuccess();
-      alert('Payment processed successfully!');
-    }, 1000);
+    // // Simulate payment processing
+    // setTimeout(() => {
+    //   setError('');
+    //   onPaymentSuccess();
+    //   alert('Payment processed successfully!');
+    // }, 1000);
   };
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-md rounded-lg p-6 my-4">
       <h2 className="text-2xl font-semibold mb-4">Card Payment</h2>
       {error && <p className="text-red-500 mb-4">{error}</p>}
-      {/* <form onSubmit={handlePayment}> */}
-      <form >
+      <form onSubmit={(e)=>{e.preventDefault()
+        console.log("testing")
+      }}>
+      {/* <form onS> */}
 
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">Card Type</label>
@@ -129,8 +131,8 @@ const MyPayment = ({ amount, onPaymentSuccess }) => {
           />
         </div>
         <button
-        //   type="submit"
-        onClick={handlePayment}
+          type="submit"
+        // onClick={handlePayment}
           className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition duration-300"
         >
           Pay Now
