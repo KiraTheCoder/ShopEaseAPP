@@ -183,6 +183,7 @@ deleteProduct();
                         <TextInput label="Apartment/Floor *" name="aprtmentOrFloor" type="text" />
                         <TextInput label="City/Town *" name="townOrCity" type="text" />
                         <TextInput label="Mobile No. *" name="phoneNumber" type="text" />
+                      {/* <button type="submit">save</button> */}
                         <Button type="submit" name="SAVE" style="w-[100%] my-0 mb-2 bg-orange-400 hover:bg-orange-500" />
                       </Form>
                     )}
