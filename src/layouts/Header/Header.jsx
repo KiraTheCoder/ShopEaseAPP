@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { FaCartPlus } from "react-icons/fa";
 import { HiMenu, HiX } from "react-icons/hi";
@@ -32,7 +32,8 @@ function Header() {
     const searchText = useRef(null);
     const [searchData, setSearchData] = useState([]);
     const { products, setSearchProduct } = useGetSearchProduct();
-
+  
+    const navigate=useNavigate()
 
 
     const fetchCartProductCount = async () => {
@@ -87,6 +88,7 @@ function Header() {
                             type="text"
                             ref={searchText}
                             onChange={handleSearch}
+                            onClick={()=>navigate("/searchproducts")}
                             placeholder="Search for Product..."
                             className="h-[100%] w-[90%] px-1 rounded-full bg-transparent text-[13px] sm:text-[14px] md:text-[14px] lg:text-sm outline-none"
                         />

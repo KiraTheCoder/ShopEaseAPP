@@ -57,6 +57,8 @@ export default function Billing() {
     ? [buyingProduct._id]
     : cartData?.map((product) => product._id);
 
+    console.log("all ids", productIDs);
+    
     // ordered called
   async function orderSubmit(values, actions) {
     if (!selectedAddress) {
@@ -117,9 +119,12 @@ export default function Billing() {
           try {
             const results = await Promise.all(
               productIDs.map(async (productId) => {
+                console.log("ids", productId);
+                
                 return deleteData("/user/products/delete_from_cart", { productId: productId  });
               })
             );
+
             results.map((result)=>{
               if (result.success) {
                       toast.success("Your cart is Empty Now.");

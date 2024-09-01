@@ -27,6 +27,7 @@ import HistoryItem from './components/userProfle/myOrders/myHistory/HistoryItem.
 import { BillingAddress } from './components/userProfle/billingAddress/BillingAddress.jsx';
 import CreateBillingAdd from './components/userProfle/createBillingAdd/CreateBillingAdd.jsx';
 import MyPayment from './pages/paymentpage/MyPayment.jsx';
+import SearchProducts from './pages/searchProducts/SearchProducts.jsx';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/searchproducts",
+        element: <SearchProducts />
       },
       {
         path: "/about",

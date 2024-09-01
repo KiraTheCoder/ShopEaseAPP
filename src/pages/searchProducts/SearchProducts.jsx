@@ -1,14 +1,15 @@
 import ProductCard from '@/components/product/Product'
+import Shimmer from '@/components/shimmer/Shimmer';
 import { useGetSearchProduct } from '@/services/zustandStore';
 import React from 'react'
 
 function SearchProducts() {
-
-//   const searchedproducts = useGetSearchProduct((state) => state.products);
     const { products, setSearchProduct } = useGetSearchProduct();
+    const searchedProducts=products?.products
   
-  console.log("search page seach product", products?.products);
-  const searchedProducts=products?.products
+  // if (searchedProducts?.length == 0)
+  //   return <Shimmer />
+
   return (
     <div className="w-[95vw] m-auto flex  gap-3 items-center flex-wrap ">
         {searchedProducts? searchedProducts?.map((product, index) => (

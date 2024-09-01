@@ -34,7 +34,7 @@ export const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="w-[15rem] bg-slate-200 rounded overflow-hidden shadow-lg m-4 relative">
+    <div className="w-[15rem] h-[24rem] bg-slate-200 rounded overflow-hidden shadow-lg m-4 relative">
       <div
         onClick={() => {
           setProduct(product);
@@ -42,16 +42,16 @@ export const ProductCard = ({ product }) => {
         }}
         className="hover:cursor-pointer"
       >
-        <div className="w-full h-auto object-cover rounded-t-xl">
+        <div className="w-full h-[14rem] rounded-t-xl">
           <img
-            className="w-full h-full object-cover rounded-t-lg"
+            className="w-full h-full object-contain rounded-t-lg"
             src={`data:${product?.images[0]?.contentType};base64,${product?.images[0]?.data}`}
             alt={product?.productName}
           />
         </div>
-        <div className="px-3 py-2">
-          <h2 className="text-lg font-bold">{product?.productName}</h2>
-          <p className="flex gap-1 text-yellow-600">
+        <div className="px-3 pt-2">
+          <h2 className="text-md leading-5  font-bold">{product?.productName}</h2>
+          <p className="flex gap-1 my-1 text-yellow-600">
             <MdOutlineStarPurple500 />
             <MdOutlineStarPurple500 />
             <MdOutlineStarPurple500 />
@@ -59,8 +59,10 @@ export const ProductCard = ({ product }) => {
             <MdOutlineStarHalf />
           </p>
         </div>
-        <div className="px-3 mb-8">
-          <span className="text-gray-900 font-bold">Price: ${product?.price}</span>
+        <div className="px-3 mb-8 flex gap-8 items-center">
+          <span className="text-gray-900 font-bold">Price: ₹ <span className="text-orange-400">{product?.price}</span></span>
+          {/* <span className=""></span> */}
+          <h4 className="text-lg italic">Off : <span>{product?.discount}</span><span className="text-[12px] text-red-600"> %</span></h4>
         </div>
       </div>
       <button
