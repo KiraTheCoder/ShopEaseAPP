@@ -42,9 +42,9 @@ export const ProductCard = ({ product }) => {
         }}
         className="hover:cursor-pointer"
       >
-        <div className="w-full h-auto">
+        <div className="w-full h-auto object-cover rounded-t-xl">
           <img
-            className="w-full"
+            className="w-full h-full object-cover rounded-t-lg"
             src={`data:${product?.images[0]?.contentType};base64,${product?.images[0]?.data}`}
             alt={product?.productName}
           />
@@ -64,7 +64,7 @@ export const ProductCard = ({ product }) => {
         </div>
       </div>
       <button
-        className=" h-8 px-2 w-full absolute bottom-0 left-0 bg-orange-400 hover:bg-orange-500"
+        className=" h-8 px-2 w-full font-bold text-[#b5b1b1] absolute bottom-0 left-0 bg-gray-800 hover:bg-gray-900 hover:text-white"
         onClick={() => AddCart(product._id, 1)}
       >
         Add to Cart

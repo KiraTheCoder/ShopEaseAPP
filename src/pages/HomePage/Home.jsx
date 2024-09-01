@@ -12,6 +12,10 @@ export default function Home() {
    const { products, setSearchProduct } = useGetSearchProduct();
    console.log("home page seach product", products);
    
+   useEffect(()=>{return () => {
+      setSearchProduct(null); // This will run when the component unmounts
+    };
+   },[])
    //  const onlineStatus= useOnlineStatus()
    // if (onlineStatus===false) 
    //    return (
