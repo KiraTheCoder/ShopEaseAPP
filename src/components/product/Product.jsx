@@ -9,7 +9,6 @@ export const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const { setCount } = useGetCount((state) => state);
   const AddCart = async (Id, quantity) => {
-    console.log("hello", product);
     
     try {
       const addProductPromise = postData("/user/products/add_to_cart", { productId: Id, productQuantity: quantity });
@@ -33,8 +32,10 @@ export const ProductCard = ({ product }) => {
     }
   };
 
+  const MRP = Math.ceil(product?.price / (1 - parseInt(product?.discount) / 100));  
+
   return (
-    <div className="w-[15rem] bg-white h-[24rem] rounded overflow-hidden shadow-lg m-4 relative">
+    <div className="w-[15rem] bg-white h-[26rem] rounded overflow-hidden shadow-lg m-4 relative">
       <div
         onClick={() => {
           setProduct(product);
@@ -51,6 +52,7 @@ export const ProductCard = ({ product }) => {
         </div>
         <div className="px-3 pt-2">
           <h2 className="text-md leading-5  font-bold">{product?.productName}</h2>
+          <div className="flex gap-8 items-center mt-2">
           <p className="flex gap-1 my-1 text-yellow-600">
             <MdOutlineStarPurple500 />
             <MdOutlineStarPurple500 />
@@ -58,11 +60,13 @@ export const ProductCard = ({ product }) => {
             <MdOutlineStarPurple500 />
             <MdOutlineStarHalf />
           </p>
+          <p className=" text-gray-600">MRP: <span className="line-through">{MRP}</span></p>
+          </div>
         </div>
         <div className="px-3 mb-8 flex gap-8 items-center">
           <span className="text-gray-900 font-bold">Price: ₹ <span className="text-orange-400">{product?.price}</span></span>
           {/* <span className=""></span> */}
-          <h4 className="text-lg italic">Off : <span>{product?.discount}</span><span className="text-[12px] text-red-600"> %</span></h4>
+          {/* <h4 className="text-lg italic">Off : <span>{product?.discount}</span><span className="text-[12px] text-red-600"> %</span></h4> */}
         </div>
       </div>
       <button
