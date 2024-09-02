@@ -24,6 +24,10 @@ import UpdateName from './components/updateName/UpdateName.jsx';
 import NewArrivals from './pages/NewArrivalsPage/NewArrivals.jsx';
 import MyHistory from './components/userProfle/myOrders/myHistory/MyHistory.jsx';
 import HistoryItem from './components/userProfle/myOrders/myHistory/HistoryItem.jsx';
+import { BillingAddress } from './components/userProfle/billingAddress/BillingAddress.jsx';
+import CreateBillingAdd from './components/userProfle/createBillingAdd/CreateBillingAdd.jsx';
+import MyPayment from './pages/paymentpage/MyPayment.jsx';
+import SearchProducts from './pages/searchProducts/SearchProducts.jsx';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/searchproducts",
+        element: <SearchProducts />
       },
       {
         path: "/about",
@@ -72,7 +80,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/billing",
-        element: <Billing />
+        element: <Billing />,
+      },
+      {
+        path: "/createbillingadd",
+        element: <CreateBillingAdd />,
+      },
+      {
+        path: "/mypayment",
+        element: <MyPayment />,
       },
       {
         path: "/useraccount",

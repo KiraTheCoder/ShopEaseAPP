@@ -33,6 +33,21 @@ const useGetProduct = create(
 );
 
 
+////////////// product //////////////////
+
+const getSearchProduct = (set) => ({
+  products: "",
+  setSearchProduct: (products) => set({ products }),
+});
+
+const useGetSearchProduct = create(
+  devtools(getSearchProduct, {
+    name: "products",
+    getStorage: () => localStorage,
+  })
+);
+
+
 ////////////////// product count  ////////////////
 const getCount = (set) => ({
   count: "",
@@ -66,9 +81,6 @@ const useBuyProduct = create(
   })
 );
 
-
-
-
 ////////////////// product pagination  ////////////////
 const pagination = (set) => ({
   pageNo: 1,
@@ -77,17 +89,30 @@ const pagination = (set) => ({
 
 
 const usePagination = create(
-  devtools(persist(pagination, {
+  devtools(pagination, {
     name: "pageNo",
     getStorage: () => localStorage,
-  }))
+  })
 );
 
+// /////////////  home page api data ///////////
 
+const optimizedProductsfetched=(set)=>({
+  datafetchedpageNo:null,
+  fetchedProducts:null,
+  setFetchedData:({datafetchedpageNo,fetchedProducts})=>set({datafetchedpageNo,fetchedProducts})
+})
+
+const useOptimizeProductsfetched=create(
+  devtools(persist(optimizedProductsfetched,{
+    name:"fetchedproductdetails",
+    getStorage:()=>sessionStorage,
+  }))
+)
 
 
 ///////  Exports /////////////////////////
-export { useAuthStore, useGetProduct, useGetCount, usePagination, useBuyProduct };
+export { useAuthStore, useGetProduct, useGetCount, usePagination, useBuyProduct, useGetSearchProduct ,useOptimizeProductsfetched};
 
 /* 
 get().state --> useful when work conditional state

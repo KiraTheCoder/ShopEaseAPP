@@ -1,43 +1,50 @@
 import ProductCard from "@/components/product/Product"
 import { useEffect, useState } from "react"
-import { postData } from "@/services/apiCall"
+import { getData, postData } from "@/services/apiCall"
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import Shimmer from "@/components/shimmer/Shimmer"
-import { usePagination } from "@/services/zustandStore"
+import {useOptimizeProductsfetched, usePagination } from "@/services/zustandStore"
 
 
 function ItemsCollection() {
   let limit = 10
-  const [pagesLength, setPagesLength] = [1]
+  const [pagesLength, setPagesLength] = useState(0)
   const [products, setProducts] = useState([])
   const { pageNo, setPageNo } = usePagination(state => state)
+const {datafetchedpageNo, fetchedProducts, setFetchedData}=useOptimizeProductsfetched((s)=>s)
+
+console.log("pagelength", pagesLength);
 
   useEffect(() => {
     (async () => {
-      // const result1 = await getData("/user/products/all/count");
-      // if (result1?.success) {
-      //   const diviedPages = result1?.data?.count/ limit ;
-      //   setPagesLength(Math.ceil(diviedPages))
-      // }
-
+      const result1 = await getData("/user/products/all/count"); 
+      if (result1?.success) {   
+        const diviedPages = result1?.data?.count/ limit ;
+        setPagesLength(Math.ceil(diviedPages))
+      }
+    })()
+    
+ if (datafetchedpageNo!=pageNo) {
+    (async () => {
       const result2 = await postData("/user/products/all", {
         pageNo: pageNo,
         limit: limit
       });
-      setProducts(result2?.data)
+      setFetchedData({datafetchedpageNo:pageNo, fetchedProducts:result2?.data})
     })()
-  }, [pageNo])
+  }
+  }, [pageNo]) 
 
 
-  if (products?.length == 0)
+  if (fetchedProducts?.length == 0)
     return <Shimmer />
 
   return (
     <div className="flex flex-col items-center gap-4">
       {/* products */}
       <div className="w-[95vw] m-auto flex  gap-3 items-center flex-wrap ">
-        {products?.map((product, index) => (
+        {fetchedProducts?.map((product, index) => (
           <ProductCard key={index} product={product} />
         ))}
       </div>
@@ -71,10 +78,10 @@ function ItemsCollection() {
           <span>{pageNo}</span>
         </div>
         <FaArrowAltCircleRight
-          className={`${pageNo > pagesLength ? "opacity-35" : null} hover:cursor-pointer`}
+          className={`${pageNo >= pagesLength ? "opacity-35" : null} hover:cursor-pointer`}
           size={23}
           onClick={() => {
-            if (!(pageNo > pagesLength)) {
+            if (!(pageNo >= pagesLength)) {
               const nextPage = pageNo + 1
               setPageNo(nextPage)
             }
@@ -84,5 +91,6 @@ function ItemsCollection() {
     </div>
   )
 }
+
 
 export default ItemsCollection

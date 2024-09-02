@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DeliveryInfo from "@/components/cards/deliveryInfo/DeliveryInfo";
 import Offercard from "@/components/cards/offercard/Offercard";
 import { Button } from "@/components/form";
@@ -9,10 +9,11 @@ import { useGetProduct, useBuyProduct } from "@/services/zustandStore";
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "@/services/zustandStore/zustandStore"
+import { useAuthStore, useGetSearchProduct } from "@/services/zustandStore/zustandStore"
 import ItemsCollection from "../ItemsCollection/ItemsCollection";
 import { useGetCount } from "@/services/zustandStore/zustandStore";
 import { getData } from "@/services/apiCall";
+import SearchProducts from "../searchProducts/SearchProducts";
 
 function ProductCart() {
     const isLoggedin = useAuthStore(s => s.token)
@@ -23,14 +24,22 @@ function ProductCart() {
         }
     })
     const Product = useGetProduct((state) => state.product);
-    
+    // searching 
+    const { products, setSearchProduct } = useGetSearchProduct();
     //.................. Buy product....................
-  const { buyingProduct, setBuyProduct } = useBuyProduct();
+    const { buyingProduct, setBuyProduct } = useBuyProduct();
 
     const { images, discount, price, productName, description, color, _id } = Product;
     const MRP = Math.ceil(price / (1 - parseInt(discount) / 100));
-    const [mainImg, setMainImg] = useState(images?.[0]);
-
+    const [mainImg, setMainImg] = useState(images[0]);
+    
+    useEffect(() => {
+        if (images?.length) {
+          setMainImg(images[0]); // Set mainImg to the first image in the array
+        }
+      }, [images]);
+    
+   
     const [quantity, setQuantity] = useState(1)
 
     const { setCount } = useGetCount((state) => state);
@@ -70,7 +79,6 @@ function ProductCart() {
    const Buyproduct = (quantity)=>{
    Product.quantity = quantity
    setBuyProduct(Product);
-
    }
 
     return (
@@ -79,7 +87,7 @@ function ProductCart() {
                 <div className="w-[90vw] m-auto flex justify-around flex-wrap">
                     <div className="w-[24rem] h-auto py-[1.5rem] flex flex-col items-center">
                         <div className="w-[24rem] h-[30rem] flex flex-col items-center justify-center shadow-[0_0_10px_2px_rgba(0,0,0,0.2)]">
-                            <img src={`data:${mainImg?.contentType};base64,${mainImg?.data}`} alt={productName} className="h-full w-auto" />
+                            <img src={`data:${mainImg?.contentType };base64,${mainImg?.data}`} alt={productName} className="h-full w-auto" />
                         </div>
                         <div className="flex justify-around w-[23rem] mt-[2rem]">
                             {images?.map((img, index) => (
@@ -160,10 +168,13 @@ function ProductCart() {
             <section>
                 <ProductInfo details={Product} />
             </section>
-            <section className=" bg-green-600 my-8">
-                <h2 className="font-bold text-xl text-center italic">Viewers Also Liked</h2>
-                {/* <CartCollection /> */}
-                <ItemsCollection />
+            <section className=" m-auto my-8">
+                <h2 className="font-bold text-xl text-center italic mb-4">Viewers Also Liked</h2>
+                {
+            products ?
+            <SearchProducts/>:
+            <ItemsCollection />
+            }
             </section>
         </>
     );

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import { useEffect, useState } from "react";
 // import { NavLink } from "react-router-dom";
 // import { CiSearch } from "react-icons/ci";
@@ -120,14 +121,22 @@
 
 
 import { useEffect, useState } from "react";
+=======
+import { useEffect, useState, useRef, useCallback } from "react";
+>>>>>>> 228fa74f3669ee525c85d8b5508179489ce725e1
 import { NavLink, useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { FaCartPlus } from "react-icons/fa";
 import { HiMenu, HiX } from "react-icons/hi";
-import { useAuthStore, useGetCount } from "@/services/zustandStore/zustandStore";
+import { useAuthStore, useGetCount, useGetSearchProduct } from "@/services/zustandStore/zustandStore";
 import { FaCircleUser } from "react-icons/fa6";
 import { useScrollToTop } from "@/services/hooks";
+<<<<<<< HEAD
 import { getData } from "@/services/apiCall";
+=======
+import { getData, postData } from "@/services/apiCall";
+import { debounce } from "@/services/utils";
+>>>>>>> 228fa74f3669ee525c85d8b5508179489ce725e1
 
 const CustomNavLink = ({ to, children, onClick, isActiveLink }) => (
     <NavLink
@@ -150,6 +159,7 @@ function Header() {
     const [searchQuery, setSearchQuery] = useState("");
     const { removeToken, token } = useAuthStore((state) => state);
     const isLoggedIn = !!token;
+<<<<<<< HEAD
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -158,6 +168,35 @@ function Header() {
         })();
     }, [setCount]);
 
+=======
+    const searchText = useRef(null);
+    const [searchData, setSearchData] = useState([]);
+    const { products, setSearchProduct } = useGetSearchProduct();
+  
+    const navigate=useNavigate()
+
+
+    const fetchCartProductCount = async () => {
+        const result = await getData("/user/products/cart_products_count");
+        setCount(result?.data?.productCartsCount || 0);
+    };
+
+    useEffect(() => {
+        fetchCartProductCount();
+    }, [setCount]);
+
+    const handleSearch = useCallback(
+        debounce(async () => {
+            if (searchText.current?.value?.trim()) {
+                const result = await postData("/user/products/search", { keyword: searchText.current.value });
+                setSearchData(result?.data || []);
+                setSearchProduct(result?.data || [])
+            }
+        }, 300),
+        []
+    );
+
+>>>>>>> 228fa74f3669ee525c85d8b5508179489ce725e1
     const handleToggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
     const handleSearch = () => {
@@ -198,6 +237,9 @@ function Header() {
                         />
                         <input
                             type="text"
+                            ref={searchText}
+                            onChange={handleSearch}
+                            onClick={()=>navigate("/searchproducts")}
                             placeholder="Search for Product..."
                             className="h-[100%] w-[90%] px-1 rounded-full bg-transparent text-[13px] sm:text-[14px] md:text-[14px] lg:text-sm outline-none"
                             value={searchQuery}
@@ -255,6 +297,12 @@ export default Header;
 
 
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 228fa74f3669ee525c85d8b5508179489ce725e1
 // import  { useEffect, useState } from "react";
 // import { NavLink } from "react-router-dom";
 // import { CiSearch } from "react-icons/ci";

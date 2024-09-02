@@ -149,9 +149,9 @@ function Cart() {
         }
     };
 
-    const totalPrice = cartData.reduce((total, product) => total + product.price * product.productCount, 0);
+    const totalPrice = cartData.reduce((total, product) => total + parseInt(product.price) * product.productCount, 0);
     const totalMRP = cartData.reduce((total, product) => {
-        const productMRP = Math.ceil(product.price / (1 - parseInt(product.discount) / 100));
+        const productMRP = Math.ceil(parseInt(product.price) / (1 - parseInt(product.discount) / 100));
         return total + productMRP * product.productCount;
     }, 0);
     const discountAmount = totalMRP - totalPrice;
@@ -183,7 +183,7 @@ function Cart() {
                                     <p className='text-[14px]'>Color: <span className='text-gray-500'>{product?.color}</span></p>
                                     <div className='flex gap-4'>
                                         <p className='font-Five text-sm'>₹ {product?.price}</p>
-                                        <p className='italic text-[12px] line-through text-red-400'>MRP: {Math.ceil(product?.price / (1 - parseInt(product?.discount) / 100))}</p>
+                                        <p className='italic text-[12px] line-through text-red-400'>MRP: {Math.ceil(parseInt(product?.price) / (1 - parseInt(product?.discount) / 100))}</p>
                                     </div>
                                 </div>
                             </div>
@@ -248,7 +248,6 @@ function Cart() {
                             navigate('/billing')
                         }
                     }}>
-                        {/* <Link to={"/billing"} className='flex justify-center items-center gap-3'>Checkout <FaArrowRight className='' /></Link> */}
                         Chechout
                     </button>
                 </div>
