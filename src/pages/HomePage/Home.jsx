@@ -8,9 +8,7 @@ import { useGetSearchProduct } from "@/services/zustandStore";
 
 export default function Home() {
    // const searchedproducts = useGetSearchProduct((state) => state.products);
-
    const { products, setSearchProduct } = useGetSearchProduct();
-   console.log("home page seach product", products);
 
    useEffect(() => {
       return () => {

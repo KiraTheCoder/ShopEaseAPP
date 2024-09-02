@@ -8,7 +8,7 @@ import { FaCircleUser } from "react-icons/fa6";
 import { useScrollToTop } from "@/services/hooks";
 import { getData, postData } from "@/services/apiCall";
 import { debounce } from "@/services/utils";
-
+import { FcSearch } from "react-icons/fc";
 const CustomNavLink = ({ to, children, onClick, isActiveLink }) => (
     <NavLink
         to={to}
@@ -88,7 +88,7 @@ function Header() {
                 </nav>
                 <div className="w-[60%] sm:w-[65%] md:w-[40%] flex justify-between items-center">
                     <div className="flex justify-evenly items-center bg-slate-200 h-6 sm:h-8 md:h-7 lg:h-9 w-[75%] sm:w-[70%] md:w-[70%] lg:w-[80%] rounded-full">
-                        <CiSearch className="text-md sm:text-[1.5rem] text-gray-500" />
+                        <FcSearch className="text-md sm:text-[1.5rem]" />
                         <input
                             type="text"
                             ref={searchText}

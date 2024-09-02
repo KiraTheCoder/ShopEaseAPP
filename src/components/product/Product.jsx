@@ -9,6 +9,7 @@ export const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const { setCount } = useGetCount((state) => state);
   const AddCart = async (Id, quantity) => {
+    console.log("cart add", Id, quantity);
     
     try {
       const addProductPromise = postData("/user/products/add_to_cart", { productId: Id, productQuantity: quantity });
@@ -22,7 +23,6 @@ export const ProductCard = ({ product }) => {
       );
 
       const addProduct = await addProductPromise;
-      // console.log("addProduct", addProduct);
       
       if (addProduct?.success) {
         setCount(await (await getData("/user/products/cart_products_count"))?.data?.productCartsCount);     
@@ -41,7 +41,7 @@ export const ProductCard = ({ product }) => {
           setProduct(product);
           navigate("/productcart");
         }}
-        className="hover:cursor-pointer"
+        className="hover:cursor-pointer "
       >
         <div className="w-full h-[14rem] rounded-t-xl">
           <img

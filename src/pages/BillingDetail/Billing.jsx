@@ -19,6 +19,7 @@ export default function Billing() {
   const [congratulations, setCongratulations] = useState(false);
   const { buyingProduct, setBuyProduct } = useBuyProduct();
   const { cartData, payableAmount } = cartitems;
+
   // cart related code start
   const setCount = useGetCount((state) => state.setCount);
   const [cart, setCart] = useState([]);
@@ -72,6 +73,9 @@ export default function Billing() {
   
     const addressCopy = { ...selectedAddress };
     delete addressCopy._id; 
+    if (addressCopy.addressId) {
+      delete addressCopy.addressId
+    }
     values.totalAmount = `${totalPrice}`;
     values.productIDs = productIDs;
     values.addresses = addressCopy;
@@ -153,7 +157,7 @@ deleteProduct();
         {userAddress.length > 0 ? (
           <BillingAddress selectedAddress={selectedAddress} setSelectedAddress={setSelectedAddress} />
         ) : (
-          <CreateBillingAdd />
+          <CreateBillingAdd sendAddress={setSelectedAddress}/>
         )}
         <div className="h-auto w-[30rem]">
           {buyingProduct ? (

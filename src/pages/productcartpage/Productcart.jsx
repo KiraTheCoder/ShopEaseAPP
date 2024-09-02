@@ -16,6 +16,11 @@ import { getData } from "@/services/apiCall";
 import SearchProducts from "../searchProducts/SearchProducts";
 
 function ProductCart() {
+    const [selectedSize, setSelectedSize] = useState(null);
+
+    const handleSizeClick = (size) => {
+        setSelectedSize(size);
+    };
     const isLoggedin = useAuthStore(s => s.token)
     const navigate = useNavigate()
     useEffect(() => {
@@ -29,17 +34,22 @@ function ProductCart() {
     //.................. Buy product....................
     const { buyingProduct, setBuyProduct } = useBuyProduct();
 
-    const { images, discount, price, productName, description, color, _id } = Product;
+    const { images, discount, price, productName, description, color, _id, size } = Product;
     const MRP = Math.ceil(price / (1 - parseInt(discount) / 100));
     const [mainImg, setMainImg] = useState(images[0]);
-    
+    // console.log("sizes", size);
+
+    const arraySize = size.split(" ");
+    // console.log("array", array);
+
+
     useEffect(() => {
         if (images?.length) {
-          setMainImg(images[0]); // Set mainImg to the first image in the array
+            setMainImg(images[0]); // Set mainImg to the first image in the array
         }
-      }, [images]);
-    
-   
+    }, [images]);
+
+
     const [quantity, setQuantity] = useState(1)
 
     const { setCount } = useGetCount((state) => state);
@@ -75,11 +85,11 @@ function ProductCart() {
             setQuantity(quantity - 1);
         }
     };
- 
-   const Buyproduct = (quantity)=>{
-   Product.quantity = quantity
-   setBuyProduct(Product);
-   }
+
+    const Buyproduct = (quantity) => {
+        Product.quantity = quantity
+        setBuyProduct(Product);
+    }
 
     return (
         <>
@@ -87,7 +97,7 @@ function ProductCart() {
                 <div className="w-[90vw] m-auto flex justify-around flex-wrap">
                     <div className="w-[24rem] h-auto py-[1.5rem] flex flex-col items-center">
                         <div className="w-[24rem] h-[30rem] flex flex-col items-center justify-center shadow-[0_0_10px_2px_rgba(0,0,0,0.2)]">
-                            <img src={`data:${mainImg?.contentType };base64,${mainImg?.data}`} alt={productName} className="h-full w-auto" />
+                            <img src={`data:${mainImg?.contentType};base64,${mainImg?.data}`} alt={productName} className="h-full w-auto" />
                         </div>
                         <div className="flex justify-around w-[23rem] mt-[2rem]">
                             {images?.map((img, index) => (
@@ -106,7 +116,7 @@ function ProductCart() {
                                 name={"BUY NOW"}
                                 type={"submit"}
                                 style={"py-2 px-10 text-sm bg-green-700 hover:bg-green-800"}
-                                onClick={() =>{ Buyproduct(quantity); navigate("/billing")}}
+                                onClick={() => { Buyproduct(quantity); navigate("/billing") }}
                             />
                             <Button
                                 name={"ADD TO CART"}
@@ -128,8 +138,8 @@ function ProductCart() {
                             </p>
                         </div>
                         <p className="text-gray-400 leading-5 text-sm">{description}</p>
-                        <h3 className="font-bold my-2">Colors <span className="text-gray-400 text-[12px]">{color}</span></h3>
-                        <div className="flex w-[6rem] overflow-hidden h-auto gap-2 bg-slate-50 shadow-[0_0_10px_2px_rgba(0,0,0,0.2)] overflow-x-auto">
+                        <h3 className="font-bold my-2">Colors <span className="text-gray-800 text-[12px] ml-2">{color}</span></h3>
+                        <div className="bg-black w-[7rem]">
                             <div className="w-[4.5rem] m-auto h-auto flex-shrink-0 flex flex-col justify-center items-center">
                                 <img
                                     src={`data:${images?.[0]?.contentType};base64,${images?.[0]?.data}`}
@@ -138,23 +148,41 @@ function ProductCart() {
                                 />
                             </div>
                         </div>
-                        <div className="text-lg font-Five mt-6">Quantity</div>
-                        <div className='w-20 h-6 rounded-xl flex justify-between bg-gray-400 my-2'>
-                            <button
-                                className='w-6 rounded-l-xl text-sm flex justify-center items-center'
-                                onClick={() => handleDecrement()}
-                            >
-                                <FaMinus />
-                            </button>
-                            <div className='w-8 bg-gray-200 text-center text-[16px] flex items-center justify-center'>
-                                {quantity}
+                        <div className="flex gap-16 mt-6 ">
+                            <div>
+                                <div className="text-lg font-Five ">Quantity</div>
+                                <div className='w-20 h-6 rounded-xl flex justify-between bg-gray-400 my-2'>
+                                    <button
+                                        className='w-6 rounded-l-xl text-sm flex justify-center items-center'
+                                        onClick={() => handleDecrement()}
+                                    >
+                                        <FaMinus />
+                                    </button>
+                                    <div className='w-8 bg-gray-200 text-center text-[16px] flex items-center justify-center'>
+                                        {quantity}
+                                    </div>
+                                    <button
+                                        className='w-6 rounded-r-xl text-sm flex justify-center items-center'
+                                        onClick={() => handleIncrement()}
+                                    >
+                                        <FaPlus />
+                                    </button>
+                                </div>
                             </div>
-                            <button
-                                className='w-6 rounded-r-xl text-sm flex justify-center items-center'
-                                onClick={() => handleIncrement()}
-                            >
-                                <FaPlus />
-                            </button>
+                            <div className=" flex gap-2 items-center">
+                               <div className="text-lg font-Five ">Size</div>
+                                {arraySize?.map((sizess) => (
+                                    <div
+                                        key={sizess}
+                                        className={`h-12 w-12 rounded-md border-gray-400 border-2 flex justify-center items-center cursor-pointer ${
+                                            selectedSize === sizess ? 'bg-gray-900 text-white' : 'bg-white text-black'
+                                        }`}
+                                        onClick={() => handleSizeClick(sizess)}
+                                    >
+                                        {sizess}
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                         <Offercard />
                     </div>
@@ -171,10 +199,10 @@ function ProductCart() {
             <section className=" m-auto my-8">
                 <h2 className="font-bold text-xl text-center italic mb-4">Viewers Also Liked</h2>
                 {
-            products ?
-            <SearchProducts/>:
-            <ItemsCollection />
-            }
+                    products ?
+                        <SearchProducts /> :
+                        <ItemsCollection />
+                }
             </section>
         </>
     );

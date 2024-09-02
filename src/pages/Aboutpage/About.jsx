@@ -1,8 +1,9 @@
 import TeamSection from '../../components/cards/aboutcusTrustcards/Ourteam'
 import Abouttrustcard from '../../components/cards/aboutcusTrustcards/Abouttrustcard'
 import Trustcard from '@/components/cards/customerTrustcard/Trustcard'
+import girlsGroup from "@/assets/images/footerImages/girlsGroup.png";
 function About() {
-    const aboutmainImg = "https://s3-alpha-sig.figma.com/img/fcc8/9aaa/7b85f8c1dcce81e71e2eb178be13bd4d?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=BwHd84ktT1n-BhjX8HhzVtrvsH6RLRdS983M3Tz8eQDcvNZOXmZD6Sa0bce0TYwb5GM3AW0O2~US5TSCrk4a8CGjJ-KiYRhf2FWBgUe24gXwcKP47YflX6Bz8PkuaWVcx9praTqi0eNyh58eQ9LC4iof~BkwoOTqCSsOFTZbrfuqvcAhsEljcwJnSa7Mm5~ezNAMyJTz3qILzsGYaAIivQgdi0SXidNqFekMgW35SHocppaq2N9MC-OARmPB56oiiLLxcWRTLc7C~W1y1UHX3nSsEE5to~r2-BrD2TNw4I1VOc6moZDceyH2QPwQK3OFos407zHlseSMYICunmPMxg__"
+    // const aboutmainImg = "https://s3-alpha-sig.figma.com/img/fcc8/9aaa/7b85f8c1dcce81e71e2eb178be13bd4d?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=BwHd84ktT1n-BhjX8HhzVtrvsH6RLRdS983M3Tz8eQDcvNZOXmZD6Sa0bce0TYwb5GM3AW0O2~US5TSCrk4a8CGjJ-KiYRhf2FWBgUe24gXwcKP47YflX6Bz8PkuaWVcx9praTqi0eNyh58eQ9LC4iof~BkwoOTqCSsOFTZbrfuqvcAhsEljcwJnSa7Mm5~ezNAMyJTz3qILzsGYaAIivQgdi0SXidNqFekMgW35SHocppaq2N9MC-OARmPB56oiiLLxcWRTLc7C~W1y1UHX3nSsEE5to~r2-BrD2TNw4I1VOc6moZDceyH2QPwQK3OFos407zHlseSMYICunmPMxg__"
     return (
         <div className=''>
             <div className='w-[100vw] ml-auto md:w-[100vw] md:justify-around lg:w-[90vw] my-4 sm:my-6 md:my-[3rem] h-auto flex flex-wrap-reverse items-center justify-center sm:justify-center lg:justify-between'>
@@ -12,8 +13,8 @@ function About() {
                     <p className='text-[14px] sm:text-[15px] md:text-[16px] lg:text-[18px] 2xl:text-[1.7rem] text-center sm:text-start font-inter tracking-wider my-2'>Exclusive has more than 1 Million products to offer, growing at a very fast. Exclusive offers a diverse assotment in categories ranging  from consumer.</p>
                 </div>
 
-                <div className='w-[95vw] sm:w-[90vw] md:w-[45vw]  lg:w-[48vw] xl:w-[48vw] h-auto'>
-                    <img className="rounded-[0.25rem] " src={aboutmainImg} alt="Login" />
+                <div className='w-[95vw] sm:w-[90vw] md:w-[45vw]  lg:w-[45vw] h-auto'>
+                    <img className="rounded-[0.25rem] " src={girlsGroup} alt="Login" />
                 </div>
             </div>
             <div className='my-[5rem]'><Abouttrustcard /> </div>
