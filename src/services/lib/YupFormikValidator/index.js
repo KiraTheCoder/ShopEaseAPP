@@ -47,9 +47,10 @@ const nameValidate = Yup.string()
   .required("Street or Address required")
   .min(1, "Street name required")
   .max(200, "Street Address is too long");
-
+  
   const aprtmentOrFloorValidation= Yup.string()
   .trim()
+  .required("Aprtment Or Floor required")
   .min(1, "Aprtment Or Floor name required")
   .max(200, "Aprtment Or Floor name is too long");
 

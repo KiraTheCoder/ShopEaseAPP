@@ -34,7 +34,7 @@ export const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="w-[15rem] h-[24rem] bg-slate-200 rounded overflow-hidden shadow-lg m-4 relative">
+    <div className="w-[15rem] bg-white h-[24rem] rounded overflow-hidden shadow-lg m-4 relative">
       <div
         onClick={() => {
           setProduct(product);
@@ -66,7 +66,7 @@ export const ProductCard = ({ product }) => {
         </div>
       </div>
       <button
-        className=" h-8 px-2 w-full font-bold text-[#b5b1b1] absolute bottom-0 left-0 bg-gray-800 hover:bg-gray-900 hover:text-white"
+        className=" h-12 px-2 w-full font-bold absolute bottom-0 left-0 bg-gray-900 text-white"
         onClick={() => AddCart(product._id, 1)}
       >
         Add to Cart

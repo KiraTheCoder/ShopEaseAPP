@@ -41,9 +41,9 @@ console.log("pagelength", pagesLength);
     return <Shimmer />
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex bg-pink-100 flex-col items-center justify-center  gap-4 w-[100vw]  m-auto ">
       {/* products */}
-      <div className="w-[95vw] m-auto flex  gap-3 items-center flex-wrap ">
+      <div className="w-[95vw] m-auto flex  gap-3   justify-center py-4 flex-wrap ">
         {fetchedProducts?.map((product, index) => (
           <ProductCard key={index} product={product} />
         ))}

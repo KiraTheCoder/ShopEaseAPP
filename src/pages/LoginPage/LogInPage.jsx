@@ -40,9 +40,6 @@ export default function LogInPage() {
             const data = await myPromise;
 
             if (data.success) {
-                // console.log(data);
-                // alert(data.message)
-                // console.log(data.data.token);
                 setToken(data?.data?.token)
                 navigate("/")
             }
@@ -69,14 +66,13 @@ export default function LogInPage() {
                             <TextInput label={"Email or Phone Number *"} name={"phoneNumberOrEmail"} type={"input"} />
                             <TextInput label={"Password *"} name={"password"} type={"password"} />
                             <div className='flex justify-between items-center my-[1.2rem]'>
-                                <Button type="submit" name={"Log In"} style={"w-[5.5rem]"} />
+                                <Button type="submit" name={"Log In"} style={"w-[5.5rem] bg-orange-400 hover:bg-orange-500"} />
                                 <div className="">
                                     <li className='list-none no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/forgetpassword"}>Forget password ?</Link></li>
                                 </div> 
                             </div>
-                                <div className=" flex text-sm  justify-between px-2">
-                                    Create Account:👉 
-                                    <li className='list-none no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/signup"}>Click here </Link></li>
+                                <div className="">
+                                    <li className='list-none no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/signup"}>Create Account </Link></li>
                                 </div>
                         </Form>
                     )}

@@ -14,7 +14,7 @@ const CustomNavLink = ({ to, children, onClick, isActiveLink }) => (
         to={to}
         onClick={onClick}
         className={({ isActive }) =>
-            `text-[12px] sm:text-[0.5rem] md:text-[0.6rem] lg:text-[0.8rem] xl:text-[1rem] font-medium text-white relative after:content-[''] 
+            `text-[12px] sm:text-[1rem] md:text-[0.9rem] lg:text-[0.8rem] xl:text-[1rem] font-medium text-white relative after:content-[''] 
             after:absolute after:left-0 after:bottom-0 after:h-[1.3px] sm:after:h-[1.5px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-[0.18rem] 
             ${isActive || isActiveLink ? 'after:block' : 'after:hidden'}`
         }
@@ -51,6 +51,11 @@ function Header() {
                 const result = await postData("/user/products/search", { keyword: searchText.current.value });
                 setSearchData(result?.data || []);
                 setSearchProduct(result?.data || [])
+                console.log("searching result", result);
+                
+                if (result?.success) {
+                    navigate("/searchproducts")
+                }
             }
         }, 300),
         []
@@ -88,7 +93,7 @@ function Header() {
                             type="text"
                             ref={searchText}
                             onChange={handleSearch}
-                            onClick={()=>navigate("/searchproducts")}
+                            // onClick={()=>navigate("/searchproducts")}
                             placeholder="Search for Product..."
                             className="h-[100%] w-[90%] px-1 rounded-full bg-transparent text-[13px] sm:text-[14px] md:text-[14px] lg:text-sm outline-none"
                         />
@@ -116,7 +121,7 @@ function Header() {
                         <HiMenu className="text-[1rem] sm:text-[1.2rem] md:text-2xl" />
                     )}
                 </button>
-                <div className={`w-[87%] sm:w-[80%] flex justify-around sm:justify-start sm:gap-7 ${isMenuOpen ? 'block' : 'hidden'}`}>
+                <div className={` ml-2 w-auto gap-8 sm:w-[80%] flex justify-around sm:justify-start sm:gap-7 ${isMenuOpen ? 'block' : 'hidden'}`}>
                     <CustomNavLink to="/">Shop</CustomNavLink>
                     <CustomNavLink to="/newarrivals">New Arrivals</CustomNavLink>
                     {isLoggedIn ? (

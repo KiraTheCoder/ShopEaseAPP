@@ -103,7 +103,7 @@ function SignupPage() {
                                     <TextInput label="Confirm Password *" name="confirm_password" type="password" />
                                     <TextInput label="OTP *" name="otp" type="text" />
                                 </>)}
-                            <Button type="submit" name={flag ? "Create Account" : "Send OTP"} style="w-[100%] my-0 mb-2" />
+                            <Button type="submit" name={flag ? "Create Account" : "Send OTP"} style="w-[100%] my-0 mb-2 bg-orange-400 hover:bg-orange-500" />
                             {/* <button className='h-[2rem] sm:h-[2.4rem] md:h-[2.5rem] border-2 w-[100%] rounded-md my-2 flex justify-center gap-4 items-center'>
                                 <FcGoogle className='text-[30px]' />
                                 <span>Sign up with Google</span>
