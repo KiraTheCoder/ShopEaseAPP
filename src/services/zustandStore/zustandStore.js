@@ -24,7 +24,6 @@ const getProduct = (set) => ({
   setProduct: (product) => set({ product }),
 });
 
-
 const useGetProduct = create(
   devtools(persist(getProduct, {
     name: "product",

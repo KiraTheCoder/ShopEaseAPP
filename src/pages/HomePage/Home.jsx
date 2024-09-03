@@ -4,6 +4,7 @@ import couple2 from "@/assets/images/footerImages/couple2.png"
 import ItemsCollection from "../ItemsCollection/ItemsCollection";
 import SearchProducts from "../searchProducts/SearchProducts";
 import { useGetSearchProduct } from "@/services/zustandStore";
+import CategoryCartContainer from "@/components/categoryCart/CategoryCartContainer";
 // import useOnlineStatus from "@/services/hooks";
 
 export default function Home() {
@@ -77,6 +78,9 @@ export default function Home() {
                         <h1 className="text-[16px] sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl text-white font-normal italic">PRADA</h1>
                         <h1 className="text-[16px] sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl text-white font-extralight">Calvin Klein</h1>
                      </div>
+                  </div>
+                  <div className="m-auto">
+                     <CategoryCartContainer/>
                   </div>
                   <div className="m-auto my-4">
                      <ItemsCollection />

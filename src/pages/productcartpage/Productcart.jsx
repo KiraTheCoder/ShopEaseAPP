@@ -37,10 +37,7 @@ function ProductCart() {
     const { images, discount, price, productName, description, color, _id, size } = Product;
     const MRP = Math.ceil(price / (1 - parseInt(discount) / 100));
     const [mainImg, setMainImg] = useState(images[0]);
-    // console.log("sizes", size);
-
     const arraySize = size.split(" ");
-    // console.log("array", array);
 
 
     useEffect(() => {
