@@ -35,11 +35,11 @@ export default function Home() {
                               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-black leading-tight">
                                  FIND CLOTHES THAT MATCH YOUR STYLE
                               </h1>
-                              <p className="py-5 text-gray-600 text-[14px]  sm:text-base md:text-lg">
+                              <p className="py-6 text-gray-600 text-[14px]  sm:text-base md:text-lg">
                                  Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style.
                               </p>
 
-                              <button className="h-[2rem] sm:h-[3rem] w-[12rem] bg-black rounded-3xl text-white">Shop Now</button>
+                              <button className=" my-5 h-[2rem] sm:h-[3rem] w-[12rem] bg-black rounded-3xl  text-white">Shop Now</button>
 
                               <div className="flex my-4  w-[90vw] sm:w-auto ">
                                  <div className=" flex-1 text-center sm:text-left px-2 sm:px-3.5 border-r border-gray-300">
