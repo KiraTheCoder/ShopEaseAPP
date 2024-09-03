@@ -11,15 +11,9 @@ function CategoryCart({categoryproduct}) {
     
 const navigate=useNavigate()
     const handleSearch = async (searchText) => {
-console.log("search text from cart", searchText);
-
         const result = await postData("/user/products/search", { keyword: searchText });
-        // setSearchData(result?.data || []);
         setSearchProduct(result?.data || [])
         console.log("searching result", result);
-        // if (result?.success) {
-        //     navigate("/searchproducts")
-        // }
     }
 
 

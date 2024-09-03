@@ -79,10 +79,11 @@ export default function Home() {
                         <h1 className="text-[16px] sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl text-white font-extralight">Calvin Klein</h1>
                      </div>
                   </div>
-                  <div className="m-auto">
+                  <div className="m-auto border-b-2 my-4">
                      <CategoryCartContainer/>
                   </div>
                   <div className="m-auto my-4">
+                     <h1 className="text-5xl italic text-center capitalize font-light my-3">Top collections </h1>
                      <ItemsCollection />
                   </div>
                {/* </> :

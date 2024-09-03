@@ -3,7 +3,7 @@ import CategoryCart from './CategoryCart'
 
 const categoryOfProducts = [
     {
-        productName: "Sleep wear",
+        productName: "Sleepwear",
         img: "https://www.fablar.com/wp-content/uploads/2020/09/1576030242dd9b45983f1a7bc29e7bac51cf0e2e01_wps%E5%9B%BE%E7%89%87.jpg",
         discount: "10-30%",
     },
@@ -51,6 +51,16 @@ const categoryOfProducts = [
         productName: "women's Sports wear",
         img: "https://th.bing.com/th/id/OIP.gzrixLZv2pl0C_MEaYMAPgHaKe?rs=1&pid=ImgDetMain",
         discount: "10-50%",
+    },
+    {
+        productName: "Kid's winter wear",
+        img: "https://th.bing.com/th/id/OIP.2Yuc2PRQoDtweF_RHNdDuAHaJQ?rs=1&pid=ImgDetMain",
+        discount: "20-30%",
+    },
+    {
+        productName: "active wear",
+        img: "https://cdn.shopify.com/s/files/1/0412/8283/0486/files/Mobile_Header_60708574-0a92-48a0-94dc-470e59134a3b.png?v=1710811210",
+        discount: "10-20%",
     },
 
 ];

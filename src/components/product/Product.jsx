@@ -3,13 +3,20 @@ import { useGetCount, useGetProduct } from "@/services/zustandStore";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getData, postData } from "@/services/apiCall";
-
+import { FaRegHeart, FaHeart } from "react-icons/fa6";
+import { useState } from "react";
 export const ProductCard = ({ product }) => {
   const setProduct = useGetProduct((state) => state.setProduct);
   const navigate = useNavigate();
   const { setCount } = useGetCount((state) => state);
+
+  const [wishlist, setWishlist] = useState(false);
+
+  const handleWishlistClick = () => {
+  setWishlist((prevWishlist) => !prevWishlist);
+};
+
   const AddCart = async (Id, quantity) => {
-    
     try {
       const addProductPromise = postData("/user/products/add_to_cart", { productId: Id, productQuantity: quantity });
       toast.promise(
@@ -35,6 +42,7 @@ export const ProductCard = ({ product }) => {
 
   return (
     <div className="w-[15rem] bg-white h-[26rem] rounded overflow-hidden shadow-lg m-4 relative">
+      <div className="absolute right-2 top-2 text-2xl" onClick={handleWishlistClick} >{wishlist? <FaHeart className="text-red-700"/> :<FaRegHeart />}</div>
       <div
         onClick={() => {
           setProduct(product);
