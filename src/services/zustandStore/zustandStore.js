@@ -50,17 +50,19 @@ const useGetSearchProduct = create(
 ////////////////// product count  ////////////////
 const getCount = (set) => ({
   count: "",
+  wishlistcount:"",
   cartitems:"",
   subAmount:"",
   setCount: (count) => set({ count }),
   setCartitems: (cartitems)=> set ({cartitems}),
-  // setSubAmount: (subAmount)=> set ({subAmount})
+  setWishlistcount: (wishlistcount)=> set ({wishlistcount})
 });
 
 const useGetCount = create(
   devtools(getCount, {
     name: "count",
     cart:"cartitems",
+    wishlist:"wishlistcount",
     // payAmt:"subAmount",
     getStorage: () => localStorage,
   })

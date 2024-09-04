@@ -4,7 +4,7 @@ import { CiSearch } from "react-icons/ci";
 import { FaCartPlus } from "react-icons/fa";
 import { HiMenu, HiX } from "react-icons/hi";
 import { useAuthStore, useGetCount, useGetSearchProduct } from "@/services/zustandStore/zustandStore";
-import { FaCircleUser } from "react-icons/fa6";
+import { FaCircleUser, FaHeart } from "react-icons/fa6";
 import { useScrollToTop } from "@/services/hooks";
 import { getData, postData } from "@/services/apiCall";
 import { debounce } from "@/services/utils";
@@ -25,25 +25,26 @@ const CustomNavLink = ({ to, children, onClick, isActiveLink }) => (
 
 function Header() {
     useScrollToTop();
-    const { count, setCount } = useGetCount((state) => state);
+    const { count, setCount, wishlistcount, setWishlistcount, } = useGetCount((state) => state);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { removeToken, token } = useAuthStore((state) => state);
     const isLoggedIn = !!token;
     const searchText = useRef(null);
     const [searchData, setSearchData] = useState([]);
     const { products, setSearchProduct } = useGetSearchProduct();
-  
-    const navigate=useNavigate()
+
+    const navigate = useNavigate()
 
 
     const fetchCartProductCount = async () => {
         const result = await getData("/user/products/cart_products_count");
+        setWishlistcount(await (await getData("/user/products/wishlist_products"))?.data?.products?.length)
         setCount(result?.data?.productCartsCount || 0);
     };
 
     useEffect(() => {
         fetchCartProductCount();
-    }, [setCount]);
+    }, [setCount, setWishlistcount]);
 
     const handleSearch = useCallback(
         debounce(async () => {
@@ -52,7 +53,7 @@ function Header() {
                 setSearchData(result?.data || []);
                 setSearchProduct(result?.data || [])
                 console.log("searching result", result);
-                
+
                 if (result?.success) {
                     navigate("/searchproducts")
                 }
@@ -86,7 +87,7 @@ function Header() {
                         <CustomNavLink to="/login">Login</CustomNavLink>
                     )}
                 </nav>
-                <div className="w-[60%] sm:w-[65%] md:w-[40%] flex justify-between items-center">
+                <div className="w-[70%] sm:w-[65%] md:w-[50%] flex justify-between items-center">
                     <div className="flex justify-evenly items-center bg-slate-200 h-6 sm:h-8 md:h-7 lg:h-9 w-[75%] sm:w-[70%] md:w-[70%] lg:w-[80%] rounded-full">
                         <FcSearch className="text-md sm:text-[1.5rem]" />
                         <input
@@ -98,15 +99,24 @@ function Header() {
                             className="h-[100%] w-[90%] px-1 rounded-full bg-transparent text-[13px] sm:text-[14px] md:text-[14px] lg:text-sm outline-none"
                         />
                     </div>
-                    <div className="w-[22%] sm:w-[15%] md:w-[20%] lg:w-[15%] flex justify-around sm:justify-between md:justify-between lg:justify-start lg:gap-3 items-center">
+                    <div className="w-[25%] sm:w-[20%] md:w-[28%] flex justify-around sm:justify-between  md:justify-center md:gap-3 items-center">
                         <div className="relative">
-                            <p className="text-white bg-orange-500 rounded-full h-[14px] w-[14px] flex justify-center items-center ml-1 absolute bottom-5 text-[10px]">
+                            <p className="text-white bg-orange-500 rounded-full h-[10px] sm:h-[10px] md:h-[12px] lg:h-[14px] w-[10px] sm:w-[10px] md:w-[12px] lg:w-[14px] flex justify-center items-center ml-[0.12rem] sm:ml-1 absolute bottom-4 sm:bottom-5 text-[7px] sm:text-[8px] md:text-[10px]">
+                                {wishlistcount}
+                            </p>
+                            <NavLink to="/wishlistproducts">
+                                <FaHeart className="text-sm sm:text-xl text-red-500" />
+                            </NavLink>
+                        </div>
+                        <div className="relative">
+                            <p className="text-white bg-orange-500 rounded-full h-[10px] sm:h-[10px] md:h-[12px] lg:h-[14px] w-[10px] sm:w-[10px] md:w-[12px] lg:w-[14px] flex justify-center items-center ml-[0.20rem] sm:ml-1 absolute bottom-4 sm:bottom-5 text-[7px] sm:text-[8px] md:text-[10px]">
                                 {count}
                             </p>
                             <NavLink to="/cart">
                                 <FaCartPlus className="text-sm sm:text-xl text-white" />
                             </NavLink>
                         </div>
+
                         <NavLink to={"/useraccount"}>
                             <FaCircleUser className="text-sm sm:text-xl text-white" />
                         </NavLink>

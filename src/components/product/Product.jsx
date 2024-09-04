@@ -3,18 +3,20 @@ import { useGetCount, useGetProduct } from "@/services/zustandStore";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getData, postData } from "@/services/apiCall";
-import { FaRegHeart, FaHeart } from "react-icons/fa6";
+import { FaRegHeart, FaHeart, } from "react-icons/fa6";
+import { BsCartPlus } from "react-icons/bs";
 import { useState } from "react";
 export const ProductCard = ({ product }) => {
   const setProduct = useGetProduct((state) => state.setProduct);
   const navigate = useNavigate();
-  const { setCount } = useGetCount((state) => state);
-
+  const { setCount, setWishlistcount} = useGetCount((state) => state);
   const [wishlist, setWishlist] = useState(false);
 
+  console.log("my wishlist products", product);
+  
   const handleWishlistClick = () => {
   setWishlist((prevWishlist) => !prevWishlist);
-};
+  };
 
   const AddCart = async (Id, quantity) => {
     try {
@@ -38,11 +40,63 @@ export const ProductCard = ({ product }) => {
     }
   };
 
+  const AddWishlist = async (Id, boolen) => {
+    try {
+      const addProductWishListPromise = postData("/user/products/add_to_wishlist", { productId: Id, wishList: boolen });
+      toast.promise(
+        addProductWishListPromise,
+        {
+          pending: 'Adding product in wishlist...',
+          success: 'Product added in wishlist successfully 👌',
+          error: 'Something went wrong.. 🤯',
+        }
+      );
+
+      const addProduct = await addProductWishListPromise;
+      
+      if (addProduct?.success) {
+        //  setWishlistcount(await (await getData("/user/products/wishlist_products"))?.data?.products?.length)
+        const getWishListdata=await (await getData("/user/products/wishlist_products"))?.data?.products
+        setWishlistcount(getWishListdata?.length)
+      }
+    } catch (error) {
+      toast.error("No response received or other error: " + error?.message);
+    }
+  };
+
+  const removeWishlist = async (Id) => {
+    try {
+      const removeProductWishListPromise = postData("/user/products/remove_to_wishlist", { productId: Id, });
+      toast.promise(
+        removeProductWishListPromise,
+        {
+          pending: 'Removing product from wishlist...',
+          success: 'Product removing from wishlist successfully 👌',
+          error: 'Something went wrong.. 🤯',
+        }
+      );
+      const removeProduct = await removeProductWishListPromise;
+      if (removeProduct?.success) {
+        // setWishlistcount(await (await getData("/user/products/wishlist_products"))?.data?.products?.length)
+        const getWishListdata=await (await getData("/user/products/wishlist_products"))?.data?.products
+        setWishlistcount(getWishListdata?.length)
+      }
+    } catch (error) {
+      toast.error("No response received or other error: " + error?.message);
+    }
+  };
+
   const MRP = Math.ceil(product?.price / (1 - parseInt(product?.discount) / 100));  
 
+  // setWishlist(product?.productWishlist)
+  console.log(product?.productWishlist);
+  
+
+
   return (
-    <div className="w-[15rem] bg-white h-[26rem] rounded overflow-hidden shadow-lg m-4 relative">
-      <div className="absolute right-2 top-2 text-2xl" onClick={handleWishlistClick} >{wishlist? <FaHeart className="text-red-700"/> :<FaRegHeart />}</div>
+    <div className="w-[15rem] bg-white h-[22rem] rounded overflow-hidden shadow-lg m-4 relative">
+      <div className="absolute right-2 top-3 text-2xl cursor-pointer " onClick={handleWishlistClick} >{wishlist || product?.productWishlist ? <FaHeart className="text-red-600"  onClick={()=>{removeWishlist(product._id)}}/> :<FaRegHeart className="hover:text-red-600" onClick={()=>{AddWishlist(product._id, true)}}/>}</div>
+      <div className="absolute right-2 top-11 text-2xl cursor-pointer hover:text-blue-600" onClick={() => AddCart(product._id, 1)}><BsCartPlus /></div>
       <div
         onClick={() => {
           setProduct(product);
@@ -76,12 +130,12 @@ export const ProductCard = ({ product }) => {
           {/* <h4 className="text-lg italic">Off : <span>{product?.discount}</span><span className="text-[12px] text-red-600"> %</span></h4> */}
         </div>
       </div>
-      <button
+      {/* <button
         className=" h-12 px-2 w-full font-bold absolute bottom-0 left-0 bg-gray-900 text-white"
         onClick={() => AddCart(product._id, 1)}
       >
         Add to Cart
-      </button>
+      </button> */}
     </div>
   );
 };

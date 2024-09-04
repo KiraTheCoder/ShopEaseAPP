@@ -82,7 +82,7 @@ export default function Home() {
                   <div className="m-auto border-b-2 my-4">
                      <CategoryCartContainer/>
                   </div>
-                  <div className="m-auto my-4">
+                  <div className="m-auto my-12 ">
                      <h1 className="text-5xl italic text-center capitalize font-light my-3">Top collections </h1>
                      <ItemsCollection />
                   </div>

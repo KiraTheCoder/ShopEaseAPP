@@ -39,7 +39,7 @@ const {datafetchedpageNo, fetchedProducts, setFetchedData}=useOptimizeProductsfe
     return <Shimmer />
 
   return (
-    <div className="flex bg-gray-100 flex-col items-center justify-center  gap-4 w-[100vw]  m-auto ">
+    <div className="flex bg-gray-100 flex-col items-center justify-center  gap-4 w-[100vw]  m-auto py-4">
       {/* products */}
       <div className="w-[95vw] m-auto flex  gap-3   justify-center py-4 flex-wrap ">
         {fetchedProducts?.map((product, index) => (

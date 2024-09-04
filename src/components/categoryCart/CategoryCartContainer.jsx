@@ -65,11 +65,9 @@ const categoryOfProducts = [
 
 ];
 
-
 function CategoryCartContainer() {
-
     return (<>
-        <h2 className='font-light italic text-5xl text-center my-3'>Categories to cart</h2>
+        <h2 className='font-light italic text-5xl text-center my-3 capitalize'>Categories to cart</h2>
         <div className="w-[100vw] m-auto flex  justify-center gap-10 py-4 flex-wrap ">
             {categoryOfProducts?.map((product, index) => (
                 <CategoryCart key={index} categoryproduct={product} />

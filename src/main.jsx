@@ -28,6 +28,7 @@ import { BillingAddress } from './components/userProfle/billingAddress/BillingAd
 import CreateBillingAdd from './components/userProfle/createBillingAdd/CreateBillingAdd.jsx';
 import MyPayment from './pages/paymentpage/MyPayment.jsx';
 import SearchProducts from './pages/searchProducts/SearchProducts.jsx';
+import WishlistProducts from './pages/wishListProductspage/WishlistProducts.jsx';
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />
+      },
+      {
+        path: "/wishlistproducts",
+        element: <WishlistProducts />
       },
       {
         path: "/billing",
