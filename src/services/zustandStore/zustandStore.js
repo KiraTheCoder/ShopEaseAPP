@@ -51,11 +51,13 @@ const useGetSearchProduct = create(
 const getCount = (set) => ({
   count: "",
   wishlistcount:"",
+  wishlistProducts:[],
   cartitems:"",
   subAmount:"",
   setCount: (count) => set({ count }),
   setCartitems: (cartitems)=> set ({cartitems}),
-  setWishlistcount: (wishlistcount)=> set ({wishlistcount})
+  setWishlistcount: (wishlistcount)=> set ({wishlistcount}),
+  setWishlistProducts: (wishlistProducts)=> set ({wishlistProducts})
 });
 
 const useGetCount = create(
@@ -63,8 +65,10 @@ const useGetCount = create(
     name: "count",
     cart:"cartitems",
     wishlist:"wishlistcount",
+    wishlistProducts:"wishlistProducts",
     // payAmt:"subAmount",
-    getStorage: () => localStorage,
+    // getStorage: () => localStorage,
+    getStorage:()=>sessionStorage
   })
 );
 

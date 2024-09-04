@@ -1,28 +1,21 @@
 import ProductCard from '@/components/product/Product'
 import { getData } from '@/services/apiCall';
+import { useGetCount } from '@/services/zustandStore';
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 
 function WishlistProducts() {
-    const [wishlistProducts, setWishlistProducts] = useState([]);
-
+    // const [wishlistProducts, setWishlistProducts] = useState([]);
+    const { wishlistProducts, setWishlistProducts} = useGetCount((state) => state);
     useEffect(() => {
         gettingWishlist();
     }, []);
 
+    console.log("wish", wishlistProducts);
+    
     const gettingWishlist = async () => {
         try {
-            const gettingProductWishListPromise = getData("/user/products/wishlist_products");
-            toast.promise(
-                gettingProductWishListPromise,
-                {
-                    pending: 'Getting products from wishlist...',
-                    success: 'Products retrieved from wishlist successfully 👌',
-                    error: 'Something went wrong.. 🤯',
-                }
-            );
-
-            const gettingProduct = await gettingProductWishListPromise;
+            const gettingProduct =await getData("/user/products/wishlist_products");
             if (gettingProduct?.success) {
                 setWishlistProducts(gettingProduct?.data?.products || []);
             }
