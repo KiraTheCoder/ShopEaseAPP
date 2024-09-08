@@ -18,7 +18,7 @@ export function TextInput({ label, name, type, labelColor, value, style, attribu
         autoComplete="off"
         type={type}
         value={value}
-        placeholder={`Enter ${name}`}
+        placeholder={`Enter ${label}`}
         {...attribute}
       />
       <div className="text-red-500 h-3 text-xs">

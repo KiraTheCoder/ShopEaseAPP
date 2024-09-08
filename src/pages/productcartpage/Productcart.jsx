@@ -112,13 +112,13 @@ function ProductCart() {
                             <Button
                                 name={"BUY NOW"}
                                 type={"submit"}
-                                style={"py-2 px-10 text-sm bg-green-700 hover:bg-green-800"}
+                                style={"py-2 px-10 text-sm bg-green-700 hover:bg-green-800 focus:ring-green-800"}
                                 onClick={() => { Buyproduct(quantity); navigate("/billing") }}
                             />
                             <Button
                                 name={"ADD TO CART"}
                                 type={"button"}
-                                style={"py-2 px-10 text-sm bg-orange-400 hover:bg-orange-500"}
+                                style={"py-2 px-10 text-sm focus:ring-orange-500"}
                                 onClick={() => AddCart(_id, quantity)}
                             />
                         </div>

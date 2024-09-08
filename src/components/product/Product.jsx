@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getData, postData } from "@/services/apiCall";
 import { FaRegHeart, FaHeart, } from "react-icons/fa6";
+import { GoHeart, GoHeartFill  } from "react-icons/go";
 import { BsCartPlus } from "react-icons/bs";
 import { useState } from "react";
 export const ProductCard = ({ product }) => {
@@ -95,7 +96,7 @@ export const ProductCard = ({ product }) => {
 
   return (
     <div className="w-[15rem] bg-white h-[22rem] rounded overflow-hidden shadow-lg m-4 relative">
-      <div className="absolute right-2 top-3 text-2xl cursor-pointer " onClick={handleWishlistClick} >{wishlist || product?.productWishlist ? <FaHeart className="text-red-600"  onClick={()=>{removeWishlist(product._id)}}/> :<FaRegHeart className="hover:text-red-600" onClick={()=>{AddWishlist(product._id, true)}}/>}</div>
+      <div className="absolute right-2 top-3 text-2xl cursor-pointer " onClick={handleWishlistClick} >{wishlist || product?.productWishlist ? <GoHeartFill className="text-red-600"  onClick={()=>{removeWishlist(product._id)}}/> :<GoHeart className="hover:text-red-600" onClick={()=>{AddWishlist(product._id, true)}}/>}</div>
       <div className="absolute right-2 top-11 text-2xl cursor-pointer hover:text-blue-600" onClick={() => AddCart(product._id, 1)}><BsCartPlus /></div>
       <div
         onClick={() => {

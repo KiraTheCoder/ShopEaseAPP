@@ -42,7 +42,7 @@ function Contact() {
                                 <TextInput style=" sm-w[100%] border-none bg-gray-200 px-1" type="text"  name="phone" />
                             </div>
                             <Textarea type="textarea" rows="4" cols="50"  name="textarea" style="bg-gray-200 px-1 " />
-                            <div className='w-full flex justify-end items-center gap-2 sm:gap-4 md:gap-8  text-[15px] md:text-[17px]'> cancel <Button type="submit" name="Send message" style="w-[7rem] text-[15px] md:text-[17px]  sm:w-[8rem] md:w-[11.5rem] my-0 mb-2 bg-orange-400 hover:bg-orange-500" /></div>
+                            <div className='w-full flex justify-end items-center gap-2 sm:gap-4 md:gap-8  text-[15px] md:text-[17px]'> cancel <Button type="submit" name="Send message" style="w-[7rem] md:text-[17px]  sm:w-[8rem] md:w-[11.5rem] my-0 mb-2 focus:ring-orange-500" /></div>
                         </Form>
                     )}
                 </ Formik>

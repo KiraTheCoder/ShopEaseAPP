@@ -94,7 +94,7 @@ function ForgetAndChangePassword() {
                                     <TextInput label="OTP *" name="otp" type="text" />
                                 </>
                             )}
-                            <Button type="submit" name={flag1 ? "Submit" : "Send OTP"} style="w-[100%] my-0 mb-2" />
+                            <Button type="submit" name={flag1 ? "Submit" : "Send OTP"} style="w-[100%] m-0 mb-2 focus:ring-orange-500" />
                             <div className='flex items-center gap-6'>
                                 <span className='text-[16px]'>Go to Login page</span>
                                 <a className='no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/login"}>Login</Link></a>

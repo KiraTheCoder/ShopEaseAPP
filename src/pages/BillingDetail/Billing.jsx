@@ -10,7 +10,9 @@ import congratulationsMsg from "@/assets/images/footerImages/thankYou.png";
 import { useEffect, useState } from "react";
 import { BillingAddress } from "@/components/userProfle/billingAddress/BillingAddress";
 import CreateBillingAdd from "@/components/userProfle/createBillingAdd/CreateBillingAdd";
-import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
+import { CheckCircleIcon } from '@heroicons/react/solid';
 
 export default function Billing() {
   const { userAddress, refetch } = useFetchUserAddress();
@@ -145,12 +147,40 @@ deleteProduct();
   }
 
 
+
+  // successfull order
+  const navigate = useNavigate();
+
+  const handleContinueShopping = () => {
+    navigate.push('/');
+  };
+
   return congratulations ? (
-    <div className="h-auto w-full flex justify-center items-center">
-      <div className="w-auto px-4 flex justify-center items-center flex-col">
-        <img src={congratulationsMsg} alt="Thank you" className="h-auto w-[50vw]" />
+    (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center p-6 bg-gray-200 " 
+      //  style={{ backgroundImage: `url(${"https://www.nicepng.com/png/full/103-1039126_set-green-spirals-as-background-image-transparent-green.png"})`}}
+        >
+        <div className="bg-white p-8 rounded-lg shadow-lg text-center max-w-lg w-full">
+          <CheckCircleIcon className="w-16 h-16 text-green-500 mx-auto mb-4" />
+          <h1 className="text-2xl font-semibold text-gray-800">Congratulations!</h1>
+          <p className="text-gray-600 mt-2">
+            Your order has been successfully placed. Thank you for shopping with us!
+          </p>
+          <p className="text-gray-600 mt-1">Order Number: <strong>#123456789</strong></p>
+          <button
+            onClick={handleContinueShopping}
+            className="mt-6 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          >
+            Continue Shopping
+          </button>
+        </div>
       </div>
-    </div>
+    )
+    // <div className="h-auto w-full flex justify-center items-center">
+    //   <div className="w-auto px-4 flex justify-center items-center flex-col">
+    //     <img src={congratulationsMsg} alt="Thank you" className="h-auto w-[50vw]" />
+    //   </div>
+    // </div>
   ) : (
     <div className="h-auto w-full">
       <div className="py-12 h-auto w-auto flex justify-around flex-wrap border">
@@ -243,13 +273,13 @@ deleteProduct();
                 <label htmlFor="radio2" className="text-[13px] font-medium">Cash on delivery</label>
               </div>
               <ErrorMessage name="paymentMethod" component="div" className="text-red-500 text-xs mt-1" />
-              <Button type={"submit"} name={"PLACE ORDER"} style="w-[60%] m-4 bg-orange-400 hover:bg-orange-500"  />
+              <Button type={"submit"} name={"PLACE ORDER"} style="w-[60%] focus:ring-orange-500"  />
             </Form>
           )}
         </Formik>
 
           <Link to="/" className="w-full inline-block">
-            <Button name="CONTINUE SHOPPING" style="w-[60%] m-4 bg-orange-400 hover:bg-orange-500" />
+            <Button name="CONTINUE SHOPPING" style="w-[60%] m-4 focus:ring-orange-500" />
           </Link>
         </div>
       </div>

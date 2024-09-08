@@ -93,8 +93,10 @@ function SignupPage() {
                 >
                     {() => (
                         <Form>
-                            <h2 className='font-inter text-[1.2rem] text-center sm:text-start sm:text-[1.4rem] font-Five my-1 tracking-wider'>Sign Up to ShopEase</h2>
-                            <p className='text-[13px] sm:text-[14px] text-center sm:text-start font-Poppins tracking-wider'>Enter your details below</p>
+
+                            <h2 className='font-inter text-[1.2rem] text-center sm:text-start sm:text-[1.4rem] font-Five my-1 tracking-wider'>{flag ? "Sign Up to ShopEase" : "Enter Email Or Phone No."}</h2>
+                            <p className='text-[13px] sm:text-[14px] text-center sm:text-start font-Poppins tracking-wider'>{flag ? "Enter your details below" : "So that, We can verify you via OTP"}</p>
+
                             <TextInput label="Email or Phone Number *" name="phoneNumberOrEmail" type="input" attribute={{ disabled: flag }} />
                             {flag && (
                                 <>
@@ -103,7 +105,7 @@ function SignupPage() {
                                     <TextInput label="Confirm Password *" name="confirm_password" type="password" />
                                     <TextInput label="OTP *" name="otp" type="text" />
                                 </>)}
-                            <Button type="submit" name={flag ? "Create Account" : "Send OTP"} style="w-[100%] my-0 mb-2 bg-orange-400 hover:bg-orange-500" />
+                            <Button type="submit" name={flag ? "Create Account" : "Send OTP"} style="w-[100%]  mb-3 m-0 focus:ring-orange-500" />
                             {/* <button className='h-[2rem] sm:h-[2.4rem] md:h-[2.5rem] border-2 w-[100%] rounded-md my-2 flex justify-center gap-4 items-center'>
                                 <FcGoogle className='text-[30px]' />
                                 <span>Sign up with Google</span>

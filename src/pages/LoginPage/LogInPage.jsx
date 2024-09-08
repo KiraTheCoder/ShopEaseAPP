@@ -66,14 +66,13 @@ export default function LogInPage() {
                             <TextInput label={"Email or Phone Number *"} name={"phoneNumberOrEmail"} type={"input"} />
                             <TextInput label={"Password *"} name={"password"} type={"password"} />
                             <div className='flex justify-between items-center my-[1.2rem]'>
-                                <Button type="submit" name={"Log In"} style={"w-[5.5rem] bg-orange-400 hover:bg-orange-500"} />
+                                <Button type="submit" name={"Log In"} style={"w-[5.5rem] focus:ring-orange-500"} />
                                 <div className="">
                                     <li className='list-none no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/forgetpassword"}>Forget password ?</Link></li>
+                                    <li className='list-none no-underline hover:underline text-[#db4444] mt-2 text-[13px]'><Link to={"/signup"}>Create Account </Link></li>
                                 </div> 
+                               
                             </div>
-                                <div className="">
-                                    <li className='list-none no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/signup"}>Create Account </Link></li>
-                                </div>
                         </Form>
                     )}
                 </Formik>
