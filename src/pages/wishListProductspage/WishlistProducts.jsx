@@ -11,7 +11,6 @@ function WishlistProducts() {
         gettingWishlist();
     }, []);
 
-    console.log("wish", wishlistProducts);
     
     const gettingWishlist = async () => {
         try {

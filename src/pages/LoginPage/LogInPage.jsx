@@ -69,7 +69,7 @@ export default function LogInPage() {
                                 <Button type="submit" name={"Log In"} style={"w-[5.5rem] focus:ring-orange-500"} />
                                 <div className="">
                                     <li className='list-none no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/forgetpassword"}>Forget password ?</Link></li>
-                                    <li className='list-none no-underline hover:underline text-[#db4444] mt-2 text-[13px]'><Link to={"/signup"}>Create Account </Link></li>
+                                    <li className='list-none no-underline hover:underline text-[#db4444] mt-2    text-[13px]'><Link to={"/signup"}>Create Account </Link></li>
                                 </div> 
                                
                             </div>

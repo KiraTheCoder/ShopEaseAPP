@@ -13,7 +13,6 @@ export const ProductCard = ({ product }) => {
   const { setCount, setWishlistcount} = useGetCount((state) => state);
   const [wishlist, setWishlist] = useState(false);
 
-  console.log("my wishlist products", product);
   
   const handleWishlistClick = () => {
   setWishlist((prevWishlist) => !prevWishlist);
@@ -88,11 +87,6 @@ export const ProductCard = ({ product }) => {
   };
 
   const MRP = Math.ceil(product?.price / (1 - parseInt(product?.discount) / 100));  
-
-  // setWishlist(product?.productWishlist)
-  console.log(product?.productWishlist);
-  
-
 
   return (
     <div className="w-[15rem] bg-white h-[22rem] rounded overflow-hidden shadow-lg m-4 relative">
