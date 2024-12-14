@@ -3,7 +3,7 @@ import { NavLink,Outlet  } from 'react-router-dom'
 function UserAccount() {
     return (
         <div className='w-[95vw] h-[80vh] sm:w-[90vw] lg:w-[80vw] py-4 m-auto flex flex-wrap sm:flex-nowrap gap-3 sm:gap-4 md:gap-6 lg:gap-12 my-4 overflow-scroll scrollbar-hide '>
-            <div className='w-full sm:w-[15rem] bg-slate-200 flex sm:flex-col justify-around sm:justify-start md:flex-none '>
+            <div className='w-full sm:w-[15rem] bg-gray-100 pl-2 flex sm:flex-col justify-around sm:justify-start md:flex-none '>
                 <div className=''>
                     <h4 className='font-semibold text-md'>Manage my account</h4>
                     <ul className='ml-4 list-none leading-7 text-[14px]'>

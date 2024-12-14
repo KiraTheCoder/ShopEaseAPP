@@ -4,14 +4,16 @@ import { Outlet } from "react-router-dom"
 import Footer from "./layouts/Footer"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import MyComponent from "./__TEST__/pathLocations";
 
 function App() {
   return (
     <>
       <Header />
       <ToastContainer  />
-      <Outlet />
       {/* <TestAPP/> */}
+      <MyComponent/>
+      <Outlet />
       <Footer />
     </>
   )

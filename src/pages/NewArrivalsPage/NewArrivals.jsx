@@ -1,3 +1,5 @@
+import Trustcard from "@/components/cards/customerTrustcard/Trustcard";
+
 const sampleArrivals = [
     {
         id: 1,
@@ -54,6 +56,7 @@ const NewArrivals = () => {
                     </div>
                 ))}
             </div>
+            <Trustcard/>
         </div>
     );
 };

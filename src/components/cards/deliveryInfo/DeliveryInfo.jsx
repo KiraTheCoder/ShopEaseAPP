@@ -15,7 +15,7 @@ const DeliveryInfo=()=>{
             </div>
             <div className="w-[8rem] bg-slate-100 flex flex-col items-center py-2 rounded-xl border-[1px] border-gray-800 cursor-pointer shadow-[0_0_8px_2px_rgba(0,0,0,0.7)] ...">
                 <div><TbTruckDelivery className="w-[2rem] h-[2rem] text-orange-600 mb-2 "/></div>
-                <div className="text-center text-sm">shisha milano Delivered</div>
+                <div className="text-center text-sm">ShopEase Delivered</div>
             </div>
             <div className="w-[8rem] bg-slate-100 flex flex-col items-center py-2 rounded-xl border-[1px] border-gray-800 cursor-pointer shadow-[0_0_8px_2px_rgba(0,0,0,0.7)] ...">
                 <div><GrSecure className="w-[2rem] h-[2rem] text-orange-600 mb-2 "/></div>
