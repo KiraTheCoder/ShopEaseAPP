@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom"
 import Footer from "./layouts/Footer"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import MyComponent from "./__TEST__/pathLocations";
+// import MyComponent from "./__TEST__/pathLocations";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <Header />
       <ToastContainer  />
       {/* <TestAPP/> */}
-      <MyComponent/>
+      {/* <MyComponent/> */}
       <Outlet />
       <Footer />
     </>
