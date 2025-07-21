@@ -49,7 +49,7 @@ function BillingAddress({ selectedAddress, setSelectedAddress }) {
   return (
     <div>
       {addId ? (
-        <CreateBillingAdd AddId={addId} onEditComplete={handleEditComplete} />
+        <CreateBillingAdd AddId={addId} onEditComplete={handleEditComplete}  sendAddress={setSelectedAddress} />
       ) : (
         <>
           <h3 className='uppercase font-DM font-bold text-lg text-orange-500'>My Addressbook</h3>
