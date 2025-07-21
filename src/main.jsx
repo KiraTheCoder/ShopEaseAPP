@@ -109,7 +109,7 @@ const router = createBrowserRouter([
           },
           {
             path:"/useraccount/updateName",
-            element:<UpdateName/>
+            element:<UpdateName/>,
           },
           {
             path:"/useraccount/address",

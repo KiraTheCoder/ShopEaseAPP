@@ -3,13 +3,15 @@ import CategoryCartContainer from "@/components/categoryCart/CategoryCartContain
 import Billing from "@/pages/BillingDetail/Billing"
 import Cart from "@/pages/cartpage/Cart"
 import UserAccount from "@/pages/userAccount/UserAccount"
+import MyComponent from "./pathLocations"
 
 const TestAPP = () => {
   return (
     <div className="w-[100vw] flex justify-center items-center py-14 m-auto">
       {/* <Billing/> */}
       {/* <CategoryCart/> */}
-      <CategoryCartContainer/>
+      {/* <CategoryCartContainer/> */}
+      <MyComponent/>
       </div>
   )
 }

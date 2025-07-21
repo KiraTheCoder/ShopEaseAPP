@@ -52,7 +52,7 @@ function Header() {
                 const result = await postData("/user/products/search", { keyword: searchText.current.value });
                 setSearchData(result?.data || []);
                 setSearchProduct(result?.data || [])
-                console.log("searching result", result);
+                // console.log("searching result", result);
 
                 if (result?.success) {
                     navigate("/searchproducts")
@@ -94,7 +94,6 @@ function Header() {
                             type="text"
                             ref={searchText}
                             onChange={handleSearch}
-                            // onClick={()=>navigate("/searchproducts")}
                             placeholder="Search for Product..."
                             className="h-[100%] w-[90%] px-1 rounded-full bg-transparent text-[13px] sm:text-[14px] md:text-[14px] lg:text-sm outline-none"
                         />

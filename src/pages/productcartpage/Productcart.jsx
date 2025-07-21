@@ -109,12 +109,17 @@ function ProductCart() {
                             ))}
                         </div>
                         <div className="flex justify-around mt-8 w-full">
-                            <Button
+                            {/* <Button
                                 name={"BUY NOW"}
                                 type={"submit"}
                                 style={"py-2 px-10 text-sm bg-green-700 hover:bg-green-800 focus:ring-green-800"}
                                 onClick={() => { Buyproduct(quantity); navigate("/billing") }}
-                            />
+                            /> */}
+                            <button 
+                            type="submit"
+                            onClick={()=>{ Buyproduct(quantity); navigate("/billing") }}
+                            className="font-bold hover:text-white transition-colors rounded-md h-[2rem] sm:h-[2.4rem] md:h-[2.5rem] my-1 m-4 focus:outline-none focus:ring-2  focus:ring-offset-2  py-2 px-10 text-sm bg-green-700 hover:bg-green-800 focus:ring-green-800"
+                            >BUY NOW</button>
                             <Button
                                 name={"ADD TO CART"}
                                 type={"button"}

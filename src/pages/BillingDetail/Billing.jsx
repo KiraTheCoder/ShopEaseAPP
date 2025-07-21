@@ -152,7 +152,7 @@ deleteProduct();
   const navigate = useNavigate();
 
   const handleContinueShopping = () => {
-    navigate.push('/');
+    navigate('/');
   };
 
   return congratulations ? (

@@ -37,9 +37,9 @@ function ForgetAndChangePassword() {
                 if (values.phoneNumber) {
                     values.otpID = otpID;
                 }
-                delete values.otpID
+                // delete values.otpID
                 const response = patchData("/user/change_password", values);
-                console.log("this is response message", response);
+                // console.log("this is response message", response);
                 toast.promise(response, {
                     pending: "password changing.",
                     success: "password changed successfully",

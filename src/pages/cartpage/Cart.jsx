@@ -112,7 +112,6 @@ function Cart() {
             toast.promise(
                 addCart,
                 {
-
                     pending: {
                         render: 'Product adding...',
                         autoClose: 500,
@@ -251,15 +250,22 @@ function Cart() {
                     }}>
                         Chechout
                     </button> */}
-                    <Button style={"w-[100%] mt-2 focus:ring-orange-500"} onClick={() => {
+                    {/* <Button style={"w-[100%] mt-2 focus:ring-orange-500"} onClick={() => {
                         if (cartData.length > 0) {
                             navigate('/billing')
                         }}}> Checkout</Button>
+                         */}
+                    <Button type={"submit"} name={"Checkout"} style={"w-[90%] m-0 focus:ring-orange-500"} onClick={() => {
+                        if (cartData.length > 0) {
+                            navigate('/billing')
+                        }
+                    }} />
                 </div>
             </div>
         </div>
     );
 }
+
 
 export default Cart;
 
