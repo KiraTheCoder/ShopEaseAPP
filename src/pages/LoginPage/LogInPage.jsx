@@ -36,9 +36,7 @@ export default function LogInPage() {
                     error: 'something went wrong.. 🤯',
                 }
             );
-
             const data = await myPromise;
-
             if (data.success) {
                 setToken(data?.data?.token)
                 navigate("/")

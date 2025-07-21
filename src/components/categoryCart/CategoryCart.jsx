@@ -13,7 +13,7 @@ const navigate=useNavigate()
     const handleSearch = async (searchText) => {
         const result = await postData("/user/products/search", { keyword: searchText });
         setSearchProduct(result?.data || [])
-        console.log("searching result", result);
+        // console.log("searching result", result);
     }
 
 
@@ -24,7 +24,8 @@ const navigate=useNavigate()
         handleSearch(productName)
         navigate("/searchproducts")
         }}
-         className="h-[23rem] w-[20rem] flex justify-end items-end rounded-md  shadow-lg bg-cover" style={{ backgroundImage: `url(${decoration})` }}>
+        //  className="h-[23rem] w-[20rem] flex justify-end items-end rounded-md  shadow-lg bg-cover" style={{ backgroundImage: `url(${decoration})` }}>
+         className="h-[23rem] flex justify-end items-end rounded-md cursor-pointer shadow-lg bg-cover" >
             <div className="h-full w-[16rem] relative  rounded-r-md " >
                 <img src={img} alt="" className='h-full w-full rounded-r-md' />
             </div>

@@ -1,5 +1,6 @@
 import { FaInstagram, FaTwitter, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
-import rohit from "@/assets/images/footerImages/rrrrrrr.jpg";
+// import rohit from "@/assets/images/footerImages/rrrrrrr.jpg";
+import rohit from "@/assets/images/footerImages/rohit-crope.jpg";
 import manshi from "@/assets/images/footerImages/manshi.jpg"
 import khushi from "@/assets/images/footerImages/kk.jpg";
 import kiran from "@/assets/images/footerImages/kiran.jpg";
@@ -32,8 +33,8 @@ const PrevArrow = ({ onClick }) => {
 };
 const teamMembers = [
     { name: "KHUSHI TAMOR", role: "Product Designer", imgSrc: `${khushi}` },
-    { name: "ROHIT KUMAR", role: "Product Designer", imgSrc: `${rohit}` },
-    { name: "PAWAN SIR", role: "Founder & Chairman", imgSrc: "https://s3-alpha-sig.figma.com/img/0881/49fd/5afc043392ee3cbb529f429b3e2098d3?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=PTqcCKmb6S-VpW31BrzcwYZEtJMMXFPcgN2TzJvAuAvVC7MdRwylAwRUMoWuZqqjYMle-WXx~o9dTmQnNEf3YWf0FZSO3nMR9dXT4brAc3WaCD1A7s7bqPTC7QyEd3Iy1k2AojmeqvFapXIxmIzTgUOLUhWBky7tEfk~1XL8BRbHgJE3spxxBp6Cd~X2pIRa1sx0xNXXBFKxLGnMJ4oA8ZhhXe7UmMEwoazMbhM0idFPt~uOlJ6D5PJh0ogdWxXzSGL1ssEUcwfOMg3Amufmmuv-CWmpIiEnfcdFGhbNhqw9dFFLEDQroT80m41yeB3Tes7-IRRn~1bDSSfpraCKog__" },
+    { name: "ROHIT KUMAR", role: "CEO", imgSrc: `${rohit}` },
+    // { name: "PAWAN SIR", role: "Founder & Chairman", imgSrc: "" },
     { name: "MANSHI", role: "Product Ideas", imgSrc: `${manshi}` },
     { name: "KIRAN BOHRA", role: "Managing Director ", imgSrc: `${kiran}` },
 ];
