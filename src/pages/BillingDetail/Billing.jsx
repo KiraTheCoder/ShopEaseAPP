@@ -324,7 +324,7 @@ export default function Billing() {
         </Formik> */}
 
           <PaymentButton
-            amount={5}
+            amount={totalPrice}
             deleteCartProducts={deleteCartProducts}
           />
 
